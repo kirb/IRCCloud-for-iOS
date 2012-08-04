@@ -1,0 +1,2 @@
+@interface ICSettingsViewController:UITableViewController<UITableViewDataSource,UITableViewDelegate>
+@end

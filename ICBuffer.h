@@ -1,0 +1,2 @@
+@interface ICBuffer:NSObject
+@end

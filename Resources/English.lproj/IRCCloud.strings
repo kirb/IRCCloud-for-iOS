@@ -1,0 +1,14 @@
+"ACCOUNT" = "Account";
+"AUTHOR" = "By Ad@m (thekirbylover)";
+"CONNECTIONS" = "Connections";
+"EMAIL" = "Email";
+"FOLLOW_ME" = "Follow me on Twitter";
+"FOLLOW_IRCCLOUD" = "Follow IRCCloud on Twitter";
+"IRCCLOUD" = "IRCCloud";
+"LOG_IN" = "Log In";
+"LOG_IN_DESCRIPTION" = "Your email and password are only used once to get a connection cookie from IRCCloud.";
+"LOG_OUT" = "Log Out";
+"OK" = "OK";
+"PASSWORD" = "Password";
+"SETTINGS" = "Settings";
+"VERSION" = "Version %@";
