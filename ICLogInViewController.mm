@@ -52,7 +52,7 @@ BOOL onAlpha=NO;
 	}else if([json objectForKey:@"message"]){
 		if([[json objectForKey:@"message"]isEqualToString:@"migrated"])logInError=__(@"ACCOUNT_MIGRATED");
 		else if([[json objectForKey:@"message"]isEqualToString:@"already_signed_in"])logInError=__(@"INTERNAL_ERROR");
-		else if([[json objectForKey:@"message"]isEqualToString:@"wrong"])logInError=__(@"WRONG_EMAIL_OR_PASSWORD");
+		else if([[json objectForKey:@"message"]isEqualToString:@"auth"])logInError=__(@"WRONG_EMAIL_OR_PASSWORD");
 		else logInError=__(@"UNKNOWN_ERROR");
 		reshow=YES;
 	}else{
