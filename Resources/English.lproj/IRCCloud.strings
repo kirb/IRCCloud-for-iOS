@@ -1,7 +1,6 @@
 "ACCOUNT" = "Account";
 "ACCOUNT_MIGRATED" = "Your account has been migrated to IRCCloud Alpha. Please log in again with the “Alpha User” switch on.";
 "ALPHA_USER" = "Alpha User";
-"ALREADY_SIGNED_IN" = "You are already logged in to IRCCloud elsewhere. Please log out to continue.";
 "AUTHOR" = "By Ad@m (thekirbylover)";
 "CONNECTIONS" = "Connections";
 "EMAIL" = "Email";
@@ -17,3 +16,6 @@
 "PLEASE_WAIT" = "Please Wait…";
 "SETTINGS" = "Settings";
 "VERSION" = "Version %@";
+"WRONG_EMAIL_OR_PASSWORD" = "You have entered the wrong email address or password. Please try again, or go to irccloud.com if you’ve forgotten your password.";
+"IMTERNAL_ERROR" = "An internal error has occurred. Please try again.";
+"UNKNOWN_ERROR" = "An unknown error has occurred. Please try again later.";

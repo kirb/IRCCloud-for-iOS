@@ -21,9 +21,12 @@ BOOL onAlpha=NO;
 }
 -(void)logIn{
 	logInError=nil;
+	NSString *email=((ADTableViewInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]]).textField.text;
+	NSString *pass=((ADTableViewInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]]).textField.text;
+	if([email isEqualToString:@""]||[pass isEqualToString:@""])return;
 	[ICRequest requestWithPage:@"login" parameters:[NSString stringWithFormat:@"email=%@&password=%@",
-		[((ADTableViewInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]]).textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-		[((ADTableViewInputCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:1]]).textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+		[email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+		[pass stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
 		alpha:onAlpha=((UISwitch *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]].accessoryView).on
 		delegate:self selector:@selector(_gotSessionCookie:)];
 	[(ICApplication *)[UIApplication sharedApplication]setUserIsOnAlpha:onAlpha];
@@ -48,7 +51,9 @@ BOOL onAlpha=NO;
 		[(ICApplication *)[UIApplication sharedApplication]connect];
 	}else if([json objectForKey:@"message"]){
 		if([[json objectForKey:@"message"]isEqualToString:@"migrated"])logInError=__(@"ACCOUNT_MIGRATED");
-		else if([[json objectForKey:@"message"]isEqualToString:@"already_signed_in"])logInError=__(@"ALREADY_SIGNED_IN");
+		else if([[json objectForKey:@"message"]isEqualToString:@"already_signed_in"])logInError=__(@"INTERNAL_ERROR");
+		else if([[json objectForKey:@"message"]isEqualToString:@"wrong"])logInError=__(@"WRONG_EMAIL_OR_PASSWORD");
+		else logInError=__(@"UNKNOWN_ERROR");
 		reshow=YES;
 	}else{
 		logInError=__(@"LOG_IN_ERROR");
