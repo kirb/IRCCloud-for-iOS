@@ -1,6 +1,7 @@
 #import "ICGlobal.h"
 #import "ICNetworksViewController.h"
 #import "ICChatViewController.h"
+#import "ICChatRequest.h"
 
 @interface ICApplication:UIApplication<UIApplicationDelegate,UISplitViewControllerDelegate>{
 	UIWindow *window;
@@ -9,6 +10,13 @@
 	ICChatViewController *main;
 	UIViewController *sidebarNavController;
 	UIViewController *mainNavController;
+	NSString *cookie;
+	BOOL userIsOnAlpha;
+	ICChatRequest *connection;
 }
+-(void)connect;
 @property(nonatomic,retain) UIWindow *window;
+@property(nonatomic,retain) NSString *cookie;
+@property(assign) BOOL userIsOnAlpha;
+@property(nonatomic,retain) ICChatRequest *connection;
 @end

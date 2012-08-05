@@ -3,34 +3,44 @@
 #import "ICApplication.h"
 #import "ICNetworksViewController.h"
 #import "ICChatViewController.h"
+#import "ICChatRequest.h"
+#import "NSString+Base64.h"
 
 @implementation ICApplication
-@synthesize window;
+@synthesize window,cookie,userIsOnAlpha,connection;
+-(ICApplication *)init{
+	if((self=[super init]))userIsOnAlpha=NO;
+	return self;
+}
 -(void)applicationDidFinishLaunching:(UIApplication *)application{
 	window=[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+	NSDictionary *prefs=[NSDictionary dictionaryWithContentsOfFile:prefpath];
+	self.cookie=[[prefs objectForKey:@"Session"]base64DecodedString];
+	sidebar=[[ICNetworksViewController alloc]init];
+	sidebar.hasCookie=!![prefs objectForKey:@"Session"];
+	sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
 	if(isPad){
 		viewController=[[objc_getClass("UISplitViewController") alloc]init];
 		viewController.delegate=self;
-		sidebar=[[ICNetworksViewController alloc]init];
 		main=[[ICChatViewController alloc]init];
-		sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
 		mainNavController=[[[UINavigationController alloc]initWithRootViewController:main]autorelease];
 		viewController.viewControllers=[NSArray arrayWithObjects:sidebarNavController,mainNavController,nil];
 		[window addSubview:viewController.view];
-	}else{
-		sidebar=[[ICNetworksViewController alloc]init];
-		sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
-		[window addSubview:sidebarNavController.view];
-	}
+	}else [window addSubview:sidebarNavController.view];
 	[window makeKeyAndVisible];
 }
 -(void)splitViewController:(UISplitViewController *)split willHideViewController:(UIViewController *)ctrl withBarButtonItem:(UIBarButtonItem *)item forPopoverController:(UIPopoverController *)popover{
-	main.title=item.title=__(@"CONNECTIONS");
+	sidebar.title=item.title=__(@"CONNECTIONS");
 	main.navigationItem.leftBarButtonItem=item;
 }
 -(void)splitViewController:(UISplitViewController *)split willShowViewController:(UIViewController *)ctrl invalidatingBarButtonItem:(UIBarButtonItem *)item{
-	main.title=__(@"IRCCLOUD");
+	sidebar.title=__(@"IRCCLOUD");
 	main.navigationItem.leftBarButtonItem=nil;
+}
+-(void)connect{
+	NSLog(@"connection time!");
+	/*ICChatRequestParser *parser=[[ICChatRequestParser alloc]init];
+	self.connection=[ICChatRequest requestWithDelegate:parser selector:@selector(receivedResponse:)];*/
 }
 -(void)dealloc{
 	[window release];

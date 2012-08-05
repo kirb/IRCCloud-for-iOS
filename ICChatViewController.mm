@@ -11,11 +11,11 @@
 -(void)loadView{
 	self.view=[[[UIScrollView alloc]initWithFrame:[[UIScreen mainScreen]applicationFrame]]autorelease];
 	self.view.backgroundColor=[UIColor whiteColor];
+	self.title=@"";
 	bottomBar=[[ICBottomBar alloc]init];
 	self.toolbarItems=[NSArray arrayWithObject:bottomBar];
 }
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation{
-	NSLog(@",,, = %@",self.navigationItem.leftBarButtonItem);
 	return YES;
 }
 @end

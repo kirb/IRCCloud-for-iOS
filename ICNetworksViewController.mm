@@ -5,24 +5,27 @@
 #import "ICLogInViewController.h"
 
 @implementation ICNetworksViewController
-@synthesize buffers;
+@synthesize buffers,hasCookie;
 -(void)loadView{
 	[super loadView];
 	self.tableView.delegate=self;
 	self.tableView.dataSource=self;
 	self.title=__(@"IRCCLOUD");
-	self.navigationItem.rightBarButtonItem=[self editButtonItem];
-	self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:__(@"SETTINGS") style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
-	[self performSelector:@selector(showSignIn) withObject:nil afterDelay:.5];
+	self.navigationItem.leftBarButtonItem=[self editButtonItem];
+	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAdd)];
+	self.navigationController.toolbarHidden=NO;
+	[self.navigationController setToolbarItems:[NSArray arrayWithObject:[[UIBarButtonItem alloc]initWithTitle:__(@"SETTINGS") style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)]] animated:NO];
+	if(!self.hasCookie)[self performSelector:@selector(showSignIn) withObject:nil afterDelay:.3];
 }
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation{
+	return YES;
+}
+-(void)showAdd{}
 -(void)showSignIn{
 	ICLogInViewController *logIn=[[ICLogInViewController alloc]initWithStyle:UITableViewStyleGrouped];
 	UINavigationController *logInCtrl=[[UINavigationController alloc]initWithRootViewController:logIn];
 	logInCtrl.modalPresentationStyle=UIModalPresentationFormSheet;
 	[self.navigationController presentModalViewController:logInCtrl animated:YES];
-}
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation{
-	return YES;
 }
 -(void)showSettings{
 	ICSettingsViewController *settings=[[ICSettingsViewController alloc]initWithStyle:UITableViewStyleGrouped];

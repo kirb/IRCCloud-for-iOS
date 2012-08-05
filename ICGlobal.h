@@ -33,6 +33,12 @@ typedef enum{
 -(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)button;
 @end
 
+@interface NSJSONSerialization:NSObject
++(id)JSONObjectWithData:(NSData *)data options:(int)flags error:(NSError **)error;
+@end
+
 #define __(key) [[NSBundle mainBundle]localizedStringForKey:key value:key table:@"IRCCloud"]
-#define version @"0.0.1 Alpha"
+#define version @"0.0.1"
 #define isPad ([[UIDevice currentDevice]respondsToSelector:@selector(isWildcat)]?[[UIDevice currentDevice]isWildcat]:NO)
+#define prefpath @"/var/mobile/Library/Preferences/ws.hbang.irccloud.plist"
+//[NSHomeDirectory() stringByAppendingString:@"Library/Preferences/ws.hbang.irccloud.plist"]
