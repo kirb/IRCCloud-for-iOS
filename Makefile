@@ -1,7 +1,7 @@
 include theos/makefiles/common.mk
 
 APPLICATION_NAME = IRCCloud
-IRCCloud_FILES = main.m $(wildcard *.mm) $(wildcard *.m)
+IRCCloud_FILES = $(wildcard *.m) $(wildcard *.mm)
 IRCCloud_FRAMEWORKS = UIKit CoreGraphics
 
 THEOS_BUILD_DIR = debs
