@@ -4,6 +4,8 @@
 #import "ICChatViewController.h"
 #import "ICSettingsViewController.h"
 #import "ICLogInViewController.h"
+#import "ICApplication.h"
+#import "UIViewController+RotationFix.h"
 
 @implementation ICNetworksViewController
 @synthesize buffers;
@@ -20,9 +22,17 @@
 		[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSettings)], //todo: get a settings icon
 	nil] animated:NO];
 	self.navigationController.toolbarHidden=NO;
+	if([ICApp cookie]==nil&&isPad)[self performSelector:@selector(showLogIn) withObject:nil afterDelay:.3];
 }
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation{
 	return YES;
+}
+-(void)showLogIn{
+	ICLogInViewController *logIn=[[ICLogInViewController alloc]initWithStyle:UITableViewStyleGrouped];
+	UINavigationController *logInCtrl=[[UINavigationController alloc]initWithRootViewController:logIn];
+	logInCtrl.modalPresentationStyle=UIModalPresentationFormSheet;
+	[logInCtrl setParent:self];
+	[self.navigationController presentModalViewController:logInCtrl animated:YES];
 }
 -(void)showAdd{
 	UIAlertView *addAlert=[[UIAlertView alloc]initWithTitle:__(@"JOIN_CHANNEL") message:[NSString stringWithFormat:__(@"JOIN_CHANNEL_MESSAGE"),@"Test"] delegate:self cancelButtonTitle:__(@"CANCEL") otherButtonTitles:__(@"JOIN"),nil];
@@ -43,6 +53,7 @@
 			UINavigationController *settingsNavController=[[UINavigationController alloc]initWithRootViewController:settings];
 			settingsPopover=[[objc_getClass("UIPopoverController") alloc]initWithContentViewController:settingsNavController];
 			settingsPopover.delegate=self;
+			settings.popoverController=settingsPopover;
 			[settingsPopover presentPopoverFromBarButtonItem:[self.toolbarItems objectAtIndex:1] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 		}else [self.navigationController pushViewController:settings animated:YES];
 	}

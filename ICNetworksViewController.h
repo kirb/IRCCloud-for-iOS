@@ -7,4 +7,5 @@
 	UIPopoverController *settingsPopover;
 }
 @property(retain) NSMutableArray *buffers;
+-(void)showLogIn;
 @end

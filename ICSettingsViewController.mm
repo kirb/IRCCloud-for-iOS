@@ -1,7 +1,11 @@
 #import "ICGlobal.h"
 #import "ICSettingsViewController.h"
+#import "ICRequest.h"
+#import "ICApplication.h"
+#import "ICLogInViewController.h"
 
 @implementation ICSettingsViewController
+@synthesize popoverController;
 -(void)loadView{
 	[super loadView];
 	self.tableView.delegate=self;
@@ -48,12 +52,28 @@
 }
 -(void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)index{
 	[table deselectRowAtIndexPath:index animated:YES];
-	if(index.section==2){
+	if(index.section==0&&index.row==0)[[[UIAlertView alloc]initWithTitle:__(@"LOG_OUT") message:__(@"LOG_OUT_MESSAGE") delegate:self cancelButtonTitle:__(@"CANCEL") otherButtonTitles:__(@"LOG_OUT"),nil]show];
+	else if(index.section==2){
 		NSString *account=index.row==0?@"thekirbylover":@"IRCCloud";
 		if([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"tweetbot:"]])[[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"tweetbot:///user_profile/" stringByAppendingString:account]]];
 		else if([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"tweetings:"]])[[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"tweetings:///user?screen_name=" stringByAppendingString:account]]];
 		else if([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:@"twitter:"]])[[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:account]]];
 		else [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://twitter.com/intent/follow?screen_name=" stringByAppendingString:account]]];
+	}
+}
+-(void)alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)index{
+	if([[alert buttonTitleAtIndex:index]isEqualToString:__(@"LOG_OUT")]){
+		if(isPad)[self.popoverController dismissPopoverAnimated:NO];
+		else [self.navigationController popViewControllerAnimated:NO];
+		[ICRequest requestWithPage:@"logout" parameters:[@"session=" stringByAppendingString:[ICApp cookie]] delegate:nil selector:nil];
+		[ICApp setCookie:nil];
+		NSMutableDictionary *prefs=[NSMutableDictionary dictionaryWithContentsOfFile:prefpath];
+		[prefs removeObjectForKey:@"Cookie"];
+		[prefs writeToFile:prefpath atomically:YES];
+		ICLogInViewController *logIn=[[ICLogInViewController alloc]initWithStyle:UITableViewStyleGrouped];
+		UINavigationController *logInCtrl=[[UINavigationController alloc]initWithRootViewController:logIn];
+		logInCtrl.modalPresentationStyle=UIModalPresentationFormSheet;
+		[self.navigationController presentModalViewController:logInCtrl animated:YES];
 	}
 }
 @end

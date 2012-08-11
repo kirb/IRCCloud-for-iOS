@@ -29,12 +29,7 @@
 		viewController.viewControllers=[NSArray arrayWithObjects:sidebarNavController,mainNavController,nil];
 		[window addSubview:viewController.view];
 	}else [window addSubview:sidebarNavController.view];
-	if(self.cookie==nil){
-		ICLogInViewController *logIn=[[ICLogInViewController alloc]initWithStyle:UITableViewStyleGrouped];
-		UINavigationController *logInCtrl=[[UINavigationController alloc]initWithRootViewController:logIn];
-		logInCtrl.modalPresentationStyle=UIModalPresentationFormSheet;
-		[sidebarNavController presentModalViewController:logInCtrl animated:YES];
-	}
+	if(self.cookie==nil&&!isPad)[sidebar showLogIn];
 	[window makeKeyAndVisible];
 }
 -(void)splitViewController:(UISplitViewController *)split willHideViewController:(UIViewController *)ctrl withBarButtonItem:(UIBarButtonItem *)item forPopoverController:(UIPopoverController *)popover{

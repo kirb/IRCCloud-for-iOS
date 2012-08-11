@@ -36,12 +36,13 @@ static NSMutableData *output;
 	[output appendData:data];
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
+	if(!delegate||!selector)return;
 	NSError *err=nil;
 	NSDictionary *json=objc_getClass("NSJSONSerialization")?[objc_getClass("NSJSONSerialization") JSONObjectWithData:output options:0 error:&err]:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-2] forKey:@"error"];
 	[delegate performSelector:selector withObject:err?[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-1] forKey:@"error"]:json];
 	[output release];
 }
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-	[delegate performSelector:selector withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:-2],@"error",[error localizedDescription],@"errormsg",nil]];
+	if(delegate&&selector)[delegate performSelector:selector withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:-2],@"error",[error localizedDescription],@"errormsg",nil]];
 }
 @end
