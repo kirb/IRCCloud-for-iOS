@@ -34,7 +34,7 @@ BOOL onAlpha=NO;
 		isLoggingIn=YES;
 		[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:1 inSection:1],[NSIndexPath indexPathForRow:2 inSection:1],[NSIndexPath indexPathForRow:3 inSection:1],nil] withRowAnimation:UITableViewRowAnimationFade];
 		[self.tableView reloadData];
-		[[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+		[ICApp sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 	}
 }
 -(void)_gotSessionCookie:(NSDictionary *)json{
@@ -44,12 +44,13 @@ BOOL onAlpha=NO;
 	logInError=nil;
 	if([json objectForKey:@"success"]&&[[json objectForKey:@"success"]boolValue]&&[json objectForKey:@"session"]){
 		[self dismissModalViewControllerAnimated:YES];
-		((ICApplication *)[UIApplication sharedApplication]).cookie=[json objectForKey:@"session"];
+		[ICApp setCookie:[json objectForKey:@"session"]];
 		NSMutableDictionary *prefs=[NSMutableDictionary dictionaryWithContentsOfFile:prefpath];
-		[prefs setObject:[NSString stringWithBase64EncodedString:[json objectForKey:@"session"]] forKey:@"Cookie"];
+		//[prefs setObject:[NSString stringWithBase64EncodedString:[json objectForKey:@"session"]] forKey:@"Cookie"];
+		[prefs setObject:[json objectForKey:@"session"] forKey:@"Cookie"];
 		[prefs setObject:[NSNumber numberWithBool:onAlpha] forKey:@"Alpha"];
 		[prefs writeToFile:prefpath atomically:YES];
-		[(ICApplication *)[UIApplication sharedApplication]connect];
+		[ICApp connect];
 	}else if([json objectForKey:@"message"]){
 		if([[json objectForKey:@"message"]isEqualToString:@"migrated"])logInError=__(@"ACCOUNT_MIGRATED");
 		else if([[json objectForKey:@"message"]isEqualToString:@"already_signed_in"])logInError=__(@"INTERNAL_ERROR");

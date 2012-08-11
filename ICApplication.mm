@@ -18,7 +18,8 @@
 	window=[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
 	NSDictionary *prefs=[NSDictionary dictionaryWithContentsOfFile:prefpath];
 	NSLog(@"prefs = %@",prefs);
-	self.cookie=[prefs objectForKey:@"Cookie"]?[[prefs objectForKey:@"Cookie"]base64DecodedString]:nil;
+	//self.cookie=[prefs objectForKey:@"Cookie"]?[[prefs objectForKey:@"Cookie"]base64DecodedString]:nil;
+	self.cookie=[prefs objectForKey:@"Cookie"]?:nil;
 	sidebar=[[ICNetworksViewController alloc]init];
 	sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
 	if(isPad){
