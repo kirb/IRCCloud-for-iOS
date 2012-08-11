@@ -45,7 +45,7 @@ BOOL onAlpha=NO;
 		[self dismissModalViewControllerAnimated:YES];
 		((ICApplication *)[UIApplication sharedApplication]).cookie=[json objectForKey:@"session"];
 		NSMutableDictionary *prefs=[NSMutableDictionary dictionaryWithContentsOfFile:prefpath];
-		[prefs setObject:[NSString stringWithBase64EncodedString:[json objectForKey:@"session"]] forKey:@"Session"];
+		[prefs setObject:[NSString stringWithBase64EncodedString:[json objectForKey:@"session"]] forKey:@"Cookie"];
 		[prefs setObject:[NSNumber numberWithBool:onAlpha] forKey:@"Alpha"];
 		[prefs writeToFile:prefpath atomically:YES];
 		[(ICApplication *)[UIApplication sharedApplication]connect];

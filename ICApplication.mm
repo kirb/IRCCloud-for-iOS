@@ -3,6 +3,7 @@
 #import "ICApplication.h"
 #import "ICNetworksViewController.h"
 #import "ICChatViewController.h"
+#import "ICLogInViewController.h"
 #import "ICChatRequest.h"
 #import "NSString+Base64.h"
 
@@ -15,9 +16,10 @@
 -(void)applicationDidFinishLaunching:(UIApplication *)application{
 	window=[[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
 	NSDictionary *prefs=[NSDictionary dictionaryWithContentsOfFile:prefpath];
-	self.cookie=[[prefs objectForKey:@"Session"]base64DecodedString];
+	NSLog(@"prefs = %@",prefs);
+	self.cookie=[prefs objectForKey:@"Cookie"]?[[prefs objectForKey:@"Cookie"]base64DecodedString]:nil;
 	sidebar=[[ICNetworksViewController alloc]init];
-	sidebar.hasCookie=!![prefs objectForKey:@"Session"];
+	sidebar.hasCookie=self.cookie!=nil;
 	sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
 	if(isPad){
 		viewController=[[objc_getClass("UISplitViewController") alloc]init];
@@ -27,6 +29,12 @@
 		viewController.viewControllers=[NSArray arrayWithObjects:sidebarNavController,mainNavController,nil];
 		[window addSubview:viewController.view];
 	}else [window addSubview:sidebarNavController.view];
+	if(self.cookie==nil){
+		ICLogInViewController *logIn=[[ICLogInViewController alloc]initWithStyle:UITableViewStyleGrouped];
+		UINavigationController *logInCtrl=[[UINavigationController alloc]initWithRootViewController:logIn];
+		logInCtrl.modalPresentationStyle=UIModalPresentationFormSheet;
+		[sidebarNavController presentModalViewController:logInCtrl animated:YES];
+	}
 	[window makeKeyAndVisible];
 }
 -(void)splitViewController:(UISplitViewController *)split willHideViewController:(UIViewController *)ctrl withBarButtonItem:(UIBarButtonItem *)item forPopoverController:(UIPopoverController *)popover{
