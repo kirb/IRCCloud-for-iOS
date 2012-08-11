@@ -26,12 +26,18 @@ static NSMutableData *output;
 	}
 	return self;
 }
++(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector{
+	return [[self alloc]initWithPage:page parameters:params delegate:delegate selector:selector];
+}
+-(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate1 selector:(SEL)selector1{
+	return [self initWithPage:page parameters:params alpha:[(ICApplication *)[UIApplication sharedApplication]userIsOnAlpha] delegate:delegate1 selector:selector1];
+}
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
 	[output appendData:data];
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
 	NSError *err=nil;
-	NSDictionary *json=output?[objc_getClass("NSJSONSerialization") JSONObjectWithData:output options:0 error:&err]:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-2] forKey:@"error"];
+	NSDictionary *json=objc_getClass("NSJSONSerialization")?[objc_getClass("NSJSONSerialization") JSONObjectWithData:output options:0 error:&err]:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-2] forKey:@"error"];
 	[delegate performSelector:selector withObject:err?[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-1] forKey:@"error"]:json];
 	[output release];
 }

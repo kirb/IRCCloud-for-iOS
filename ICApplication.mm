@@ -5,6 +5,7 @@
 #import "ICChatViewController.h"
 #import "ICLogInViewController.h"
 #import "ICChatRequest.h"
+#import "ICChatRequestParser.h"
 #import "NSString+Base64.h"
 
 @implementation ICApplication
@@ -19,7 +20,6 @@
 	NSLog(@"prefs = %@",prefs);
 	self.cookie=[prefs objectForKey:@"Cookie"]?[[prefs objectForKey:@"Cookie"]base64DecodedString]:nil;
 	sidebar=[[ICNetworksViewController alloc]init];
-	sidebar.hasCookie=self.cookie!=nil;
 	sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
 	if(isPad){
 		viewController=[[objc_getClass("UISplitViewController") alloc]init];
@@ -47,8 +47,8 @@
 }
 -(void)connect{
 	NSLog(@"connection time!");
-	/*ICChatRequestParser *parser=[[ICChatRequestParser alloc]init];
-	self.connection=[ICChatRequest requestWithDelegate:parser selector:@selector(receivedResponse:)];*/
+	ICChatRequestParser *parser=[[ICChatRequestParser alloc]init];
+	self.connection=[ICChatRequest requestWithDelegate:parser selector:@selector(receivedResponse:) errorSelector:@selector(receivedError:)];
 }
 -(void)dealloc{
 	[window release];

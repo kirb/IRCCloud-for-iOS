@@ -1,0 +1,43 @@
+makeserver			new server
+makebuffer			new buffer
+channel(_?)init		new channel
+joined_channel		joined channel (duh)
+parted_channel		have a guess.
+quit				uhh, quit?
+buffer_msg			message
+buffer_me_message	/me
+nickchange			changed nick
+isupport_params		some sorta server data
+end_of_backlog		obvious
+channel_topic		topic changed
+user_channel_mode	channel mode changed
+notice				server notice
+server_welcome		server being kind
+server_yourhost		and heres your host...
+server_created		server being boring
+myinfo				extra server junk
+motd_response		message of the day
+server_luserclient	number of users
+server_luserop		number of opers
+server_luserchannels	number of channels
+server_luserme		number of clients/servers
+self_details		stuff bout yo' self
+server_luserunknown	something bout unknown
+socket_closed		uh, socket closed?
+nickname_in_use		nick is in use
+you_nickchange		users nick changed
+you_joined_channel	user joined a channel
+channel_mode_is		initial channel mode
+channel_mode		mode changed
+server_n_local		local users and max
+server_n_global		global users and max
+server_no_motd		no motd
+user_mode			users mode changed
+connecting_failed	obvious
+quit_server			disconnect from server
+rehashed_config		config rehashed
+services_down		services are down
+unparsed_line		unknown/unparsed line
+server_snomask		server notice mask
+you_are_operator	youre an operator!
+inviting_to_channel	invite user

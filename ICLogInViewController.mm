@@ -34,6 +34,7 @@ BOOL onAlpha=NO;
 		isLoggingIn=YES;
 		[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],[NSIndexPath indexPathForRow:1 inSection:1],[NSIndexPath indexPathForRow:2 inSection:1],[NSIndexPath indexPathForRow:3 inSection:1],nil] withRowAnimation:UITableViewRowAnimationFade];
 		[self.tableView reloadData];
+		[[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 	}
 }
 -(void)_gotSessionCookie:(NSDictionary *)json{

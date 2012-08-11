@@ -1,9 +1,10 @@
+#import "ICGlobal.h"
 #import "ICBuffer.h"
 
-@interface ICNetworksViewController:UITableViewController{
+@interface ICNetworksViewController:UITableViewController<UIPopoverControllerDelegate>{
 	NSMutableArray *buffers;
-	BOOL hasCookie;
+	BOOL isShowingSettings;
+	UIPopoverController *settingsPopover;
 }
 @property(retain) NSMutableArray *buffers;
-@property(assign) BOOL hasCookie;
 @end
