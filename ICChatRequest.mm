@@ -4,48 +4,52 @@
 #import "ICChatRequest.h"
 #import "ICRequest.h"
 #import "ICApplication.h"
-
-static NSMutableString *output;
+#import "lib/WebSocket.h"
 
 @implementation ICChatRequest
-@synthesize connected;
+@synthesize connected,webSocket;
 +(ICChatRequest *)requestWithDelegate:(id)delegate selector:(SEL)selector errorSelector:(SEL)errorSelector{
 	return [[self alloc]initWithDelegate:delegate selector:selector errorSelector:errorSelector];
 }
 -(ICChatRequest *)initWithDelegate:(id)delegate1 selector:(SEL)messageSelector1 errorSelector:(SEL)errorSelector1{
-	if((self=[self initWithPage:@"stream" parameters:@"" delegate:delegate1 selector:errorSelector1])){ //requires le GO_EASY_ON_ME=1
+	if((self=[super init])){
 		delegate=delegate1;
 		messageSelector=messageSelector1;
 		errorSelector=errorSelector1;
-		output=[[NSMutableString alloc]init];
+		NSLog(@"websocket.");
+		WebSocketConnectConfig *config=[WebSocketConnectConfig configWithURLString:[@"wss://" stringByAppendingString:[ICApp userIsOnAlpha]?alphaURL:betaURL]
+			origin:nil protocols:nil tlsSettings:nil headers:nil verifySecurityKey:YES extensions:nil];
+		config.closeTimeout=15;
+		//config.keepAlive=15;
+		NSLog(@"here we go.");
+		self.webSocket=[[WebSocket webSocketWithConfig:config delegate:self]retain];
+		[self.webSocket open];
+		NSLog(@"opened");
 	}
 	return self;
 }
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)err{
-	NSLog(@"fail :(");
+-(void)didOpen{
+	NSLog(@"websocket connected");
+	self.connected=YES;
+}
+-(void)didClose:(NSUInteger)status message:(NSString *)msg error:(NSError *)err{
+	NSLog(@"fail :( - %@ / %@",msg,err);
 	self.connected=NO;
 	[delegate performSelector:errorSelector withObject:err];
 }
--(void)connectionDidFinishLoading:(NSURLConnection *)connection{
-	[self connection:connection didFailWithError:[NSError errorWithDomain:@"ICChatRequestFinishedLoadingError" code:1 userInfo:nil]];
+-(void)didReceiveError:(NSError *)err{
+	NSLog(@"hmm, error. %@",err);
+	[delegate performSelector:errorSelector withObject:err];
 }
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-	NSString *out=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-	NSLog(@"message! %@",out);
-	if([out isEqualToString:@""]||[out rangeOfString:@"\n"].location==NSNotFound){
-		[output appendString:out];
-		return;
-	}
-	NSLog(@"string = %@",output);
-	NSString *outcp=[output copy];
-	NSArray *split=[outcp componentsSeparatedByString:@"\n"];
-	for(NSString *i in split)[self parseData:i];
-	output=[[NSMutableString alloc]init];
-}
--(void)parseData:(NSString *)data{
+-(void)didReceiveTextMessage:(NSString *)msg{
+	NSLog(@"message! %@",msg);
+	if([msg isEqualToString:@""])return;
 	NSError *err=nil;
-	NSDictionary *json=data?[objc_getClass("NSJSONSerialization") JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err]:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-2] forKey:@"error"];
+	NSDictionary *json=msg?[objc_getClass("NSJSONSerialization") JSONObjectWithData:[msg dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&err]:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-2] forKey:@"error"];
 	if(err)[delegate performSelector:errorSelector withObject:err];
 	else [delegate performSelector:messageSelector withObject:json];
+}
+-(void)didReceiveBinaryMessage:(NSData *)msg{
+	NSLog(@"wtf, received binary from the websocket");
 }
 @end
