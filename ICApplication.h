@@ -13,10 +13,12 @@
 	NSString *cookie;
 	BOOL userIsOnAlpha;
 	ICChatRequest *connection;
+	NSMutableDictionary *servers;
 }
 -(void)connect;
 @property(nonatomic,retain) UIWindow *window;
 @property(nonatomic,retain) NSString *cookie;
 @property(assign) BOOL userIsOnAlpha;
 @property(nonatomic,retain) ICChatRequest *connection;
+@property(nonatomic,retain) NSMutableDictionary *servers;
 @end

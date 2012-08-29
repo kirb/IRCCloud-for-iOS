@@ -19,7 +19,7 @@
 	[self setToolbarItems:[NSArray arrayWithObjects:
 		//[[UIBarButtonItem alloc]initWithTitle:__(@"SETTINGS") style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)]
 		[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-		[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSettings)], //todo: get a settings icon
+		[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)],
 	nil] animated:NO];
 	self.navigationController.toolbarHidden=NO;
 	if([ICApp cookie]==nil&&isPad)[self performSelector:@selector(showLogIn) withObject:nil afterDelay:.3];

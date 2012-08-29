@@ -3,6 +3,7 @@
 #import "ICGlobal.h"
 #import "ICRequest.h"
 #import "ICApplication.h"
+#import "NSString+URL.h"
 
 static NSMutableData *output;
 
@@ -13,13 +14,24 @@ static NSMutableData *output;
 -(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params alpha:(BOOL)alpha delegate:(id)delegate1 selector:(SEL)selector1{
 	if((self=[super init])){
 		output=[[NSMutableData alloc]init];
-		NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@irccloud.com/chat/%@",alpha?@"alpha.":@"",page]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:90];
+		NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/chat/%@",alpha?alphaURL:betaURL,page]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:90];
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
 		struct utsname info;
 		uname(&info);
 		[request addValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)",version,[NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding],[[UIDevice currentDevice]systemVersion]] forHTTPHeaderField:@"User-Agent"];
-		request.HTTPShouldHandleCookies=NO;
+		if(![page isEqualToString:@"login"]&&![[ICApp cookie]isEqualToString:@""]){
+			NSLog(@"has cookie");
+			NSDictionary *cookies=[NSHTTPCookie requestHeaderFieldsWithCookies:[NSArray arrayWithObject:[NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
+				[[ICApp userIsOnAlpha]?@"alpha.":@"" stringByAppendingString:@"irccloud.com"],NSHTTPCookieDomain,
+				@"/",NSHTTPCookiePath,
+				@"session",NSHTTPCookieName,
+				[ICApp cookie], NSHTTPCookieValue,
+				nil]]]];
+			NSLog(@"mmm, cookie... uh, i mean, %@",cookies);
+			[request setAllHTTPHeaderFields:cookies];
+		}else request.HTTPShouldHandleCookies=NO;
+		NSLog(@"lets go!");
 		[NSURLConnection connectionWithRequest:request delegate:self];
 		delegate=delegate1;
 		selector=selector1;

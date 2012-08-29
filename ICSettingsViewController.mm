@@ -15,6 +15,13 @@
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation{
 	return YES;
 }
+-(void)viewDidLoad{
+	[super viewDidLoad];
+	self.contentSizeForViewInPopover=CGSizeMake(320,264);
+}
+-(void)viewWillDisappear{
+	//TODO: make settings that need to be saved here
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)table{
 	return 3;
 }
@@ -33,22 +40,37 @@
 		default:return nil;break;
 	}
 }
--(NSString *)tableView:(UITableView *)table titleForFooterInSection:(NSInteger)section{
-	return section==1?__(@"AUTHOR"):nil;
+-(UIView *)tableView:(UITableView *)table viewForFooterInSection:(NSInteger)section{
+	if(section!=1)return nil;
+	UIView *view=[[UIView alloc]init];
+	UILabel *label=[[UILabel alloc]init];
+	label.text=__(@"AUTHOR");
+	label.font=[UIFont systemFontOfSize:14];
+	label.backgroundColor=[UIColor clearColor];
+	label.textColor=[UIColor colorWithRed:76/255.0 green:86/255.0 blue:108/255.0 alpha:1];
+	label.shadowOffset=CGSizeMake(0,1);
+	label.shadowColor=[UIColor whiteColor];
+	CGSize size=[label.text sizeWithFont:label.font];
+	[label setFrame:CGRectMake(19,0,size.width,size.height)];//someone tell me why label.frame isnt working
+	[view setFrame:CGRectMake(0,0,19+size.width,40+size.height)];
+	[view addSubview:label];
+	NSLog(@"v=%@,l=%@,s=%@,f=%@,g=%@",view,label,NSStringFromCGSize(size),NSStringFromCGRect(label.frame),NSStringFromCGRect(view.frame));
+	return view;
 }
 -(UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)index{
-	UITableViewCell *cell=[table dequeueReusableCellWithIdentifier:index.section==0?@"settingsSwitchCell":@"settingsFollowCell"]?:[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:index.section==0?@"settingsSwitchCell":@"settingsFollowCell"];
-	if(index.section==0){
-		cell.textLabel.text=__(@"LOG_OUT");
-		cell.textLabel.textAlignment=UITextAlignmentCenter;
-	}else{
-		cell.textLabel.text=__(index.row==0?@"FOLLOW_ME":@"FOLLOW_IRCCLOUD");
-		cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+	UITableViewCell *cell;
+	if(!(cell=[table dequeueReusableCellWithIdentifier:index.section==0?@"settingsSwitchCell":@"settingsFollowCell"])){
+		cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:index.section==0?@"settingsSwitchCell":@"settingsFollowCell"];
+		if(index.section==0)cell.textLabel.textAlignment=UITextAlignmentCenter;
+		else{
+			cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+			cell.image=[UIImage imageNamed:@"twitter.png"];
+			cell.selectedImage=[UIImage imageNamed:@"twitter_selected.png"];
+		}
 	}
+	if(index.section==0)cell.textLabel.text=__(@"LOG_OUT");
+	else cell.textLabel.text=__(index.row==0?@"FOLLOW_ME":@"FOLLOW_IRCCLOUD");
 	return cell;
-}
--(void)viewWillDisappear{
-	//TODO: make settings that need to be saved here
 }
 -(void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)index{
 	[table deselectRowAtIndexPath:index animated:YES];

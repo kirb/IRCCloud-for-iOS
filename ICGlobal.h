@@ -24,12 +24,49 @@ enum{
 };
 typedef NSUInteger UIPopoverArrowDirection;
 
+typedef enum{
+	ICMessageTypeMessage,
+	ICMessageTypeMe
+} ICMessageType;
+
+typedef enum{
+	ICServerStatusUnknown,
+	ICServerStatusQueued,
+	ICServerStatusConnecting,
+	ICServerStatusConnected,
+	ICServerStatusJoining,
+	ICServerStatusReady,
+	ICServerStatusQuitting,
+	ICServerStatusDisconnected,
+	ICServerStatusPoolUnavailable,
+	ICServerStatusWaiting,
+	ICServerStatusRetrying
+} ICServerStatus;
+
+typedef enum{
+	ICBufferTypeUnknown,
+	ICBufferTypeConsole,
+	ICBufferTypeChannel,
+	ICBufferTypeConversation
+} ICBufferType;
+
+typedef enum{
+	ICBufferSecurityUnknown,
+	ICBufferSecurityPublic,
+	ICBufferSecurityPrivate,
+	ICBufferSecuritySecret
+} ICBufferSecurity;
+
+#define ICGetServer(server) [[ICApp servers]objectForKey:[NSString stringWithFormat:@"%i",server]]
+#define ICGetBuffer(server,buffer) [ICGetServer(server).buffers objectForKey:[NSString stringWithFormat:@"%i",buffer]]
+
 @interface UIDevice (iPad)
 -(BOOL)isWildcat;
 @end
 
 @interface UIViewController (iPad)
 @property(nonatomic,assign) UIModalPresentationStyle modalPresentationStyle;
+@property(nonatomic,readwrite) CGSize contentSizeForViewInPopover;
 @end
 
 @protocol UISplitViewControllerDelegate;
@@ -75,3 +112,5 @@ typedef NSUInteger UIPopoverArrowDirection;
 #define isPad ([[UIDevice currentDevice]respondsToSelector:@selector(isWildcat)]?[[UIDevice currentDevice]isWildcat]:NO)
 #define prefpath @"/var/mobile/Library/Preferences/ws.hbang.irccloud.plist"
 #define ICApp (ICApplication *)[UIApplication sharedApplication]
+#define betaURL @"irccloud.com"
+#define alphaURL @"alpha.irccloud.com"
