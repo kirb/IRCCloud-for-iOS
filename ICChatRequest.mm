@@ -8,9 +8,6 @@
 
 @implementation ICChatRequest
 @synthesize connected,webSocket;
-+(ICChatRequest *)requestWithDelegate:(id)delegate selector:(SEL)selector errorSelector:(SEL)errorSelector{
-	return [[self alloc]initWithDelegate:delegate selector:selector errorSelector:errorSelector];
-}
 -(ICChatRequest *)initWithDelegate:(id)delegate1 selector:(SEL)messageSelector1 errorSelector:(SEL)errorSelector1{
 	if((self=[super init])){
 		delegate=delegate1;

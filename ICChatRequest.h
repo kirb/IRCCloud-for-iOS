@@ -9,7 +9,6 @@
 	BOOL connected;
 	WebSocket *webSocket;
 }
-+(ICChatRequest *)requestWithDelegate:(id)delegate selector:(SEL)selector errorSelector:(SEL)errorSelector;
 -(ICChatRequest *)initWithDelegate:(id)delegate selector:(SEL)selector errorSelector:(SEL)errorSelector;
 @property(assign) BOOL connected;
 @property(nonatomic,retain) WebSocket *webSocket;
