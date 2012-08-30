@@ -9,21 +9,25 @@
 @implementation ICChatRequest
 @synthesize connected,webSocket;
 -(ICChatRequest *)initWithDelegate:(id)delegate1 selector:(SEL)messageSelector1 errorSelector:(SEL)errorSelector1{
+	if(![ICApp cookie]||[[ICApp cookie]isEqualToString:@""])return nil;
 	if((self=[super init])){
 		delegate=delegate1;
 		messageSelector=messageSelector1;
 		errorSelector=errorSelector1;
 		NSLog(@"websocket.");
-		WebSocketConnectConfig *config=[WebSocketConnectConfig configWithURLString:[@"wss://" stringByAppendingString:[ICApp userIsOnAlpha]?alphaURL:betaURL]
-			origin:nil protocols:nil tlsSettings:nil headers:nil verifySecurityKey:YES extensions:nil];
+		WebSocketConnectConfig *config=[WebSocketConnectConfig configWithURLString:[NSString stringWithFormat:@"wss://%@/",[ICApp userIsOnAlpha]?alphaURL:betaURL]
+			origin:nil protocols:nil tlsSettings:nil headers:[NSArray arrayWithObject:[@"Cookie: session=" stringByAppendingString:[ICApp cookie]]] verifySecurityKey:YES extensions:nil];
+		config.host=[ICApp userIsOnAlpha]?alphaURL:betaURL;
 		config.closeTimeout=15;
-		//config.keepAlive=15;
+		config.isSecure=YES;
 		NSLog(@"here we go.");
 		self.webSocket=[[WebSocket webSocketWithConfig:config delegate:self]retain];
-		[self.webSocket open];
-		NSLog(@"opened");
 	}
 	return self;
+}
+-(void)startConnection{
+	NSLog(@"firin' up the socket");
+	[self.webSocket open];//idk why we need this to be separate, but somehow that works.
 }
 -(void)didOpen{
 	NSLog(@"websocket connected");

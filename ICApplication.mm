@@ -25,7 +25,6 @@
 	//self.cookie=[prefs objectForKey:@"Cookie"]?[[prefs objectForKey:@"Cookie"]base64DecodedString]:nil;
 	self.cookie=[prefs objectForKey:@"Cookie"];
 	self.userIsOnAlpha=[prefs objectForKey:@"Alpha"]?[[prefs objectForKey:@"Alpha"]boolValue]:NO;
-	NSLog(@"mah cookie = %@",self.cookie);
 	sidebar=[[ICNetworksViewController alloc]init];
 	sidebarNavController=[[[UINavigationController alloc]initWithRootViewController:sidebar]autorelease];
 	if(isPad){
@@ -59,6 +58,7 @@
 -(void)connect{
 	ICChatRequestParser *parser=[[ICChatRequestParser alloc]init];
 	self.connection=[[ICChatRequest alloc]initWithDelegate:parser selector:@selector(receivedResponse:) errorSelector:@selector(receivedError:)];
+	[self.connection.webSocket performSelector:@selector(open) withObject:nil afterDelay:.1];
 }
 -(void)receivedUserInfo:(NSDictionary *)json{}//todo
 -(void)backlogLoaded{//threedo

@@ -27,8 +27,8 @@ typedef enum
     WebSocketVersion08 = 8,
     WebSocketVersion10 = 10,
     WebSocketVersionRFC6455 = 6455
-}/*;
-typedef NSUInteger*/ WebSocketVersion;
+};
+typedef NSUInteger WebSocketVersion;
 
 
 @interface WebSocketConnectConfig : NSObject

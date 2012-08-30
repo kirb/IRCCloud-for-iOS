@@ -9,11 +9,15 @@
 	return self;
 }
 -(void)loadView{
-	self.view=[[[UIScrollView alloc]initWithFrame:[[UIScreen mainScreen]applicationFrame]]autorelease];
+	self.view=[[[UIWebView alloc]initWithFrame:[[UIScreen mainScreen]applicationFrame]]autorelease];
 	self.view.backgroundColor=[UIColor whiteColor];
 	self.title=@"";
-	bottomBar=[[ICBottomBar alloc]init];
-	self.toolbarItems=[NSArray arrayWithObject:bottomBar];
+	textField=[[UITextField alloc]init];
+	textField.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+	[self setToolbarItems:[NSArray arrayWithObject:
+		[[UIBarButtonItem alloc]initWithCustomView:textField]
+	] animated:NO];
+	self.navigationController.toolbarHidden=NO;
 }
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation{
 	return YES;

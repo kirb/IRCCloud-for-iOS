@@ -107,6 +107,10 @@ typedef enum{
 @property(nonatomic,assign) UIAlertViewStyle alertViewStyle;
 @end
 
+@interface UINavigationBar (iOS5)
++(UINavigationBar *)appearance;
+@end
+
 #define __(key) [[NSBundle mainBundle]localizedStringForKey:key value:key table:@"IRCCloud"]
 #define version @"0.0.1"
 #define isPad ([[UIDevice currentDevice]respondsToSelector:@selector(isWildcat)]?[[UIDevice currentDevice]isWildcat]:NO)
@@ -114,3 +118,4 @@ typedef enum{
 #define ICApp (ICApplication *)[UIApplication sharedApplication]
 #define betaURL @"irccloud.com"
 #define alphaURL @"alpha.irccloud.com"
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255 green:g/255 blue:b/255 alpha:a]

@@ -1,2 +1,0 @@
-@interface ICBottomBar:UIView
-@end

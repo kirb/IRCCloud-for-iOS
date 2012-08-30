@@ -62,7 +62,7 @@
 	else [self parseResponse:json];
 }
 -(void)receivedError:(NSError *)err{
-	NSLog(@"boom");
+	NSLog(@"boom. user info = %@",err.userInfo);
 	[[[UIAlertView alloc]initWithTitle:__(@"ERROR_OCCURRED") message:[NSString stringWithFormat:__(@"ERROR_OCCURRED_MESSAGE"),[err localizedDescription]] delegate:nil cancelButtonTitle:__(@"OK") otherButtonTitles:nil]show];
 }
 @end

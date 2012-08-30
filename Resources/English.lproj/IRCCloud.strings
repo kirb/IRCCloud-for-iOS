@@ -6,7 +6,7 @@
 "CONNECTIONS" = "Connections";
 "EMAIL" = "Email";
 "ERROR_OCCURRED" = "Oops, an error occurred.";
-"ERROR_OCCURRED_MESSAGE" = "Please try again later.\nThe error was: %@";
+"ERROR_OCCURRED_MESSAGE" = "%@\nPlease try again later.";
 "FOLLOW_IRCCLOUD" = "Follow IRCCloud on Twitter";
 "FOLLOW_ME" = "Follow me on Twitter";
 "IRCCLOUD" = "IRCCloud";

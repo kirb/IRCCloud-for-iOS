@@ -3,7 +3,7 @@
 #import "ADTableViewInputCell.h"
 #import "ICRequest.h"
 #import "ICApplication.h"
-#import "NSString+Base64.h"
+//#import "NSString+Base64.h"
 
 BOOL onAlpha=NO;
 

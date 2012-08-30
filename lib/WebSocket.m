@@ -96,16 +96,16 @@ WebSocketWaitingState waitingState;
     NSError* error = nil;
     BOOL successful = false;
     @try 
-    {
-        successful = [socket connectToHost:self.config.url.host onPort:port error:&error];
-        if (self.config.version == WebSocketVersion07)
-        {
+    {NSLog(@"tryin. host=%@,port=%i",self.config.url.host,port);
+        successful = [socket connectToHost:self.config.url.host onPort:port error:&error];NSLog(@"successful line");
+        NSLog(@"if");if (self.config.version == WebSocketVersion07)
+        {NSLog(@"ws 07");
             closeStatusCode = WebSocketCloseStatusNormal;
         }
         else
-        {
+        {NSLog(@"else");
             closeStatusCode = 0;
-        }
+        }NSLog(@"nil");
         closeMessage = nil;
     }
     @catch (NSException *exception) 
