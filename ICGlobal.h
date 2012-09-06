@@ -118,7 +118,7 @@ typedef enum{
 
 #define __(key) [[NSBundle mainBundle]localizedStringForKey:key value:key table:@"IRCCloud"]
 #define version @"0.0.1"
-#define isPad ([UIDevice currentDevice.userInterfaceIdiom==UIUserInterfaceIdiomPad)
+#define isPad ([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
 #define prefpath @"/var/mobile/Library/Preferences/ws.hbang.irccloud.plist"
 #define ICApp (ICApplication *)[UIApplication sharedApplication]
 #define betaURL @"irccloud.com"
