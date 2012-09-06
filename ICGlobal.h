@@ -25,6 +25,11 @@ enum{
 typedef NSUInteger UIPopoverArrowDirection;
 
 typedef enum{
+   UIUserInterfaceIdiomPhone,
+   UIUserInterfaceIdiomPad,
+} UIUserInterfaceIdiom;
+
+typedef enum{
 	ICMessageTypeMessage,
 	ICMessageTypeMe
 } ICMessageType;
@@ -61,7 +66,7 @@ typedef enum{
 #define ICGetBuffer(server,buffer) [ICGetServer(server).buffers objectForKey:[NSString stringWithFormat:@"%i",buffer]]
 
 @interface UIDevice (iPad)
--(BOOL)isWildcat;
+@property(nonatomic,readonly) UIUserInterfaceIdiom userInterfaceIdiom;
 @end
 
 @interface UIViewController (iPad)
@@ -113,7 +118,7 @@ typedef enum{
 
 #define __(key) [[NSBundle mainBundle]localizedStringForKey:key value:key table:@"IRCCloud"]
 #define version @"0.0.1"
-#define isPad ([[UIDevice currentDevice]respondsToSelector:@selector(isWildcat)]?[[UIDevice currentDevice]isWildcat]:NO)
+#define isPad ([UIDevice currentDevice.userInterfaceIdiom==UIUserInterfaceIdiomPad)
 #define prefpath @"/var/mobile/Library/Preferences/ws.hbang.irccloud.plist"
 #define ICApp (ICApplication *)[UIApplication sharedApplication]
 #define betaURL @"irccloud.com"
