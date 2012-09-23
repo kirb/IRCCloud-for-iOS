@@ -1,8 +1,0 @@
-Package: ws.hbang.irccloud
-Name: IRCCloud
-Version: 0.0.1
-Architecture: iphoneos-arm
-Description: Unofficial IRCCloud app for iOS
-Maintainer: thekirbylover <irccloud@hbang.ws>
-Author: thekirbylover <irccloud@hbang.ws>
-Section: Social
