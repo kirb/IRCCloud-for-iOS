@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SRWebSocket.h"
+#import "ICWebSocketDelegate.h"
 
 @interface ICAppDelegate : UIResponder <UIApplicationDelegate> {
-	SRWebSocket *webSocket;
 	UIView *notificationView;
+	ICWebSocketDelegate *webSocket;
 }
-
--(void)openWebSocket;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIView *notificationView;
+@property (strong, nonatomic) ICWebSocketDelegate *webSocket;
 
 @end

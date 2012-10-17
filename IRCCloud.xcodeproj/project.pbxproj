@@ -9,23 +9,17 @@
 /* Begin PBXBuildFile section */
 		498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A631619F8B4001A4356 /* UIKit.framework */; };
 		498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A651619F8B4001A4356 /* Foundation.framework */; };
-		498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A671619F8B4001A4356 /* CoreGraphics.framework */; };
-		498B8A6E1619F8B4001A4356 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A6C1619F8B4001A4356 /* InfoPlist.strings */; };
+		498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A671619F8B4001A4356 /* CoreGraphics.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		498B8A701619F8B4001A4356 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8A6F1619F8B4001A4356 /* main.m */; };
 		498B8A741619F8B4001A4356 /* ICAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8A731619F8B4001A4356 /* ICAppDelegate.m */; };
 		498B8A761619F8B4001A4356 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A751619F8B4001A4356 /* Default.png */; };
 		498B8A781619F8B4001A4356 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A771619F8B4001A4356 /* Default@2x.png */; };
 		498B8A7A1619F8B5001A4356 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A791619F8B4001A4356 /* Default-568h@2x.png */; };
-		498B8A7D1619F8B5001A4356 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A7B1619F8B5001A4356 /* MainStoryboard_iPhone.storyboard */; };
-		498B8A801619F8B5001A4356 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A7E1619F8B5001A4356 /* MainStoryboard_iPad.storyboard */; };
 		498B8A831619F8B5001A4356 /* ICMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8A821619F8B5001A4356 /* ICMasterViewController.m */; };
 		498B8A93161A036B001A4356 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A92161A036B001A4356 /* icon.png */; };
 		498B8A95161A0382001A4356 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A94161A0382001A4356 /* icon@2x.png */; };
 		498B8A97161A03A4001A4356 /* icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A96161A03A4001A4356 /* icon~ipad.png */; };
 		498B8A99161A03C4001A4356 /* icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A98161A03C4001A4356 /* icon~ipad@2x.png */; };
-		498B8AAA161A0AB1001A4356 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AA3161A0AB1001A4356 /* base64.c */; };
-		498B8AAB161A0AB1001A4356 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AA6161A0AB1001A4356 /* NSData+SRB64Additions.m */; };
-		498B8AAC161A0AB1001A4356 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AA9161A0AB1001A4356 /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		498B8AAE161A0AFA001A4356 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8AAD161A0AFA001A4356 /* CFNetwork.framework */; };
 		498B8AB0161A0B00001A4356 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8AAF161A0B00001A4356 /* Security.framework */; };
 		498B8AB2161A0B90001A4356 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8AB1161A0B90001A4356 /* libicucore.dylib */; };
@@ -40,10 +34,14 @@
 		498B8AC9161A1C16001A4356 /* ICTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AC8161A1C16001A4356 /* ICTextCell.m */; };
 		498E6D8A162A7B4D002BA7E5 /* ICBufferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */; };
 		498E6D8F162A9489002BA7E5 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6D8E162A9489002BA7E5 /* AJNotificationView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		49917B8C162EF88D000E4DF8 /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49917B8B162EF88D000E4DF8 /* libUnittWebSocketClient.a */; };
 		499BCB9D1629B34F00A58167 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499BCB9C1629B34F00A58167 /* LogIn.storyboard */; };
 		499BCBA31629BD2500A58167 /* ICRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCBA21629BD2500A58167 /* ICRequest.m */; };
 		499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */; };
+		49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */; };
+		49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */; };
 		49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FDF4B0162E763000AAE35D /* ICNotification.m */; };
+		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +50,6 @@
 		498B8A651619F8B4001A4356 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		498B8A671619F8B4001A4356 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		498B8A6B1619F8B4001A4356 /* IRCCloud-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRCCloud-Info.plist"; sourceTree = "<group>"; };
-		498B8A6D1619F8B4001A4356 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		498B8A6F1619F8B4001A4356 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		498B8A711619F8B4001A4356 /* IRCCloud-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRCCloud-Prefix.pch"; sourceTree = "<group>"; };
 		498B8A721619F8B4001A4356 /* ICAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICAppDelegate.h; sourceTree = "<group>"; };
@@ -60,8 +57,6 @@
 		498B8A751619F8B4001A4356 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		498B8A771619F8B4001A4356 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		498B8A791619F8B4001A4356 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		498B8A7C1619F8B5001A4356 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		498B8A7F1619F8B5001A4356 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		498B8A811619F8B5001A4356 /* ICMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICMasterViewController.h; sourceTree = "<group>"; };
 		498B8A821619F8B5001A4356 /* ICMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICMasterViewController.m; sourceTree = "<group>"; };
 		498B8A92161A036B001A4356 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -70,13 +65,6 @@
 		498B8A98161A03C4001A4356 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon~ipad@2x.png"; sourceTree = "<group>"; };
 		498B8A9E161A0A3A001A4356 /* NavBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBar.png; sourceTree = "<group>"; };
 		498B8A9F161A0A3A001A4356 /* NavBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBar@2x.png"; sourceTree = "<group>"; };
-		498B8AA3161A0AB1001A4356 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
-		498B8AA4161A0AB1001A4356 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
-		498B8AA5161A0AB1001A4356 /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SRB64Additions.h"; sourceTree = "<group>"; };
-		498B8AA6161A0AB1001A4356 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SRB64Additions.m"; sourceTree = "<group>"; };
-		498B8AA7161A0AB1001A4356 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
-		498B8AA8161A0AB1001A4356 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
-		498B8AA9161A0AB1001A4356 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		498B8AAD161A0AFA001A4356 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		498B8AAF161A0B00001A4356 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		498B8AB1161A0B90001A4356 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -94,13 +82,17 @@
 		498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBufferViewController.m; sourceTree = "<group>"; };
 		498E6D8D162A9489002BA7E5 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
 		498E6D8E162A9489002BA7E5 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
+		49917B8B162EF88D000E4DF8 /* libUnittWebSocketClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUnittWebSocketClient.a; path = "../../../Library/Developer/Ext/UnittWebSocketClient/bin/Debug-iphonesimulator/libUnittWebSocketClient.a"; sourceTree = "<group>"; };
 		499BCB9C1629B34F00A58167 /* LogIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
 		499BCB9E1629BC1D00A58167 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		499BCBA11629BD2400A58167 /* ICRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICRequest.h; sourceTree = "<group>"; };
 		499BCBA21629BD2500A58167 /* ICRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICRequest.m; sourceTree = "<group>"; };
+		49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		49FDF4AF162E763000AAE35D /* ICNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNotification.h; sourceTree = "<group>"; };
 		49FDF4B0162E763000AAE35D /* ICNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNotification.m; sourceTree = "<group>"; };
+		49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +106,8 @@
 				498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */,
 				498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */,
 				498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */,
+				49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */,
+				49917B8C162EF88D000E4DF8 /* libUnittWebSocketClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +124,6 @@
 				498B8A691619F8B4001A4356 /* IRCCloud */,
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
-				498B8AA2161A0AB1001A4356 /* SocketRocket */,
 				498B8A621619F8B4001A4356 /* Frameworks */,
 				498B8A601619F8B4001A4356 /* Products */,
 			);
@@ -148,11 +141,13 @@
 			isa = PBXGroup;
 			children = (
 				498B8AB1161A0B90001A4356 /* libicucore.dylib */,
-				498B8AAF161A0B00001A4356 /* Security.framework */,
+				49917B8B162EF88D000E4DF8 /* libUnittWebSocketClient.a */,
 				498B8AAD161A0AFA001A4356 /* CFNetwork.framework */,
-				498B8A631619F8B4001A4356 /* UIKit.framework */,
-				498B8A651619F8B4001A4356 /* Foundation.framework */,
 				498B8A671619F8B4001A4356 /* CoreGraphics.framework */,
+				498B8A651619F8B4001A4356 /* Foundation.framework */,
+				49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */,
+				498B8AAF161A0B00001A4356 /* Security.framework */,
+				498B8A631619F8B4001A4356 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,8 +161,8 @@
 				498B8ABE161A13AF001A4356 /* ICWebSocketDelegate.m */,
 				49FDF4AF162E763000AAE35D /* ICNotification.h */,
 				49FDF4B0162E763000AAE35D /* ICNotification.m */,
-				498B8A7B1619F8B5001A4356 /* MainStoryboard_iPhone.storyboard */,
-				498B8A7E1619F8B5001A4356 /* MainStoryboard_iPad.storyboard */,
+				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
+				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
 				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
 				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
 				498B8A811619F8B5001A4356 /* ICMasterViewController.h */,
@@ -188,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				498B8A6B1619F8B4001A4356 /* IRCCloud-Info.plist */,
-				498B8A6C1619F8B4001A4356 /* InfoPlist.strings */,
 				498B8A6F1619F8B4001A4356 /* main.m */,
 				498B8A711619F8B4001A4356 /* IRCCloud-Prefix.pch */,
 				498B8A9E161A0A3A001A4356 /* NavBar.png */,
@@ -202,21 +196,6 @@
 				498B8A791619F8B4001A4356 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		498B8AA2161A0AB1001A4356 /* SocketRocket */ = {
-			isa = PBXGroup;
-			children = (
-				498B8AA3161A0AB1001A4356 /* base64.c */,
-				498B8AA4161A0AB1001A4356 /* base64.h */,
-				498B8AA5161A0AB1001A4356 /* NSData+SRB64Additions.h */,
-				498B8AA6161A0AB1001A4356 /* NSData+SRB64Additions.m */,
-				498B8AA7161A0AB1001A4356 /* SocketRocket-Prefix.pch */,
-				498B8AA8161A0AB1001A4356 /* SRWebSocket.h */,
-				498B8AA9161A0AB1001A4356 /* SRWebSocket.m */,
-			);
-			name = SocketRocket;
-			path = IRCCloud/SocketRocket;
 			sourceTree = "<group>";
 		};
 		498E6D8C162A9489002BA7E5 /* AJNotificationView */ = {
@@ -291,12 +270,9 @@
 			files = (
 				498B8AB3161A0CB1001A4356 /* NavBar.png in Resources */,
 				498B8AB4161A0CB1001A4356 /* NavBar@2x.png in Resources */,
-				498B8A6E1619F8B4001A4356 /* InfoPlist.strings in Resources */,
 				498B8A761619F8B4001A4356 /* Default.png in Resources */,
 				498B8A781619F8B4001A4356 /* Default@2x.png in Resources */,
 				498B8A7A1619F8B5001A4356 /* Default-568h@2x.png in Resources */,
-				498B8A7D1619F8B5001A4356 /* MainStoryboard_iPhone.storyboard in Resources */,
-				498B8A801619F8B5001A4356 /* MainStoryboard_iPad.storyboard in Resources */,
 				498B8A93161A036B001A4356 /* icon.png in Resources */,
 				498B8A95161A0382001A4356 /* icon@2x.png in Resources */,
 				498B8A97161A03A4001A4356 /* icon~ipad.png in Resources */,
@@ -306,6 +282,8 @@
 				498B8ABB161A10C5001A4356 /* NavButtonSelected.png in Resources */,
 				498B8ABC161A10C5001A4356 /* NavButtonSelected@2x.png in Resources */,
 				499BCB9D1629B34F00A58167 /* LogIn.storyboard in Resources */,
+				49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */,
+				49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,9 +297,6 @@
 				498B8A701619F8B4001A4356 /* main.m in Sources */,
 				498B8A741619F8B4001A4356 /* ICAppDelegate.m in Sources */,
 				498B8A831619F8B5001A4356 /* ICMasterViewController.m in Sources */,
-				498B8AAA161A0AB1001A4356 /* base64.c in Sources */,
-				498B8AAB161A0AB1001A4356 /* NSData+SRB64Additions.m in Sources */,
-				498B8AAC161A0AB1001A4356 /* SRWebSocket.m in Sources */,
 				498B8ABF161A13B0001A4356 /* ICWebSocketDelegate.m in Sources */,
 				498B8AC5161A1953001A4356 /* ICLogInViewController.m in Sources */,
 				498B8AC9161A1C16001A4356 /* ICTextCell.m in Sources */,
@@ -334,33 +309,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		498B8A6C1619F8B4001A4356 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				498B8A6D1619F8B4001A4356 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		498B8A7B1619F8B5001A4356 /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				498B8A7C1619F8B5001A4356 /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		498B8A7E1619F8B5001A4356 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				498B8A7F1619F8B5001A4356 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		498B8A871619F8B5001A4356 /* Debug */ = {
@@ -419,8 +367,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRCCloud/IRCCloud-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Ext/UnittWebSocketClient/include\"",
+				);
 				INFOPLIST_FILE = "IRCCloud/IRCCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Ext/UnittWebSocketClient/bin/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -435,8 +392,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRCCloud/IRCCloud-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Ext/UnittWebSocketClient/include\"",
+				);
 				INFOPLIST_FILE = "IRCCloud/IRCCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Ext/UnittWebSocketClient/bin/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

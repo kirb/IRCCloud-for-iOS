@@ -12,6 +12,7 @@
 #import "ICRequest.h"
 #import "ICAppDelegate.h"
 #import "ICMasterViewController.h"
+#import "ICWebSocketDelegate.h"
 
 @interface ICLogInViewController ()
 
@@ -57,7 +58,7 @@
 	NSString *logInError = @"";
 	if ([json objectForKey:@"success"] && [[json objectForKey:@"success"] boolValue] && [json objectForKey:@"session"]) {
 		[[NSUserDefaults standardUserDefaults] setValue:[json objectForKey:@"session"] forKey:@"cookie"];
-		[(ICAppDelegate *)[UIApplication sharedApplication].delegate openWebSocket];
+		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).webSocket open];
 		[(ICMasterViewController *)((UINavigationController *)self.navigationController.presentingViewController).topViewController updateLoginStatus];
 		[self dismissModalViewControllerAnimated:YES];
 		return;

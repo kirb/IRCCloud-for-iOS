@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SRWebSocket.h"
+#import "WebSocket.h"
 
-@interface ICWebSocketDelegate : NSObject <SRWebSocketDelegate>
+@interface ICWebSocketDelegate : NSObject <WebSocketDelegate> {
+	WebSocket *webSocket;
+}
+
+-(void)open;
+-(void)close;
 
 @end

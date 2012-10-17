@@ -100,12 +100,7 @@
 	if (loggedIn) {
 	    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
 		cell.textLabel.text = servers[indexPath.section][1][indexPath.row];
-		cell.textLabel.backgroundColor = [UIColor clearColor];
-		CGRect labelFrame = cell.textLabel.frame;
-		labelFrame.origin.y = 16;
-		cell.textLabel.frame = labelFrame;
 		cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBar"]];
-		[cell.selectedBackgroundView addSubview:[cell viewWithTag:5]];
     	return cell;
 	} else if (indexPath.row < 4) {
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WelcomeCell" forIndexPath:indexPath];
