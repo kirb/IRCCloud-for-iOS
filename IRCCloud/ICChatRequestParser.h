@@ -1,2 +1,0 @@
-@interface ICChatRequestParser:NSObject
-@end
