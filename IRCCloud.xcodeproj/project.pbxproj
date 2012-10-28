@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907B6111636980500022D54 /* LogIn_iPad.storyboard */; };
+		49887DEF163D5F64003773A7 /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
 		498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A631619F8B4001A4356 /* UIKit.framework */; };
 		498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A651619F8B4001A4356 /* Foundation.framework */; };
 		498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A671619F8B4001A4356 /* CoreGraphics.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -34,8 +36,8 @@
 		498B8AC9161A1C16001A4356 /* ICTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AC8161A1C16001A4356 /* ICTextCell.m */; };
 		498E6D8A162A7B4D002BA7E5 /* ICBufferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */; };
 		498E6D8F162A9489002BA7E5 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6D8E162A9489002BA7E5 /* AJNotificationView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		49917B8C162EF88D000E4DF8 /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49917B8B162EF88D000E4DF8 /* libUnittWebSocketClient.a */; };
-		499BCB9D1629B34F00A58167 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499BCB9C1629B34F00A58167 /* LogIn.storyboard */; };
+		4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 4992FFE51637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m */; };
+		499BCB9D1629B34F00A58167 /* LogIn_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499BCB9C1629B34F00A58167 /* LogIn_iPhone.storyboard */; };
 		499BCBA31629BD2500A58167 /* ICRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCBA21629BD2500A58167 /* ICRequest.m */; };
 		499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */; };
 		49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */; };
@@ -44,7 +46,26 @@
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		49887DE8163D5D9B003773A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD0C3248136FA7CB008B53D7;
+			remoteInfo = UnittWebSocketClient;
+		};
+		49887DEA163D5D9B003773A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BD0C3255136FA7CB008B53D7;
+			remoteInfo = UnittWebSocketClientTests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		4907B6111636980500022D54 /* LogIn_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn_iPad.storyboard; sourceTree = "<group>"; };
+		49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnittWebSocketClient.xcodeproj; path = UnittWebSocketClient/UnittWebSocketClient.xcodeproj; sourceTree = "<group>"; };
 		498B8A5F1619F8B4001A4356 /* IRCCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		498B8A631619F8B4001A4356 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		498B8A651619F8B4001A4356 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,8 +103,9 @@
 		498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBufferViewController.m; sourceTree = "<group>"; };
 		498E6D8D162A9489002BA7E5 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
 		498E6D8E162A9489002BA7E5 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
-		49917B8B162EF88D000E4DF8 /* libUnittWebSocketClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUnittWebSocketClient.a; path = "../../../Library/Developer/Ext/UnittWebSocketClient/bin/Debug-iphonesimulator/libUnittWebSocketClient.a"; sourceTree = "<group>"; };
-		499BCB9C1629B34F00A58167 /* LogIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
+		4992FFE41637C4C2008A7E8C /* UINavigationController+KeyboardDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KeyboardDismiss.h"; sourceTree = "<group>"; };
+		4992FFE51637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
+		499BCB9C1629B34F00A58167 /* LogIn_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn_iPhone.storyboard; sourceTree = "<group>"; };
 		499BCB9E1629BC1D00A58167 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		499BCBA11629BD2400A58167 /* ICRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICRequest.h; sourceTree = "<group>"; };
@@ -107,13 +129,33 @@
 				498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */,
 				498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */,
 				49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */,
-				49917B8C162EF88D000E4DF8 /* libUnittWebSocketClient.a in Frameworks */,
+				49887DEF163D5F64003773A7 /* libUnittWebSocketClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4907B6131636980D00022D54 /* Log In */ = {
+			isa = PBXGroup;
+			children = (
+				499BCB9C1629B34F00A58167 /* LogIn_iPhone.storyboard */,
+				4907B6111636980500022D54 /* LogIn_iPad.storyboard */,
+				498B8AC2161A1953001A4356 /* ICLogInViewController.h */,
+				498B8AC3161A1953001A4356 /* ICLogInViewController.m */,
+			);
+			name = "Log In";
+			sourceTree = "<group>";
+		};
+		49887DE1163D5D9B003773A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */,
+				49887DEB163D5D9B003773A7 /* UnittWebSocketClientTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		498B8A541619F8B4001A4356 = {
 			isa = PBXGroup;
 			children = (
@@ -140,8 +182,8 @@
 		498B8A621619F8B4001A4356 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */,
 				498B8AB1161A0B90001A4356 /* libicucore.dylib */,
-				49917B8B162EF88D000E4DF8 /* libUnittWebSocketClient.a */,
 				498B8AAD161A0AFA001A4356 /* CFNetwork.framework */,
 				498B8A671619F8B4001A4356 /* CoreGraphics.framework */,
 				498B8A651619F8B4001A4356 /* Foundation.framework */,
@@ -169,9 +211,7 @@
 				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
 				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
 				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
-				499BCB9C1629B34F00A58167 /* LogIn.storyboard */,
-				498B8AC2161A1953001A4356 /* ICLogInViewController.h */,
-				498B8AC3161A1953001A4356 /* ICLogInViewController.m */,
+				4907B6131636980D00022D54 /* Log In */,
 				499BCBA11629BD2400A58167 /* ICRequest.h */,
 				499BCBA21629BD2500A58167 /* ICRequest.m */,
 				498B8A6A1619F8B4001A4356 /* Supporting Files */,
@@ -185,6 +225,8 @@
 				498B8A6B1619F8B4001A4356 /* IRCCloud-Info.plist */,
 				498B8A6F1619F8B4001A4356 /* main.m */,
 				498B8A711619F8B4001A4356 /* IRCCloud-Prefix.pch */,
+				4992FFE41637C4C2008A7E8C /* UINavigationController+KeyboardDismiss.h */,
+				4992FFE51637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m */,
 				498B8A9E161A0A3A001A4356 /* NavBar.png */,
 				498B8A9F161A0A3A001A4356 /* NavBar@2x.png */,
 				498B8AB5161A10C4001A4356 /* NavButton.png */,
@@ -256,12 +298,35 @@
 			mainGroup = 498B8A541619F8B4001A4356;
 			productRefGroup = 498B8A601619F8B4001A4356 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 49887DE1163D5D9B003773A7 /* Products */;
+					ProjectRef = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				498B8A5E1619F8B4001A4356 /* IRCCloud */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUnittWebSocketClient.a;
+			remoteRef = 49887DE8163D5D9B003773A7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49887DEB163D5D9B003773A7 /* UnittWebSocketClientTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnittWebSocketClientTests.octest;
+			remoteRef = 49887DEA163D5D9B003773A7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		498B8A5D1619F8B4001A4356 /* Resources */ = {
@@ -281,9 +346,10 @@
 				498B8ABA161A10C5001A4356 /* NavButton@2x.png in Resources */,
 				498B8ABB161A10C5001A4356 /* NavButtonSelected.png in Resources */,
 				498B8ABC161A10C5001A4356 /* NavButtonSelected@2x.png in Resources */,
-				499BCB9D1629B34F00A58167 /* LogIn.storyboard in Resources */,
+				499BCB9D1629B34F00A58167 /* LogIn_iPhone.storyboard in Resources */,
 				49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */,
+				4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +371,7 @@
 				498E6D8A162A7B4D002BA7E5 /* ICBufferViewController.m in Sources */,
 				498E6D8F162A9489002BA7E5 /* AJNotificationView.m in Sources */,
 				49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */,
+				4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +443,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Ext/UnittWebSocketClient/bin/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,6 +469,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Ext/UnittWebSocketClient/bin/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";

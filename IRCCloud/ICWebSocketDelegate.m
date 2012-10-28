@@ -18,8 +18,11 @@
 	if (self) {
 		struct utsname info;
 		uname(&info);
-		NSLog(@"setting config");
-		WebSocketConnectConfig *config = [WebSocketConnectConfig configWithURLString:@"wss://alpha.irccloud.com" origin:nil protocols:nil tlsSettings:nil headers:@[
+		WebSocketConnectConfig *config = [WebSocketConnectConfig configWithURLString:@"wss://alpha.irccloud.com" origin:nil protocols:nil tlsSettings:[@{
+																(NSString *)kCFStreamSSLPeerName: [NSNull null],
+														   (NSString *)kCFStreamSSLAllowsAnyRoot: [NSNumber numberWithBool:YES],
+											   (NSString *)kCFStreamSSLValidatesCertificateChain: [NSNumber numberWithBool:NO]
+										  } mutableCopy] headers:@[
 										  [NSString stringWithFormat:@"User-Agent: IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]],
 										  [NSString stringWithFormat:@"Cookie: session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]]
 										  ] verifySecurityKey:YES extensions:nil];
@@ -31,10 +34,12 @@
 }
 
 -(void)open {
+	NSLog(@"opening...");
 	[webSocket open];
 }
 
 -(void)close {
+	NSLog(@"closing...");
 	[webSocket close];
 }
 

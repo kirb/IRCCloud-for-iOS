@@ -7,6 +7,8 @@
 //
 
 #import "ICBufferViewController.h"
+#import "ICMasterViewController.h"
+#import "ICAppDelegate.h"
 
 @interface ICBufferViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -33,6 +35,8 @@
 
 - (void)configureView
 {
+	((ICAppDelegate *)[UIApplication sharedApplication].delegate).currentBuffer = self;
+	
     // Update the user interface for the detail item. 
 	if (!textField) {
 		textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -40,7 +44,6 @@
 		textField.borderStyle = UITextBorderStyleRoundedRect;
 	}
 	if (server) {
-		//self.title = [NSString stringWithFormat:@"%@ | %@", server[1][channelIndex], server[0]];
 		UIView *titleView = [[UIView alloc] init];
 		
 		UILabel *serverName = [[UILabel alloc] init];
@@ -81,6 +84,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	[self configureView];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	if (isPad && ![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"]) {
+		[(ICMasterViewController *)[self.splitViewController.viewControllers[0] topViewController] performSelector:@selector(showLogIn) withObject:nil afterDelay:0.3];
+	}
 }
 
 -(void)viewWillAppear:(BOOL)animated {

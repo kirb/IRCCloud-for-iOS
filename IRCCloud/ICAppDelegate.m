@@ -10,7 +10,7 @@
 #import "ICWebSocketDelegate.h"
 
 @implementation ICAppDelegate
-@synthesize notificationView, webSocket;
+@synthesize notificationView, webSocket, buffers, currentBuffer;
 
 - (void)dealloc
 {
@@ -29,18 +29,21 @@
 	[[UIBarButtonItem appearance] setTintColor:RGBA(82, 125, 255, 1)];
 	//[[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"NavButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(3, 3, 3, 3)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 	//[[UIBarButtonItem appearance] setBackgroundImage:[[UIImage imageNamed:@"NavButtonSelected"] resizableImageWithCapInsets:UIEdgeInsetsMake(3, 3, 3, 3)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+	
 	UIView *mainView;
 	if (isPad) {
-	    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-	    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-	    splitViewController.delegate = (id)navigationController.topViewController;
+		UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+		UINavigationController *navigationController = splitViewController.viewControllers[1];
+		splitViewController.delegate = (id)navigationController.topViewController;
+		
 		mainView = navigationController.view;
 	} else {
 		mainView = self.window.rootViewController.view;
 	}
-	
+		
 	notificationView = [[UIView alloc] initWithFrame:CGRectMake(0, isPad ? 44 : 64, mainView.frame.size.width, 100)];
 	notificationView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	notificationView.userInteractionEnabled = NO;
 	[mainView addSubview:notificationView];
 	
 	self.webSocket = [[ICWebSocketDelegate alloc] init];

@@ -9,15 +9,12 @@
 #import "ICMasterViewController.h"
 #import "ICBufferViewController.h"
 #import "ICLogInViewController.h"
+#import "ICAppDelegate.h"
 
 @implementation ICMasterViewController
 
 - (void)awakeFromNib
 {
-	if (isPad) {
-	    self.clearsSelectionOnViewWillAppear = NO;
-	    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-	}
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
 	servers = [[NSMutableArray alloc] initWithObjects:
 				@[@"IRCCloud", [@[@"#alpha", @"#changelog", @"#feedback", @"#themes"] mutableCopy]],
@@ -41,7 +38,17 @@
 	// Do any additional setup after loading the view, typically from a nib.
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	[self updateLoginStatus];
-	self.detailViewController = (ICBufferViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+	self.detailViewController = (ICBufferViewController *)[self.splitViewController.viewControllers[1] topViewController];
+	
+	((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers = self;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	if (!isPad && !loggedIn) {
+		[self performSelector:@selector(showLogIn) withObject:nil afterDelay:0.3];
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,22 +64,18 @@
 }
 
 -(void)showLogIn {
-	ICLogInViewController *logIn = [[UIStoryboard storyboardWithName:@"LogIn" bundle:nil] instantiateInitialViewController];
+	ICLogInViewController *logIn = [[UIStoryboard storyboardWithName:isPad ? @"LogIn_iPad" : @"LogIn_iPhone" bundle:nil] instantiateInitialViewController];
 	[self.navigationController presentViewController:logIn animated:YES completion:NULL];
 }
 
--(void)showSettings {}
+-(IBAction)showSettings:(id)sender {
+}
 
 -(void)updateLoginStatus {
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
 	if (loggedIn) {
 		UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
 		self.navigationItem.rightBarButtonItem = addButton;
-		self.navigationController.toolbarHidden = NO;
-		self.navigationController.toolbarItems = [@[
-												  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-												  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showSettings)]
-												  ] copy];
 	} else {
 		self.navigationItem.leftBarButtonItem = nil;
 	}
@@ -83,12 +86,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return loggedIn ? servers.count : 1;
+	return loggedIn ? servers.count : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return loggedIn ? [servers[section][1] count] : 5;
+	return loggedIn ? [servers[section][1] count] : 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -102,44 +105,8 @@
 		cell.textLabel.text = servers[indexPath.section][1][indexPath.row];
 		cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBar"]];
     	return cell;
-	} else if (indexPath.row < 4) {
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WelcomeCell" forIndexPath:indexPath];
-		
-		switch (indexPath.row) {
-			case 1:
-			{
-				UIImageView *icon = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon~ipad"]] autorelease];
-				icon.center = cell.contentView.center;
-				icon.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-				[cell.contentView addSubview:icon];
-				break;
-			}
-			case 2:
-				cell.textLabel.textAlignment = UITextAlignmentCenter;
-				cell.textLabel.text = L(@"Welcome to IRCCloud");
-				break;
-		}
-		return cell;
-	} else {
-		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogInCell" forIndexPath:indexPath];
-		[(UIButton *)[cell viewWithTag:5] addTarget:self action:@selector(showLogIn) forControlEvents:UIControlEventTouchUpInside];
-		return cell;
 	}
 	return nil;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (!loggedIn) {
-		switch (indexPath.row) {
-			case 0:
-				return 100.f;
-			case 1:
-				return 72.f;
-		}
-	} else {
-		return 40.f;
-	}
-	return 44.f;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,7 +136,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    if ([[segue identifier] isEqualToString:@"showBuffer"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         [segue.destinationViewController setServer:servers[indexPath.section]];
 		[segue.destinationViewController setChannelIndex:indexPath.row];

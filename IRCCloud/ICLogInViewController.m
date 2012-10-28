@@ -31,7 +31,7 @@
 
 -(void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField becomeFirstResponder];
+	[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.1];
 }
 
 -(void)logIn {
@@ -59,8 +59,8 @@
 	if ([json objectForKey:@"success"] && [[json objectForKey:@"success"] boolValue] && [json objectForKey:@"session"]) {
 		[[NSUserDefaults standardUserDefaults] setValue:[json objectForKey:@"session"] forKey:@"cookie"];
 		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).webSocket open];
-		[(ICMasterViewController *)((UINavigationController *)self.navigationController.presentingViewController).topViewController updateLoginStatus];
-		[self dismissModalViewControllerAnimated:YES];
+		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers updateLoginStatus];
+		[self dismissViewControllerAnimated:YES completion:NULL];
 		return;
 	} else if ([json objectForKey:@"message"]) {
 		if ([[json objectForKey:@"message"] isEqualToString:@"auth"]) {

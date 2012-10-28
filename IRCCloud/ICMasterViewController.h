@@ -16,6 +16,7 @@
 }
 
 -(void)updateLoginStatus;
+-(IBAction)showSettings:(id)sender;
 
 @property (strong, nonatomic) ICBufferViewController *detailViewController;
 
