@@ -1,12 +1,12 @@
 # Unofficial IRCCloud iOS App
-[GPL licensed.](http://hbang.ws/s/gpl)
+[MIT licensed.](http://adam.mit-license.org)
 
 ## Compilation
 Before building in Xcode, checkout the code for UnittWebSocketClient:
 
     svn co http://unitt.googlecode.com/svn/projects/ unitt-read-only
 
-Now navigate to `unitt-read-only/iOS/UnittWebSocketClient/trunk` and open UnittWebSocketClient.xcodeproj. Press <kbd>⌘B</kbd> to build the project, then drag libUnittWebSocketClient.a from the Products group into the Frameworks group of the IRCCloud project.
+When that finishes, navigate to `unitt-read-only/iOS/UnittWebSocketClient/trunk` and select and copy all files in this directory. Now create a directory called _UnittWebSocketClient_ in the same directory as this file (README.md) and paste the files into there.
 
 ## Libraries used
 * [UnittWebSocketClient](http://code.google.com/p/unitt)
