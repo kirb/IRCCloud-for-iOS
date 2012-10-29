@@ -42,6 +42,7 @@
 		499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */; };
 		49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */; };
 		49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */; };
+		49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A92B72163EB7D800AE20C9 /* JSONKit.m */; };
 		49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FDF4B0162E763000AAE35D /* ICNotification.m */; };
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,8 @@
 		499BCBA21629BD2500A58167 /* ICRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICRequest.m; sourceTree = "<group>"; };
 		49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		49A92B71163EB7D800AE20C9 /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = JSONKit/JSONKit.h; sourceTree = "<group>"; };
+		49A92B72163EB7D800AE20C9 /* JSONKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = "<group>"; };
 		49FDF4AF162E763000AAE35D /* ICNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNotification.h; sourceTree = "<group>"; };
 		49FDF4B0162E763000AAE35D /* ICNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNotification.m; sourceTree = "<group>"; };
 		49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -166,6 +169,7 @@
 				498B8A691619F8B4001A4356 /* IRCCloud */,
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
+				49A92B73163EB7DC00AE20C9 /* JSONKit */,
 				498B8A621619F8B4001A4356 /* Frameworks */,
 				498B8A601619F8B4001A4356 /* Products */,
 			);
@@ -256,6 +260,15 @@
 				499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		49A92B73163EB7DC00AE20C9 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				49A92B71163EB7D800AE20C9 /* JSONKit.h */,
+				49A92B72163EB7D800AE20C9 /* JSONKit.m */,
+			);
+			name = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +385,7 @@
 				498E6D8F162A9489002BA7E5 /* AJNotificationView.m in Sources */,
 				49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */,
 				4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */,
+				49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,7 +29,7 @@ static NSMutableData *output;
 		uname(&info);
 		[request addValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]] forHTTPHeaderField:@"User-Agent"];
 		if (!unauth && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"] isEqualToString:@""]){
-			NSDictionary *cookies=[NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"alpha.irccloud.com", NSHTTPCookieDomain, @"/", NSHTTPCookiePath, @"session", NSHTTPCookieName, [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"], NSHTTPCookieValue, nil]]]];
+			NSDictionary *cookies = [NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"alpha.irccloud.com", NSHTTPCookieDomain, @"/", NSHTTPCookiePath, @"session", NSHTTPCookieName, [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"], NSHTTPCookieValue, nil]]]];
 			[request setAllHTTPHeaderFields:cookies];
 		} else {
 			request.HTTPShouldHandleCookies = NO;

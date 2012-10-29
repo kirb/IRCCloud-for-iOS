@@ -16,6 +16,10 @@
 	ICWebSocketDelegate *webSocket;
 	ICMasterViewController *buffers;
 	ICBufferViewController *currentBuffer;
+	int selectedBufferID;
+	NSArray *highlights;
+	NSDictionary *preferences;
+	BOOL isConnected;
 }
 
 -(void)receivedJSON:(NSDictionary *)data;
@@ -25,5 +29,9 @@
 @property (strong, nonatomic) ICWebSocketDelegate *webSocket;
 @property (strong, nonatomic) ICMasterViewController *buffers;
 @property (strong, nonatomic) ICBufferViewController *currentBuffer;
+@property (assign) int selectedBufferID;
+@property (strong, nonatomic) NSArray *highlights;
+@property (strong, nonatomic) NSDictionary *preferences;
+@property (assign) BOOL isConnected;
 
 @end

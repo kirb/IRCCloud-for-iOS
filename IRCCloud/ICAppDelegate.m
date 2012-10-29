@@ -8,9 +8,11 @@
 
 #import "ICAppDelegate.h"
 #import "ICWebSocketDelegate.h"
+#import "ICNotification.h"
+#import "JSONKit.h"
 
 @implementation ICAppDelegate
-@synthesize notificationView, webSocket, buffers, currentBuffer;
+@synthesize notificationView, webSocket, buffers, currentBuffer, isConnected, selectedBufferID, highlights, preferences;
 
 - (void)dealloc
 {
@@ -40,7 +42,7 @@
 	} else {
 		mainView = self.window.rootViewController.view;
 	}
-		
+	
 	notificationView = [[UIView alloc] initWithFrame:CGRectMake(0, isPad ? 44 : 64, mainView.frame.size.width, 100)];
 	notificationView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	notificationView.userInteractionEnabled = NO;
@@ -56,6 +58,39 @@
 
 -(void)applicationWillTerminate:(UIApplication *)application {
 	[webSocket close];
+}
+
+-(void)receivedJSON:(NSDictionary *)data {
+	if (!data[@"type"]) {
+		return;
+	} else if ([data[@"type"] isEqualToString:@"stat_user"]) {
+		if (![data[@"verified"] boolValue]) {
+			[ICNotification notificationWithMessage:L(@"Reminder: You haven't verified your email address.") type:AJNotificationTypeBlue];
+		}
+		self.selectedBufferID = [data[@"last_selected_bid"] intValue];
+		self.highlights = data[@"highlights"];
+		self.preferences = [data[@"prefs"] objectFromJSONString];
+	} else if ([data[@"type"] isEqualToString:@"oob_include"]) {
+		[self performSelectorInBackground:@selector(getOOBLoaderWithURL:) withObject:data[@"url"]];
+	} else {
+		NSLog(@"%@", data);
+	}
+}
+
+-(void)getOOBLoaderWithURL:(NSString *)url {
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[@"https://alpha.irccloud.com" stringByAppendingString:url]] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
+	[request addValue:[NSString stringWithFormat:@"session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]] forHTTPHeaderField:@"Cookie"];
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+	
+	if (data == nil) {
+		[ICNotification notificationWithMessage:L(@"Oops, something went wrong while connecting to the server.") type:AJNotificationTypeOrange];
+	} else {
+		NSArray *json = [data objectFromJSONData];
+		NSLog(@"json = %@", json);
+		for (NSDictionary *i in json) {
+			[self performSelectorOnMainThread:@selector(receivedJSON:) withObject:i waitUntilDone:YES];
+		}
+	}
 }
 
 @end

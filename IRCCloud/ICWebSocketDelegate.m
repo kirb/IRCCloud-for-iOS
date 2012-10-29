@@ -10,6 +10,7 @@
 #import "ICAppDelegate.h"
 #import "ICNotification.h"
 #import "HandshakeHeader.h"
+#import "JSONKit.h"
 #include <sys/utsname.h>
 
 @implementation ICWebSocketDelegate
@@ -43,23 +44,26 @@
 }
 
 -(void)didReceiveTextMessage:(NSString *)message {
-	[(ICAppDelegate *)[UIApplication sharedApplication].delegate receivedJSON:message];
+	if ([message isEqualToString:@""]) {
+		return;
+	}
+	[(ICAppDelegate *)[UIApplication sharedApplication].delegate receivedJSON:[message objectFromJSONString]];
 }
 
 -(void)didReceiveBinaryMessage:(NSData *)message {}
 
 -(void)didOpen {
-	[UIApplication sharedApplication].delegate.isConnected = YES;
+	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = YES;
 }
 
 -(void)didReceiveError:(NSError *)error {
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), error.localizedDescription] type:AJNotificationTypeRed];
-	[UIApplication sharedApplication].delegate.isConnected = NO;
+	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = NO;
 }
 
 -(void)didClose:(NSUInteger)statusCode message:(NSString *)message error:(NSError *)error {
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), message] type:AJNotificationTypeRed];
-	[UIApplication sharedApplication].delegate.isConnected = NO;
+	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = NO;
 }
 
 @end
