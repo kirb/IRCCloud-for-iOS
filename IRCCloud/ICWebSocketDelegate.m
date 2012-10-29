@@ -9,6 +9,7 @@
 #import "ICWebSocketDelegate.h"
 #import "ICAppDelegate.h"
 #import "ICNotification.h"
+#import "HandshakeHeader.h"
 #include <sys/utsname.h>
 
 @implementation ICWebSocketDelegate
@@ -22,10 +23,10 @@
 																(NSString *)kCFStreamSSLPeerName: [NSNull null],
 														   (NSString *)kCFStreamSSLAllowsAnyRoot: [NSNumber numberWithBool:YES],
 											   (NSString *)kCFStreamSSLValidatesCertificateChain: [NSNumber numberWithBool:NO]
-										  } mutableCopy] headers:@[
-										  [NSString stringWithFormat:@"User-Agent: IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]],
-										  [NSString stringWithFormat:@"Cookie: session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]]
-										  ] verifySecurityKey:YES extensions:nil];
+										  } mutableCopy] headers:[@[
+											[HandshakeHeader headerWithValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]] forKey:@"User-Agent"],
+											[HandshakeHeader headerWithValue:[NSString stringWithFormat:@"session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]] forKey:@"Cookie"]
+										  ] mutableCopy] verifySecurityKey:YES extensions:nil];
 		config.closeTimeout = 15;
 		config.keepAlive = 15;
 		webSocket = [[WebSocket webSocketWithConfig:config delegate:self] retain];
@@ -34,34 +35,31 @@
 }
 
 -(void)open {
-	NSLog(@"opening...");
 	[webSocket open];
 }
 
 -(void)close {
-	NSLog(@"closing...");
 	[webSocket close];
 }
 
 -(void)didReceiveTextMessage:(NSString *)message {
-	NSLog(@"MESSAGE! %@", message);
+	[(ICAppDelegate *)[UIApplication sharedApplication].delegate receivedJSON:message];
 }
 
--(void)didReceiveBinaryMessage:(NSData *)message {
-	NSLog(@"BINARY MESSAGE...?");
-}
+-(void)didReceiveBinaryMessage:(NSData *)message {}
 
 -(void)didOpen {
-	NSLog(@"OPEN!");
+	[UIApplication sharedApplication].delegate.isConnected = YES;
 }
 
 -(void)didReceiveError:(NSError *)error {
-	NSLog(@"CLOSED :( %@", error);
+	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), error.localizedDescription] type:AJNotificationTypeRed];
+	[UIApplication sharedApplication].delegate.isConnected = NO;
 }
 
 -(void)didClose:(NSUInteger)statusCode message:(NSString *)message error:(NSError *)error {
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), message] type:AJNotificationTypeRed];
-	NSLog(@"CLOSED :/ %u, %@, %@", statusCode, message, error);
+	[UIApplication sharedApplication].delegate.isConnected = NO;
 }
 
 @end
