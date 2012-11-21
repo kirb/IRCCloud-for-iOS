@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48DB71FC165D303500646E6F /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
 		4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907B6111636980500022D54 /* LogIn_iPad.storyboard */; };
-		49887DEF163D5F64003773A7 /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
 		498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A631619F8B4001A4356 /* UIKit.framework */; };
 		498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A651619F8B4001A4356 /* Foundation.framework */; };
 		498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A671619F8B4001A4356 /* CoreGraphics.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -81,10 +81,10 @@
 		498B8A791619F8B4001A4356 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		498B8A811619F8B5001A4356 /* ICMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICMasterViewController.h; sourceTree = "<group>"; };
 		498B8A821619F8B5001A4356 /* ICMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICMasterViewController.m; sourceTree = "<group>"; };
-		498B8A92161A036B001A4356 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		498B8A94161A0382001A4356 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		498B8A96161A03A4001A4356 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon~ipad.png"; sourceTree = "<group>"; };
-		498B8A98161A03C4001A4356 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon~ipad@2x.png"; sourceTree = "<group>"; };
+		498B8A92161A036B001A4356 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		498B8A94161A0382001A4356 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		498B8A96161A03A4001A4356 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad.png"; path = "../icon~ipad.png"; sourceTree = "<group>"; };
+		498B8A98161A03C4001A4356 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad@2x.png"; path = "../icon~ipad@2x.png"; sourceTree = "<group>"; };
 		498B8A9E161A0A3A001A4356 /* NavBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBar.png; sourceTree = "<group>"; };
 		498B8A9F161A0A3A001A4356 /* NavBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBar@2x.png"; sourceTree = "<group>"; };
 		498B8AAD161A0AFA001A4356 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -132,13 +132,60 @@
 				498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */,
 				498B8A681619F8B4001A4356 /* CoreGraphics.framework in Frameworks */,
 				49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */,
-				49887DEF163D5F64003773A7 /* libUnittWebSocketClient.a in Frameworks */,
+				48DB71FC165D303500646E6F /* libUnittWebSocketClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48DB71FD165D307D00646E6F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				498B8A98161A03C4001A4356 /* icon~ipad@2x.png */,
+				498B8A96161A03A4001A4356 /* icon~ipad.png */,
+				498B8A94161A0382001A4356 /* icon@2x.png */,
+				498B8A92161A036B001A4356 /* icon.png */,
+				498B8A9E161A0A3A001A4356 /* NavBar.png */,
+				498B8A9F161A0A3A001A4356 /* NavBar@2x.png */,
+				498B8AB5161A10C4001A4356 /* NavButton.png */,
+				498B8AB6161A10C4001A4356 /* NavButton@2x.png */,
+				498B8AB7161A10C4001A4356 /* NavButtonSelected.png */,
+				498B8AB8161A10C5001A4356 /* NavButtonSelected@2x.png */,
+				498B8A751619F8B4001A4356 /* Default.png */,
+				498B8A771619F8B4001A4356 /* Default@2x.png */,
+				498B8A791619F8B4001A4356 /* Default-568h@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		48DB71FE165D309200646E6F /* Convenience Classes */ = {
+			isa = PBXGroup;
+			children = (
+				49FDF4AF162E763000AAE35D /* ICNotification.h */,
+				49FDF4B0162E763000AAE35D /* ICNotification.m */,
+				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
+				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
+				499BCBA11629BD2400A58167 /* ICRequest.h */,
+				499BCBA21629BD2500A58167 /* ICRequest.m */,
+			);
+			name = "Convenience Classes";
+			sourceTree = "<group>";
+		};
+		48DB71FF165D309C00646E6F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
+				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
+				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
+				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
+				498B8A811619F8B5001A4356 /* ICMasterViewController.h */,
+				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
+				4907B6131636980D00022D54 /* Log In */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		4907B6131636980D00022D54 /* Log In */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,10 +209,6 @@
 		498B8A541619F8B4001A4356 = {
 			isa = PBXGroup;
 			children = (
-				498B8A98161A03C4001A4356 /* icon~ipad@2x.png */,
-				498B8A96161A03A4001A4356 /* icon~ipad.png */,
-				498B8A94161A0382001A4356 /* icon@2x.png */,
-				498B8A92161A036B001A4356 /* icon.png */,
 				498B8A691619F8B4001A4356 /* IRCCloud */,
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
@@ -205,19 +248,8 @@
 				498B8A731619F8B4001A4356 /* ICAppDelegate.m */,
 				498B8ABD161A13AF001A4356 /* ICWebSocketDelegate.h */,
 				498B8ABE161A13AF001A4356 /* ICWebSocketDelegate.m */,
-				49FDF4AF162E763000AAE35D /* ICNotification.h */,
-				49FDF4B0162E763000AAE35D /* ICNotification.m */,
-				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
-				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
-				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
-				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
-				498B8A811619F8B5001A4356 /* ICMasterViewController.h */,
-				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
-				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
-				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
-				4907B6131636980D00022D54 /* Log In */,
-				499BCBA11629BD2400A58167 /* ICRequest.h */,
-				499BCBA21629BD2500A58167 /* ICRequest.m */,
+				48DB71FE165D309200646E6F /* Convenience Classes */,
+				48DB71FF165D309C00646E6F /* View Controllers */,
 				498B8A6A1619F8B4001A4356 /* Supporting Files */,
 			);
 			path = IRCCloud;
@@ -231,15 +263,7 @@
 				498B8A711619F8B4001A4356 /* IRCCloud-Prefix.pch */,
 				4992FFE41637C4C2008A7E8C /* UINavigationController+KeyboardDismiss.h */,
 				4992FFE51637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m */,
-				498B8A9E161A0A3A001A4356 /* NavBar.png */,
-				498B8A9F161A0A3A001A4356 /* NavBar@2x.png */,
-				498B8AB5161A10C4001A4356 /* NavButton.png */,
-				498B8AB6161A10C4001A4356 /* NavButton@2x.png */,
-				498B8AB7161A10C4001A4356 /* NavButtonSelected.png */,
-				498B8AB8161A10C5001A4356 /* NavButtonSelected@2x.png */,
-				498B8A751619F8B4001A4356 /* Default.png */,
-				498B8A771619F8B4001A4356 /* Default@2x.png */,
-				498B8A791619F8B4001A4356 /* Default-568h@2x.png */,
+				48DB71FD165D307D00646E6F /* Images */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -413,6 +437,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/UnittWebSocketClient/UnittWebSocketClient";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -433,6 +458,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/UnittWebSocketClient/UnittWebSocketClient";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
