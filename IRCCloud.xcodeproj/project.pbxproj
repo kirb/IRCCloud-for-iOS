@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		48DB71FC165D303500646E6F /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
+		48DB7202165D30F500646E6F /* ICController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7201165D30F400646E6F /* ICController.m */; };
+		48DB7205165D31B900646E6F /* ICNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7204165D31B800646E6F /* ICNetwork.m */; };
+		48DB7209165D3C3300646E6F /* ICChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7208165D3C3300646E6F /* ICChannel.m */; };
 		4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907B6111636980500022D54 /* LogIn_iPad.storyboard */; };
 		498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A631619F8B4001A4356 /* UIKit.framework */; };
 		498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A651619F8B4001A4356 /* Foundation.framework */; };
@@ -65,6 +68,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48DB7200165D30F400646E6F /* ICController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICController.h; sourceTree = "<group>"; };
+		48DB7201165D30F400646E6F /* ICController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICController.m; sourceTree = "<group>"; };
+		48DB7203165D31B800646E6F /* ICNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetwork.h; sourceTree = "<group>"; };
+		48DB7204165D31B800646E6F /* ICNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNetwork.m; sourceTree = "<group>"; };
+		48DB7207165D3C3300646E6F /* ICChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICChannel.h; sourceTree = "<group>"; };
+		48DB7208165D3C3300646E6F /* ICChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICChannel.m; sourceTree = "<group>"; };
 		4907B6111636980500022D54 /* LogIn_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn_iPad.storyboard; sourceTree = "<group>"; };
 		49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnittWebSocketClient.xcodeproj; path = UnittWebSocketClient/UnittWebSocketClient.xcodeproj; sourceTree = "<group>"; };
 		498B8A5F1619F8B4001A4356 /* IRCCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +195,17 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		48DB7206165D31BD00646E6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				48DB7203165D31B800646E6F /* ICNetwork.h */,
+				48DB7204165D31B800646E6F /* ICNetwork.m */,
+				48DB7207165D3C3300646E6F /* ICChannel.h */,
+				48DB7208165D3C3300646E6F /* ICChannel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4907B6131636980D00022D54 /* Log In */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +268,9 @@
 				498B8A731619F8B4001A4356 /* ICAppDelegate.m */,
 				498B8ABD161A13AF001A4356 /* ICWebSocketDelegate.h */,
 				498B8ABE161A13AF001A4356 /* ICWebSocketDelegate.m */,
+				48DB7200165D30F400646E6F /* ICController.h */,
+				48DB7201165D30F400646E6F /* ICController.m */,
+				48DB7206165D31BD00646E6F /* Model */,
 				48DB71FE165D309200646E6F /* Convenience Classes */,
 				48DB71FF165D309C00646E6F /* View Controllers */,
 				498B8A6A1619F8B4001A4356 /* Supporting Files */,
@@ -410,6 +433,9 @@
 				49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */,
 				4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */,
 				49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */,
+				48DB7202165D30F500646E6F /* ICController.m in Sources */,
+				48DB7205165D31B900646E6F /* ICNetwork.m in Sources */,
+				48DB7209165D3C3300646E6F /* ICChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
