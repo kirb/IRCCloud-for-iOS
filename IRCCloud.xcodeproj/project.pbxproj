@@ -49,6 +49,9 @@
 		49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A92B72163EB7D800AE20C9 /* JSONKit.m */; };
 		49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FDF4B0162E763000AAE35D /* ICNotification.m */; };
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
+		CF5FFA7A165E2D6E00636DB0 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5FFA79165E2D6E00636DB0 /* Add.storyboard */; };
+		CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA81165E30D300636DB0 /* ICAddViewController.m */; };
+		CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +133,11 @@
 		49FDF4AF162E763000AAE35D /* ICNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNotification.h; sourceTree = "<group>"; };
 		49FDF4B0162E763000AAE35D /* ICNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNotification.m; sourceTree = "<group>"; };
 		49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CF5FFA79165E2D6E00636DB0 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Add.storyboard; path = ../Add.storyboard; sourceTree = "<group>"; };
+		CF5FFA80165E30D300636DB0 /* ICAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICAddViewController.h; sourceTree = "<group>"; };
+		CF5FFA81165E30D300636DB0 /* ICAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICAddViewController.m; sourceTree = "<group>"; };
+		CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMultiLineTextCell.h; sourceTree = "<group>"; };
+		CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMultiLineTextCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +188,8 @@
 				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
 				499BCBA11629BD2400A58167 /* ICRequest.h */,
 				499BCBA21629BD2500A58167 /* ICRequest.m */,
+				CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */,
+				CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */,
 			);
 			name = "Convenience Classes";
 			sourceTree = "<group>";
@@ -187,13 +197,9 @@
 		48DB71FF165D309C00646E6F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
-				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
-				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
-				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
-				498B8A811619F8B5001A4356 /* ICMasterViewController.h */,
-				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
+				CF5FFA7E165E2E7800636DB0 /* Add */,
 				4907B6131636980D00022D54 /* Log In */,
+				CF5FFA7F165E2ED100636DB0 /* Main */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -323,6 +329,29 @@
 			name = JSONKit;
 			sourceTree = "<group>";
 		};
+		CF5FFA7E165E2E7800636DB0 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				CF5FFA79165E2D6E00636DB0 /* Add.storyboard */,
+				CF5FFA80165E30D300636DB0 /* ICAddViewController.h */,
+				CF5FFA81165E30D300636DB0 /* ICAddViewController.m */,
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		CF5FFA7F165E2ED100636DB0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
+				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
+				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
+				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
+				498B8A811619F8B5001A4356 /* ICMasterViewController.h */,
+				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -415,6 +444,7 @@
 				49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */,
 				4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */,
+				CF5FFA7A165E2D6E00636DB0 /* Add.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +472,8 @@
 				48DB7205165D31B900646E6F /* ICNetwork.m in Sources */,
 				48DB7209165D3C3300646E6F /* ICChannel.m in Sources */,
 				480F3EF1165DEA82005079F1 /* ICParser.m in Sources */,
+				CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */,
+				CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,8 +501,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/UnittWebSocketClient/UnittWebSocketClient";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -490,8 +522,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/UnittWebSocketClient/UnittWebSocketClient";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -521,8 +553,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos5.1;
-				VALID_ARCHS = "armv6 armv7";
+				SDKROOT = iphoneos6.0;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -549,8 +581,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos5.1;
-				VALID_ARCHS = "armv6 armv7";
+				SDKROOT = iphoneos6.0;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
