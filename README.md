@@ -12,3 +12,7 @@ When that finishes, navigate to `unitt-read-only/iOS/UnittWebSocketClient/trunk`
 * [UnittWebSocketClient](http://code.google.com/p/unitt)
 * [AJNotificationView](https://github.com/ajerez/AJNotificationView)
 * [MBProgressHUD](https://github.com/jdg/MBProgressHUD)
+
+----
+
+Thanks to [flux](https://github.com/caughtinflux) for helping with this project!
