@@ -29,17 +29,17 @@
     }
 
     if ([json[@"type"] isEqualToString:@"makeserver"]) {
-        ICNetwork *network = [[ICNetwork alloc] initWithNetworkNamed:json[@"name"]
+        ICNetwork *network = [[[ICNetwork alloc] initWithNetworkNamed:json[@"name"]
                                                             hostName:json[@"hostname"]
                                                                  SSL:[(NSNumber *)json[@"ssl"] boolValue]
                                                                 port:[(NSNumber *)json[@"port"] intValue]
-                                                        connectionID:[(NSNumber *)json[@"cid"] intValue]];
+                                                         connectionID:[(NSNumber *)json[@"cid"] intValue]] autorelease];
         [[ICController sharedController] addNetwork:network];
     }
     if ([json[@"type"] isEqualToString:@"channel_init"]) {
         if (![[ICController sharedController] networkForConnection:json[@"cid"]])
             return;
-        ICChannel *channel = [[ICChannel alloc] initWithName:json[@"chan"] andBufferID:json[@"bid"]];
+        ICChannel *channel = [[[ICChannel alloc] initWithName:json[@"chan"] andBufferID:json[@"bid"]] autorelease];
         channel.members = json[@"members"];
         channel.creationDate = [NSDate dateWithTimeIntervalSince1970:[json[@"timestamp"] intValue]];
         channel.topic = json[@"topic"];
@@ -50,7 +50,7 @@
         ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
         [channelNetwork addChannel:channel];
     }
-    [p drain];
+    [p release];
 }
 
 @end

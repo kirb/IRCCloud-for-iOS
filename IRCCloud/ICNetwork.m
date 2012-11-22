@@ -35,7 +35,6 @@
         return;
     else {
         // make sure the current object is released. Else it will become just a leak that no one has a reference to.
-        [self.networkName release];
         self.networkName = networkName;
     }
 }
@@ -45,7 +44,6 @@
     if ([hostName isEqualToString:self.hostName])
         return;
     else {
-        [self.hostName release];
         self.hostName = hostName;
     }
 }
