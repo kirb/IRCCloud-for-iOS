@@ -9,6 +9,7 @@
 #import "ICAppDelegate.h"
 #import "ICWebSocketDelegate.h"
 #import "ICNotification.h"
+#import "ICParser.h"
 #import "JSONKit.h"
 
 @implementation ICAppDelegate
@@ -73,7 +74,8 @@
 	} else if ([data[@"type"] isEqualToString:@"oob_include"]) {
 		[self performSelectorInBackground:@selector(getOOBLoaderWithURL:) withObject:data[@"url"]];
 	} else {
-		NSLog(@"%@", data);
+		ICParser *parser = [[ICParser alloc] init];
+        [parser performSelectorInBackground:@selector(parse:) withObject:data];
 	}
 }
 

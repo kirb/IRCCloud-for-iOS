@@ -50,6 +50,11 @@
     }
 }
 
+- (id)description
+{
+    return [NSString stringWithFormat:@"Network name: %@ Port: %@, SSL: %@, CID: %@", self.networkName, [NSNumber numberWithInt:self.port], ((self.isSSL) ? @"on":@"off"), [NSNumber numberWithInt:self.cid]];
+}
+
 #pragma mark Channel Management -
 - (void)addChannelsFromArray:(NSArray *)array
 {
@@ -69,7 +74,7 @@
         if ([channel.name isEqualToString:currentChannel.name])
             return;
     [_channels addObject:channel];
-    
+    NSLog(@"%@", _channels);
 }
 
 - (void)removeChannel:(ICChannel *)channel

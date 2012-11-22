@@ -17,5 +17,6 @@
 + (ICController *)sharedController;
 - (void)addNetwork:(ICNetwork *)connection;
 - (void)removeNetwork:(ICNetwork *)connection;
+- (ICNetwork *)networkForConnection:(NSNumber *)connectionID;
 
 @end
