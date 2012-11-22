@@ -86,7 +86,7 @@
 		[ICNotification notificationWithMessage:L(@"Oops, something went wrong while connecting to the server.") type:AJNotificationTypeOrange];
 	} else {
 		NSArray *json = [data objectFromJSONData];
-		NSLog(@"json = %@", json);
+		//NSLog(@"json = %@", json);
 		for (NSDictionary *i in json) {
 			[self performSelectorOnMainThread:@selector(receivedJSON:) withObject:i waitUntilDone:YES];
 		}
