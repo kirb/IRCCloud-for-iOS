@@ -35,7 +35,6 @@
         return;
     else {
         // make sure the current object is released. Else it will become just a leak that no one has a reference to.
-        [self.networkName release];
         self.networkName = networkName;
     }
 }
@@ -45,9 +44,13 @@
     if ([hostName isEqualToString:self.hostName])
         return;
     else {
-        [self.hostName release];
         self.hostName = hostName;
     }
+}
+
+- (id)description
+{
+    return [NSString stringWithFormat:@"Network name: %@ Port: %@, SSL: %@, CID: %@", self.networkName, [NSNumber numberWithInt:self.port], ((self.isSSL) ? @"on":@"off"), [NSNumber numberWithInt:self.cid]];
 }
 
 #pragma mark Channel Management -
@@ -69,7 +72,7 @@
         if ([channel.name isEqualToString:currentChannel.name])
             return;
     [_channels addObject:channel];
-    
+    NSLog(@"%@", _channels);
 }
 
 - (void)removeChannel:(ICChannel *)channel

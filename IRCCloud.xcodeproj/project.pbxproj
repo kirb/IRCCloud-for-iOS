@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480F3EF1165DEA82005079F1 /* ICParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 480F3EF0165DEA82005079F1 /* ICParser.m */; };
 		48DB71FC165D303500646E6F /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
 		48DB7202165D30F500646E6F /* ICController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7201165D30F400646E6F /* ICController.m */; };
 		48DB7205165D31B900646E6F /* ICNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7204165D31B800646E6F /* ICNetwork.m */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		480F3EEF165DEA82005079F1 /* ICParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICParser.h; sourceTree = "<group>"; };
+		480F3EF0165DEA82005079F1 /* ICParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICParser.m; sourceTree = "<group>"; };
 		48DB7200165D30F400646E6F /* ICController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICController.h; sourceTree = "<group>"; };
 		48DB7201165D30F400646E6F /* ICController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICController.m; sourceTree = "<group>"; };
 		48DB7203165D31B800646E6F /* ICNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetwork.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 		48DB7206165D31BD00646E6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				480F3EEF165DEA82005079F1 /* ICParser.h */,
+				480F3EF0165DEA82005079F1 /* ICParser.m */,
 				48DB7203165D31B800646E6F /* ICNetwork.h */,
 				48DB7204165D31B800646E6F /* ICNetwork.m */,
 				48DB7207165D3C3300646E6F /* ICChannel.h */,
@@ -436,6 +441,7 @@
 				48DB7202165D30F500646E6F /* ICController.m in Sources */,
 				48DB7205165D31B900646E6F /* ICNetwork.m in Sources */,
 				48DB7209165D3C3300646E6F /* ICChannel.m in Sources */,
+				480F3EF1165DEA82005079F1 /* ICParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

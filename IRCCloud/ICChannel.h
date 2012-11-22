@@ -11,9 +11,14 @@
 @interface ICChannel : NSObject
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) NSNumber *bid;
+@property (nonatomic, copy) NSDictionary *topic;
+@property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSDate *creationDate;
-@property (nonatomic, assign) int bid;
+@property (nonatomic, strong) NSDictionary *members;
+@property (nonatomic, strong) NSString *mode;
+@property (nonatomic, strong) NSArray *ops;
 
-- (id)initWithName:(NSString *)name andBufferID:(int)bid;
+- (id)initWithName:(NSString *)name andBufferID:(NSNumber *)bid;
 
 @end

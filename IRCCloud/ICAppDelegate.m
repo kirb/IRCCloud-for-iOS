@@ -9,6 +9,7 @@
 #import "ICAppDelegate.h"
 #import "ICWebSocketDelegate.h"
 #import "ICNotification.h"
+#import "ICParser.h"
 #import "JSONKit.h"
 
 @implementation ICAppDelegate
@@ -73,7 +74,8 @@
 	} else if ([data[@"type"] isEqualToString:@"oob_include"]) {
 		[self performSelectorInBackground:@selector(getOOBLoaderWithURL:) withObject:data[@"url"]];
 	} else {
-		NSLog(@"%@", data);
+        
+        [[ICParser sharedParser] performSelectorInBackground:@selector(parse:) withObject:data];
 	}
 }
 
@@ -81,7 +83,7 @@
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[@"https://alpha.irccloud.com" stringByAppendingString:url]] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
 	[request addValue:[NSString stringWithFormat:@"session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]] forHTTPHeaderField:@"Cookie"];
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	
+	[request release];
 	if (data == nil) {
 		[ICNotification notificationWithMessage:L(@"Oops, something went wrong while connecting to the server.") type:AJNotificationTypeOrange];
 	} else {
