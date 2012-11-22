@@ -37,12 +37,12 @@
 -(void)logIn {
 	NSString *email = ((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField.text;
 	NSString *pass = ((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).textField.text;
-	if ([email isEqualToString:@""] || email == nil) {
+	if (email == nil || [email isEqualToString:@""]) {
 		[[[UIAlertView alloc] initWithTitle:L(@"Oops, you forgot to enter your email address.") message:nil delegate:nil cancelButtonTitle:L(@"Dismiss") otherButtonTitles:nil] show];
 		[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField becomeFirstResponder];
 		return;
 	}
-	if ([pass isEqualToString:@""] || pass == nil) {
+	if (pass == nil || [pass isEqualToString:@""]) {
 		[[[UIAlertView alloc] initWithTitle:L(@"Oops, you forgot to enter your password.") message:nil delegate:nil cancelButtonTitle:L(@"Dismiss") otherButtonTitles:nil] show];
 		[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).textField becomeFirstResponder];
 		return;
