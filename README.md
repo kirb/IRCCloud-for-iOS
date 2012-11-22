@@ -1,6 +1,8 @@
 # Unofficial IRCCloud iOS App
 [MIT licensed.](http://adam.mit-license.org)
 
+**IRC:** [irc.irccloud.com #ios](irc://irc.irccloud.com/#ios)
+
 ## Compilation
 Before building in Xcode, checkout the code for UnittWebSocketClient:
 
