@@ -12,6 +12,14 @@
 #import "ICChannel.h"
 
 @implementation ICParser
++ (ICParser *)sharedParser
+{
+    // a sharedInstance is better than continually creating a new instance of the parser
+    static ICParser *parser;
+    if (!parser)
+        parser = [[self alloc] init];
+    return parser;
+}
 
 - (void)parse:(NSDictionary *)json
 {

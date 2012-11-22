@@ -74,8 +74,8 @@
 	} else if ([data[@"type"] isEqualToString:@"oob_include"]) {
 		[self performSelectorInBackground:@selector(getOOBLoaderWithURL:) withObject:data[@"url"]];
 	} else {
-		ICParser *parser = [[ICParser alloc] init];
-        [parser performSelectorInBackground:@selector(parse:) withObject:data];
+        
+        [[ICParser sharedParser] performSelectorInBackground:@selector(parse:) withObject:data];
 	}
 }
 

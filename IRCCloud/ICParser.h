@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface ICParser : NSObject
++ (ICParser *)sharedParser;
 - (void)parse:(NSDictionary *)json;
 @end
