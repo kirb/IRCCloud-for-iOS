@@ -50,7 +50,7 @@
 	[(ICAppDelegate *)[UIApplication sharedApplication].delegate receivedJSON:[message objectFromJSONString]];
 }
 
--(void)didReceiveBinaryMessage:(NSData *)message {}
+-(void)didReceiveBinaryMessage:(NSData *)message {} // not needed; the stream will never send a binary message
 
 -(void)didOpen {
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = YES;

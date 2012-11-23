@@ -49,9 +49,10 @@
 		49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A92B72163EB7D800AE20C9 /* JSONKit.m */; };
 		49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FDF4B0162E763000AAE35D /* ICNotification.m */; };
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
-		CF5FFA7A165E2D6E00636DB0 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF5FFA79165E2D6E00636DB0 /* Add.storyboard */; };
 		CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA81165E30D300636DB0 /* ICAddViewController.m */; };
 		CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */; };
+		CF9586A7165F932600137594 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9586A6165F932600137594 /* SSTextView.m */; };
+		CFA11005165F46180056784B /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA11004165F46180056784B /* Add.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,11 +134,13 @@
 		49FDF4AF162E763000AAE35D /* ICNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNotification.h; sourceTree = "<group>"; };
 		49FDF4B0162E763000AAE35D /* ICNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNotification.m; sourceTree = "<group>"; };
 		49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CF5FFA79165E2D6E00636DB0 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Add.storyboard; path = ../Add.storyboard; sourceTree = "<group>"; };
 		CF5FFA80165E30D300636DB0 /* ICAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICAddViewController.h; sourceTree = "<group>"; };
 		CF5FFA81165E30D300636DB0 /* ICAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICAddViewController.m; sourceTree = "<group>"; };
 		CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMultiLineTextCell.h; sourceTree = "<group>"; };
 		CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMultiLineTextCell.m; sourceTree = "<group>"; };
+		CF9586A5165F932600137594 /* SSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextView.h; sourceTree = "<group>"; };
+		CF9586A6165F932600137594 /* SSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextView.m; sourceTree = "<group>"; };
+		CFA11004165F46180056784B /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,14 +185,14 @@
 		48DB71FE165D309200646E6F /* Convenience Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */,
+				CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */,
 				49FDF4AF162E763000AAE35D /* ICNotification.h */,
 				49FDF4B0162E763000AAE35D /* ICNotification.m */,
 				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
 				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
 				499BCBA11629BD2400A58167 /* ICRequest.h */,
 				499BCBA21629BD2500A58167 /* ICRequest.m */,
-				CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */,
-				CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */,
 			);
 			name = "Convenience Classes";
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
 				49A92B73163EB7DC00AE20C9 /* JSONKit */,
+				CF9586A4165F932600137594 /* SSToolkit */,
 				498B8A621619F8B4001A4356 /* Frameworks */,
 				498B8A601619F8B4001A4356 /* Products */,
 			);
@@ -332,7 +336,7 @@
 		CF5FFA7E165E2E7800636DB0 /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				CF5FFA79165E2D6E00636DB0 /* Add.storyboard */,
+				CFA11004165F46180056784B /* Add.storyboard */,
 				CF5FFA80165E30D300636DB0 /* ICAddViewController.h */,
 				CF5FFA81165E30D300636DB0 /* ICAddViewController.m */,
 			);
@@ -350,6 +354,15 @@
 				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		CF9586A4165F932600137594 /* SSToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				CF9586A5165F932600137594 /* SSTextView.h */,
+				CF9586A6165F932600137594 /* SSTextView.m */,
+			);
+			path = SSToolkit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,7 +457,7 @@
 				49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */,
 				4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */,
-				CF5FFA7A165E2D6E00636DB0 /* Add.storyboard in Resources */,
+				CFA11005165F46180056784B /* Add.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +487,7 @@
 				480F3EF1165DEA82005079F1 /* ICParser.m in Sources */,
 				CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */,
 				CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */,
+				CF9586A7165F932600137594 /* SSTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

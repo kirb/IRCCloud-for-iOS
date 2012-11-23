@@ -38,7 +38,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	[self updateLoginStatus];
-	self.detailViewController = (ICBufferViewController *)[self.splitViewController.viewControllers[1] topViewController];
+	self.detailViewController = (ICBufferViewController *)[[self.splitViewController.viewControllers objectAtIndex:1] topViewController];
 	
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers = self;
 }
@@ -59,8 +59,8 @@
 
 - (void)insertNewObject:(id)sender
 {
-    [servers[0][1] addObject:[[NSDate date] description]];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[servers[0][1] count] - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    ICAddViewController *adder = [[UIStoryboard storyoardWithName:@"Add" bundle:nil] instantiateInitialViewController];
+	[self.navigationController presentViewController:adder animated:YES completion:NULL];
 }
 
 -(void)showLogIn {
