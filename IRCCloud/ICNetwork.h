@@ -17,6 +17,7 @@
 @property (nonatomic, assign, getter = isSSL) BOOL SSL;
 @property (nonatomic, assign) int port;
 @property (nonatomic, assign) int cid;
+@property (nonatomic, copy) NSString *status;
 
 - (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(int)port connectionID:(int)cid;
 

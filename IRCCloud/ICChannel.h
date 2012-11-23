@@ -7,17 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ICBuffer.h"
 
-@interface ICChannel : NSObject
+@interface ICChannel : ICBuffer
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) NSNumber *bid;
 @property (nonatomic, copy) NSDictionary *topic;
-@property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSDate *creationDate;
 @property (nonatomic, strong) NSDictionary *members;
-@property (nonatomic, strong) NSString *mode;
 @property (nonatomic, strong) NSArray *ops;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *mode;
 
 - (id)initWithName:(NSString *)name andBufferID:(NSNumber *)bid;
 

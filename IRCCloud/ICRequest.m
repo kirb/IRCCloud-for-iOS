@@ -15,7 +15,7 @@ static NSMutableData *output;
 @implementation ICRequest
 
 +(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate selector:(SEL)selector {
-	return [[self alloc] initWithPage:page parameters:params unauth:unauth delegate:delegate selector:selector];
+	return [[[self alloc] initWithPage:page parameters:params unauth:unauth delegate:delegate selector:selector] autorelease];
 }
 
 -(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate1 selector:(SEL)selector1 {
@@ -42,7 +42,7 @@ static NSMutableData *output;
 }
 
 +(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector {
-	return [[self alloc] initWithPage:page parameters:params delegate:delegate selector:selector];
+	return [[[self alloc] initWithPage:page parameters:params delegate:delegate selector:selector] autorelease];
 }
 
 -(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate1 selector:(SEL)selector1 {

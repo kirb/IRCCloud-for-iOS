@@ -28,14 +28,7 @@
 
 - (id)description
 {
-    return [NSString stringWithFormat:@"Channel: %@, Topic: %@ Mode: %@ Type: %@", self.name, [self.topic objectForKey:@"text"], self.mode, self.type];
-}
-
-- (void)dealloc
-{
-    [_name release];
-    [_creationDate release];
-    [super dealloc];
+    return [NSString stringWithFormat:@"Channel: %@, Mode: %@ Type: %@", self.name, self.mode, self.type];
 }
 
 @end

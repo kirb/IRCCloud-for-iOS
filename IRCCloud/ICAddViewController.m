@@ -36,7 +36,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:(CGRect){0, 0, [UIScreen mainScreen].bounds.size.width, 50}];
+    UIToolbar *accessoryView = [[[UIToolbar alloc] initWithFrame:(CGRect){0, 0, [UIScreen mainScreen].bounds.size.width, 50}] autorelease];
     accessoryView.backgroundColor = [UIColor blackColor];
     [accessoryView setTranslucent:YES];
     UIBarButtonItem *done = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard)] autorelease];
