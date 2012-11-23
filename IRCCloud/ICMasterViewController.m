@@ -9,6 +9,7 @@
 #import "ICMasterViewController.h"
 #import "ICBufferViewController.h"
 #import "ICLogInViewController.h"
+#import "ICAddViewController.h"
 #import "ICAppDelegate.h"
 
 @implementation ICMasterViewController
