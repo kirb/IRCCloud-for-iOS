@@ -16,7 +16,7 @@
  
  The default value is `nil`.
  */
-@property (nonatomic, strong) NSString *placeholder;
+@property (nonatomic, strong) NSString *customPlaceholder;
 
 /**
  The color of the placeholder.

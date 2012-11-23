@@ -22,7 +22,7 @@
 
 #pragma mark - Accessors
 
-@synthesize placeholder = _placeholder;
+@synthesize customPlaceholder = _customPlaceholder;
 @synthesize placeholderTextColor = _placeholderTextColor;
 
 - (void)setText:(NSString *)string {
@@ -32,11 +32,11 @@
 
 
 - (void)setPlaceholder:(NSString *)string {
-	if ([string isEqual:_placeholder]) {
+	if ([string isEqual:_customPlaceholder]) {
 		return;
 	}
 	
-	_placeholder = string;
+	_customPlaceholder = string;
 	[self _updateShouldDrawPlaceholder];
 }
 
@@ -85,7 +85,8 @@
 }
 
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect
+{
 	[super drawRect:rect];
 
 	if (_shouldDrawPlaceholder) {
@@ -100,7 +101,7 @@
 
 		// Draw the text
 		[_placeholderTextColor set];
-		[_placeholder drawInRect:rect withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:self.textAlignment];
+		[_customPlaceholder drawInRect:rect withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:self.textAlignment];
 	}
 }
 
@@ -117,7 +118,7 @@
 
 - (void)_updateShouldDrawPlaceholder {
 	BOOL previous = _shouldDrawPlaceholder;
-	_shouldDrawPlaceholder = self.placeholder && self.placeholderTextColor && self.text.length == 0;
+	_shouldDrawPlaceholder = self.customPlaceholder && self.placeholderTextColor && self.text.length == 0;
 	
 	if (previous != _shouldDrawPlaceholder) {
 		[self setNeedsDisplay];

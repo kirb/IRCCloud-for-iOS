@@ -29,7 +29,7 @@
 	self.selectionStyle = UITableViewCellSelectionStyleNone;
 	self.textView = [[SSTextView alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 0)];
 	self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	self.textView.placeholder = self.detailTextLabel.text;
+	self.textView.customPlaceholder = self.detailTextLabel.text;
 	self.detailTextLabel.text = @"";
 	[self.contentView addSubview:self.textView];
 }
