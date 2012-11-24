@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ICChannel;
+@class ICChannel, ICConversation;
 
 @interface ICNetwork : NSObject
 
@@ -22,7 +22,7 @@
 
 // typically, this should be an array of ICChannel objects, but maybe we could add a -addChannelsCreatingChannelsFromStrings:(NSArray *)array or soemthing method
 // might make it easier to load from a plist.
-- (void)addChannelsFromArray:(NSArray *)array;
+
 - (void)addChannel:(ICChannel *)channel;
 - (void)removeChannel:(ICChannel *)channel;
 

@@ -36,21 +36,27 @@
                                                          connectionID:[(NSNumber *)json[@"cid"] intValue]] autorelease];
         [[ICController sharedController] addNetwork:network];
     }
-    if ([json[@"type"] isEqualToString:@"channel_init"]) {
-        if (![[ICController sharedController] networkForConnection:json[@"cid"]])
-            return;
-        ICChannel *channel = [[[ICChannel alloc] initWithName:json[@"chan"] andBufferID:json[@"bid"]] autorelease];
-        channel.members = json[@"members"];
-        channel.creationDate = [NSDate dateWithTimeIntervalSince1970:[json[@"timestamp"] intValue]];
-        channel.topic = json[@"topic"];
-        channel.type = json[@"channel_type"];
-        channel.mode = json[@"mode"];
-        channel.ops = json[@"ops"];
-        
-        ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
-        [channelNetwork addChannel:channel];
-    }
-    [p release];
+    if ([json[@"type"] isEqualToString:@"channel_init"])
+        [self parseChannel:json];
+    
+    
+    [p drain];
+}
+
+- (void)parseChannel:(NSDictionary *)json
+{
+    if (![[ICController sharedController] networkForConnection:json[@"cid"]])
+        return;
+    ICChannel *channel = [[[ICChannel alloc] initWithName:json[@"chan"] andBufferID:json[@"bid"]] autorelease];
+    channel.members = json[@"members"];
+    channel.creationDate = [NSDate dateWithTimeIntervalSince1970:[json[@"timestamp"] intValue]];
+    channel.topic = json[@"topic"];
+    channel.type = json[@"channel_type"];
+    channel.mode = json[@"mode"];
+    channel.ops = json[@"ops"];
+    
+    ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
+    [channelNetwork addChannel:channel];
 }
 
 @end
