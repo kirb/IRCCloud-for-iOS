@@ -27,7 +27,7 @@ static ICController *controller;
 {
     self = [super init];
     if (self) {
-        _connections = [[[NSMutableDictionary alloc] init] retain];
+        _connections = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -49,10 +49,5 @@ static ICController *controller;
     return [_connections objectForKey:connectionID];
 }
 
-- (void)dealloc
-{
-    [_connections release];
-    [super dealloc];
-}
 
 @end

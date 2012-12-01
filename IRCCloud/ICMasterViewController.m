@@ -18,20 +18,15 @@
 {
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
 	servers = [[NSMutableArray alloc] initWithObjects:
-				@[@"IRCCloud", [[@[@"#alpha", @"#changelog", @"#feedback", @"#themes"] mutableCopy] autorelease]],
-				@[@"Saurik", [[@[@"#bacon", @"#cycript", @"#cydia", @"#iphone", @"#iphonedev", @"#theos", @"#winterboard"] mutableCopy] autorelease]],
-				@[@"Rizon", [[@[@"#jailbreak", @"#tklbot"] mutableCopy] autorelease]],
-				@[@"Chronic-Dev", [[@[@"#greenpois0n"] mutableCopy] autorelease]],
-				@[@"freenode", [[@[@"#GelbrackQA", @"#iphonedev", @"#iTweakStore", @"#iTweakStore-dev", @"#jailbreakqa"] mutableCopy] autorelease]],
+				@[@"IRCCloud", [@[@"#alpha", @"#changelog", @"#feedback", @"#themes"] mutableCopy]],
+				@[@"Saurik", [@[@"#bacon", @"#cycript", @"#cydia", @"#iphone", @"#iphonedev", @"#theos", @"#winterboard"] mutableCopy]],
+				@[@"Rizon", [@[@"#jailbreak", @"#tklbot"] mutableCopy]],
+				@[@"Chronic-Dev", [@[@"#greenpois0n"] mutableCopy]],
+				@[@"freenode", [@[@"#GelbrackQA", @"#iphonedev", @"#iTweakStore", @"#iTweakStore-dev", @"#jailbreakqa"] mutableCopy]],
 				nil];
     [super awakeFromNib];
 }
 
-- (void)dealloc
-{
-	[_detailViewController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad
 {
@@ -75,7 +70,7 @@
 -(void)updateLoginStatus {
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
 	if (loggedIn) {
-		UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
+		UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 		self.navigationItem.rightBarButtonItem = addButton;
 	} else {
 		self.navigationItem.leftBarButtonItem = nil;
@@ -104,7 +99,7 @@
 	if (loggedIn) {
 	    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
         if (!cell)
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChannelCell"] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChannelCell"];
 		cell.textLabel.text = servers[indexPath.section][1][indexPath.row];
 		cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBar"]];
     	return cell;

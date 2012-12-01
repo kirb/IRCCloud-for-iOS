@@ -23,28 +23,28 @@
 
 - (void)parse:(NSDictionary *)json
 {
-    NSAutoreleasePool *p = [NSAutoreleasePool new];
-    if ([json[@"type"] isEqualToString:@"header"]) {
-        NSLog(@"Header received, stream has begun");
-    }
+    @autoreleasepool {
+        if ([json[@"type"] isEqualToString:@"header"]) {
+            NSLog(@"Header received, stream has begun");
+        }
 
-    if ([json[@"type"] isEqualToString:@"makeserver"]) {
-        [self parseNetwork:json];
+        if ([json[@"type"] isEqualToString:@"makeserver"]) {
+            [self parseNetwork:json];
+        }
+        if ([json[@"type"] isEqualToString:@"channel_init"])
+            [self parseChannel:json];
+    
+    
     }
-    if ([json[@"type"] isEqualToString:@"channel_init"])
-        [self parseChannel:json];
-    
-    
-    [p drain];
 }
 
 - (void)parseNetwork:(NSDictionary *)json
 {
-    ICNetwork *network = [[[ICNetwork alloc] initWithNetworkNamed:json[@"name"]
+    ICNetwork *network = [[ICNetwork alloc] initWithNetworkNamed:json[@"name"]
                                                          hostName:json[@"hostname"]
                                                               SSL:[(NSNumber *)json[@"ssl"] boolValue]
                                                              port:[(NSNumber *)json[@"port"] intValue]
-                                                     connectionID:[(NSNumber *)json[@"cid"] intValue]] autorelease];
+                                                     connectionID:[(NSNumber *)json[@"cid"] intValue]];
     network.status = json[@"status"];
     [[ICController sharedController] addNetwork:network];
 }
@@ -53,7 +53,7 @@
 {
     if (![[ICController sharedController] networkForConnection:json[@"cid"]])
         return;
-    ICChannel *channel = [[[ICChannel alloc] initWithName:json[@"chan"] andBufferID:json[@"bid"]] autorelease];
+    ICChannel *channel = [[ICChannel alloc] initWithName:json[@"chan"] andBufferID:json[@"bid"]];
     channel.members = json[@"members"];
     channel.creationDate = json[@"created"];
     channel.topic = json[@"topic"];

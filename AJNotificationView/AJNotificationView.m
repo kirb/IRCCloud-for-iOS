@@ -27,7 +27,7 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic) AJNotificationType notificationType;
 @property (nonatomic) AJLinedBackgroundType backgroundType;
-@property (nonatomic,assign) NSTimer* animationTimer;
+@property (nonatomic,weak) NSTimer* animationTimer;
 @property (nonatomic, assign) float moveFactor;
 @property(nonatomic,assign) BOOL linedBackground;
 

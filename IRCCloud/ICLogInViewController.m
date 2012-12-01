@@ -49,7 +49,7 @@
 	}
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 	self.view.userInteractionEnabled = NO;
-	cancelButton = [self.navigationItem.leftBarButtonItem retain];
+	cancelButton = self.navigationItem.leftBarButtonItem;
 	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
 	[MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	[ICRequest requestWithPage:@"login" parameters:[NSString stringWithFormat:@"email=%@&password=%@", [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [pass stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] unauth:YES delegate:self selector:@selector(_gotSessionCookie:)];
@@ -79,7 +79,6 @@
 	}
 	self.view.userInteractionEnabled = YES;
 	[self.navigationItem setLeftBarButtonItem:cancelButton animated:YES];
-	[cancelButton release];
 }
 
 - (IBAction)cancel:(id)sender {
