@@ -16,6 +16,6 @@
 
 -(void)commonSetup;
 
-@property (nonatomic, retain) SSTextView *textView;
+@property (nonatomic, strong) SSTextView *textView;
 
 @end

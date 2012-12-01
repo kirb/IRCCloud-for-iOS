@@ -47,7 +47,7 @@
 		499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCB9F1629BC1D00A58167 /* MBProgressHUD.m */; };
 		49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */; };
 		49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */; };
-		49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A92B72163EB7D800AE20C9 /* JSONKit.m */; };
+		49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A92B72163EB7D800AE20C9 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FDF4B0162E763000AAE35D /* ICNotification.m */; };
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 		CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA81165E30D300636DB0 /* ICAddViewController.m */; };
@@ -562,6 +562,7 @@
 		498B8A8A1619F8B5001A4356 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -586,6 +587,7 @@
 		498B8A8B1619F8B5001A4356 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

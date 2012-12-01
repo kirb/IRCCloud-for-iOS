@@ -24,7 +24,7 @@
         _SSL = isSSL;
         _port = port;
         _cid = cid;
-        _channels = [[[NSMutableArray alloc] init] retain];
+        _channels = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -80,13 +80,6 @@
     [_channels removeObject:channel];
 }
 
-- (void)dealloc
-{
-    [_hostName release];
-    [_networkName release];
-    [_channels release];
-    [super dealloc];
-}
 
 @end
 

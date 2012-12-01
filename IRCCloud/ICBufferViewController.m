@@ -25,11 +25,6 @@
     }
     return self;
 }
-- (void)dealloc
-{
-	[_masterPopoverController release];
-    [super dealloc];
-}
 
 #pragma mark - Managing the detail item
 
@@ -71,7 +66,7 @@
 		titleView.frame = CGRectMake(0, 0, serverSize.width + channelSize.width, channelSize.height);
 		self.navigationItem.titleView = titleView;
 	}
-	[self.navigationController setToolbarItems:@[[[[UIBarButtonItem alloc] initWithCustomView:textField] autorelease]] animated:NO];
+	[self.navigationController setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:textField]] animated:NO];
 	self.navigationController.toolbarHidden = NO;
 	
     if (self.masterPopoverController != nil) {

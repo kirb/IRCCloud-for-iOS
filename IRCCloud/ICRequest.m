@@ -15,7 +15,7 @@ static NSMutableData *output;
 @implementation ICRequest
 
 +(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate selector:(SEL)selector {
-	return [[[self alloc] initWithPage:page parameters:params unauth:unauth delegate:delegate selector:selector] autorelease];
+	return [[self alloc] initWithPage:page parameters:params unauth:unauth delegate:delegate selector:selector];
 }
 
 -(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate1 selector:(SEL)selector1 {
@@ -42,7 +42,7 @@ static NSMutableData *output;
 }
 
 +(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector {
-	return [[[self alloc] initWithPage:page parameters:params delegate:delegate selector:selector] autorelease];
+	return [[self alloc] initWithPage:page parameters:params delegate:delegate selector:selector];
 }
 
 -(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate1 selector:(SEL)selector1 {
@@ -60,7 +60,6 @@ static NSMutableData *output;
 	NSError *err = nil;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:output options:0 error:&err];
 	[delegate performSelector:selector withObject:err ? [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-1] forKey:@"error"] : json];
-	[output release];
 }
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	if (delegate && selector) {
