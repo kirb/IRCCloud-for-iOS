@@ -52,7 +52,7 @@
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 		CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA81165E30D300636DB0 /* ICAddViewController.m */; };
 		CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */; };
-		CF9586A7165F932600137594 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9586A6165F932600137594 /* SSTextView.m */; };
+		CF9586A7165F932600137594 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9586A6165F932600137594 /* SSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CFA11005165F46180056784B /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA11004165F46180056784B /* Add.storyboard */; };
 /* End PBXBuildFile section */
 
