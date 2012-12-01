@@ -10,8 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface ICAddViewController ()
-@property (retain, nonatomic) IBOutlet UITextField *portTextField;
-@property (retain, nonatomic) IBOutlet UISwitch *sslSwitch;
+@property (strong, nonatomic) IBOutlet UITextField *portTextField;
+@property (strong, nonatomic) IBOutlet UISwitch *sslSwitch;
 
 @end
 
@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].backgroundView = [[[UIView alloc] init] autorelease];
+	[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].backgroundView = [[UIView alloc] init];
     self.portTextField.layer.cornerRadius = 3.5f;
 }
 
@@ -36,11 +36,11 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    UIToolbar *accessoryView = [[[UIToolbar alloc] initWithFrame:(CGRect){0, 0, [UIScreen mainScreen].bounds.size.width, 50}] autorelease];
+    UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:(CGRect){0, 0, [UIScreen mainScreen].bounds.size.width, 50}];
     accessoryView.backgroundColor = [UIColor blackColor];
     [accessoryView setTranslucent:YES];
-    UIBarButtonItem *done = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard)] autorelease];
-    UIBarButtonItem *flex = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard)];
+    UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     accessoryView.items = @[flex, done];
     textField.inputAccessoryView = accessoryView;
 }
@@ -56,12 +56,6 @@
     [self.portTextField resignFirstResponder];
 }
 
-- (void)dealloc
-{
-    [_portTextField release];
-    [_sslSwitch release];
-    [super dealloc];
-}
 - (void)viewDidUnload
 {
     [self setPortTextField:nil];

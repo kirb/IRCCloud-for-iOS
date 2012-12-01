@@ -30,7 +30,7 @@
 										  ] mutableCopy] verifySecurityKey:YES extensions:nil];
 		config.closeTimeout = 15;
 		config.keepAlive = 15;
-		webSocket = [[WebSocket webSocketWithConfig:config delegate:self] retain];
+		webSocket = [WebSocket webSocketWithConfig:config delegate:self];
 	}
 	return self;
 }
