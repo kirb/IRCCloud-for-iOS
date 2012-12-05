@@ -11,19 +11,23 @@
 #import "ICLogInViewController.h"
 #import "ICAddViewController.h"
 #import "ICAppDelegate.h"
+#import "ICController.h"
+#import "ICNetwork.h"
+#import "ICChannel.h"
 
 @implementation ICMasterViewController
 
 - (void)awakeFromNib
 {
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
-	servers = [[NSMutableArray alloc] initWithObjects:
+	servers = [[NSMutableArray alloc] init];/*WithObjects:
 				@[@"IRCCloud", [@[@"#alpha", @"#changelog", @"#feedback", @"#themes"] mutableCopy]],
 				@[@"Saurik", [@[@"#bacon", @"#cycript", @"#cydia", @"#iphone", @"#iphonedev", @"#theos", @"#winterboard"] mutableCopy]],
 				@[@"Rizon", [@[@"#jailbreak", @"#tklbot"] mutableCopy]],
 				@[@"Chronic-Dev", [@[@"#greenpois0n"] mutableCopy]],
 				@[@"freenode", [@[@"#GelbrackQA", @"#iphonedev", @"#iTweakStore", @"#iTweakStore-dev", @"#jailbreakqa"] mutableCopy]],
 				nil];
+                                             */
     [super awakeFromNib];
 }
 
@@ -32,6 +36,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [kSharedController setDelegate:self];
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	[self updateLoginStatus];
 	self.detailViewController = (ICBufferViewController *)[[self.splitViewController.viewControllers objectAtIndex:1] topViewController];
@@ -39,7 +44,7 @@
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers = self;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
 	if (!isPad && !loggedIn) {
@@ -59,15 +64,19 @@
 	[self.navigationController presentViewController:adder animated:YES completion:NULL];
 }
 
--(void)showLogIn {
+- (void)showLogIn
+{
 	ICLogInViewController *logIn = [[UIStoryboard storyboardWithName:isPad ? @"LogIn_iPad" : @"LogIn_iPhone" bundle:nil] instantiateInitialViewController];
 	[self.navigationController presentViewController:logIn animated:YES completion:NULL];
 }
 
--(IBAction)showSettings:(id)sender {
+- (IBAction)showSettings:(id)sender
+{
+    
 }
 
--(void)updateLoginStatus {
+- (void)updateLoginStatus
+{
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
 	if (loggedIn) {
 		UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -87,11 +96,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return loggedIn ? [servers[section][1] count] : 0;
+	return loggedIn ? [[[servers objectAtIndex:section] channels] count] : 0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return loggedIn ? servers[section][0] : nil;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	return loggedIn ? [servers[section] networkName] : nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,7 +110,7 @@
 	    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
         if (!cell)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChannelCell"];
-		cell.textLabel.text = servers[indexPath.section][1][indexPath.row];
+		cell.textLabel.text = [[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name];
 		cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBar"]];
     	return cell;
 	}
@@ -126,7 +136,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isPad) {
-        self.detailViewController.server = servers[indexPath.section];
+        //elf.detailViewController.server = servers[indexPath.section];
 		self.detailViewController.channelIndex = indexPath.row;
 		[self.detailViewController configureView];
     }
@@ -136,10 +146,38 @@
 {
     if ([[segue identifier] isEqualToString:@"showBuffer"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [segue.destinationViewController setServer:servers[indexPath.section]];
+        [segue.destinationViewController setServerName:@""];
 		[segue.destinationViewController setChannelIndex:indexPath.row];
 		[(ICBufferViewController *)segue.destinationViewController configureView];
     }
+}
+
+#pragma mark - ICController Delegate
+- (void)controllerDidAddNetwork:(ICNetwork *)network
+{
+    [network setDelegate:self];
+    [servers addObject:network];
+    [self.tableView reloadData];
+}
+
+- (void)controllerDidRemoveNetwork:(ICNetwork *)network
+{
+    [network setDelegate:nil];
+    [servers removeObject:network];
+}
+
+- (void)network:(ICNetwork *)network didAddChannel:(ICChannel *)channel
+{
+#warning This has to be fixed.
+    // so, we have a problem, and I don't have the time to work this out.
+    // -reloadData works perfect for the first [servers count] - 1 networks
+    // but when the last network comes along in -controllerDidAddNetwork:, its channels havent.
+    // I could use -[UITableView insertRowsAtIndexPaths:withAnimation:], but that causes a whole bunch of other problems
+}
+
+- (void)network:(ICNetwork *)network didRemoveChannel:(ICChannel *)channel
+{
+    
 }
 
 @end

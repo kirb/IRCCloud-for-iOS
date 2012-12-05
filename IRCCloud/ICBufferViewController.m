@@ -9,14 +9,14 @@
 #import "ICBufferViewController.h"
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
+#import "ICNetwork.h"
 
 @interface ICBufferViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
 
 @implementation ICBufferViewController
-@synthesize server, channelIndex;
-
+@synthesize channelIndex;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -38,27 +38,27 @@
 		textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		textField.borderStyle = UITextBorderStyleRoundedRect;
 	}
-	if (server) {
+	if (_serverName) {
 		UIView *titleView = [[UIView alloc] init];
 		
-		UILabel *serverName = [[UILabel alloc] init];
-		serverName.font = [UIFont systemFontOfSize:20];
-		serverName.text = [NSString stringWithFormat:@"%@: ", server[0]];
-		[titleView addSubview:serverName];
+		UILabel *serverLabel = [[UILabel alloc] init];
+		serverLabel.font = [UIFont systemFontOfSize:20];
+        serverLabel.text = _serverName;
+		[titleView addSubview:serverLabel];
 		
 		UILabel *channelName = [[UILabel alloc] init];
 		channelName.font = [UIFont boldSystemFontOfSize:20];
-		channelName.text = server[1][channelIndex];
+		//channelName.text =
 		[titleView addSubview:channelName];
 		
-		serverName.backgroundColor = channelName.backgroundColor = [UIColor clearColor];
-		serverName.textColor = channelName.textColor = [UIColor whiteColor];
-		serverName.shadowColor = channelName.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
+		serverLabel.backgroundColor = channelName.backgroundColor = [UIColor clearColor];
+        serverLabel.textColor = channelName.textColor = [UIColor whiteColor];
+        serverLabel.shadowColor = channelName.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
 
-		serverName.shadowOffset = channelName.shadowOffset = CGSizeMake(0, -1);
+        serverLabel.shadowOffset = channelName.shadowOffset = CGSizeMake(0, -1);
 		
-		CGSize serverSize = [serverName.text sizeWithFont:serverName.font];
-		serverName.frame = (CGRect) {{0, 0}, serverSize};
+		CGSize serverSize = [serverLabel.text sizeWithFont:serverLabel.font];
+        serverLabel.frame = (CGRect) {{0, 0}, serverSize};
 		
 		CGSize channelSize = [channelName.text sizeWithFont:channelName.font];
 		channelName.frame = (CGRect) {{serverSize.width, 0}, channelSize};

@@ -10,13 +10,24 @@
 
 @class ICNetwork;
 
+@protocol IControllerDelegate <NSObject>
+@required
+- (void)controllerDidAddNetwork:(ICNetwork *)network;
+- (void)controllerDidRemoveNetwork:(ICNetwork *)network;
+@end
+
 @interface ICController : NSObject
 {
+    __weak id<IControllerDelegate> _delegate;
 }
 
+@property (nonatomic, weak) id delegate;
+
 + (ICController *)sharedController;
+- (void)addNetworkFromDictionary:(NSDictionary *)dict;
 - (void)addNetwork:(ICNetwork *)connection;
-- (void)removeNetwork:(ICNetwork *)connection;
+- (void)removeNetworkWithCID:(NSNumber *)cid;
 - (ICNetwork *)networkForConnection:(NSNumber *)connectionID;
+- (NSArray *)networks;
 
 @end

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ICController.h"
+#import "ICNetwork.h"
 
 @class ICBufferViewController;
 
-@interface ICMasterViewController : UITableViewController {
+@interface ICMasterViewController : UITableViewController <IControllerDelegate, ICNetworkDelegate>
+{
 	BOOL loggedIn;
 	NSMutableArray *servers;
 }

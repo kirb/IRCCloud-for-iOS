@@ -16,3 +16,4 @@
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r / 255 green:g / 255 blue:b / 255 alpha:a]
 #define L(key) NSLocalizedString(key, key)
 #define isPad ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+#define kSharedController [ICController sharedController]

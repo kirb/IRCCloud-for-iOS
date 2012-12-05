@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate> {
+@class ICNetwork;
+
+@interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate>
+{
 	UITextField *textField;
 	UIToolbar *toolbar;
-	NSArray *server;
 	int channelIndex;
 }
 
-@property (strong, nonatomic) NSArray *server;
+@property (strong, nonatomic) NSString *serverName;
 @property (assign) int channelIndex;
 
 - (void)configureView;

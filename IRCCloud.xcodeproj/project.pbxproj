@@ -203,9 +203,9 @@
 		48DB71FF165D309C00646E6F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CF5FFA7F165E2ED100636DB0 /* Main */,
 				CF5FFA7E165E2E7800636DB0 /* Add */,
 				4907B6131636980D00022D54 /* Log In */,
-				CF5FFA7F165E2ED100636DB0 /* Main */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -359,12 +359,12 @@
 		CF5FFA7F165E2ED100636DB0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
-				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
-				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
-				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
 				498B8A811619F8B5001A4356 /* ICMasterViewController.h */,
 				498B8A821619F8B5001A4356 /* ICMasterViewController.m */,
+				498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */,
+				498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */,
+				49A72774162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard */,
+				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Main;
 			sourceTree = "<group>";

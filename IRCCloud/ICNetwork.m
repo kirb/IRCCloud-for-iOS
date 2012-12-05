@@ -11,46 +11,27 @@
 
 @implementation ICNetwork
 {
-    NSMutableArray *_channels;
+    NSMutableDictionary *_channels;
 }
 
 #pragma mark Basic Settings -
-- (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(int)port connectionID:(int)cid
+- (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(NSNumber *)port connectionID:(NSNumber *)cid
 {
     self = [super init];
     if (self){
         _networkName = [networkName copy];
         _hostName = [hostName copy];
-        _SSL = isSSL;
-        _port = port;
-        _cid = cid;
-        _channels = [[NSMutableArray alloc] init];
+        _SSL        = isSSL;
+        _port     = port;
+        _cid      = cid;
+        _channels = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
-- (void)setNetworkName:(NSString *)networkName
-{
-    if ([networkName isEqualToString:self.networkName])
-        return;
-    else {
-        // make sure the current object is released. Else it will become just a leak that no one has a reference to.
-        self.networkName = networkName;
-    }
-}
-
-- (void)setHostName:(NSString *)hostName
-{
-    if ([hostName isEqualToString:self.hostName])
-        return;
-    else {
-        self.hostName = hostName;
-    }
-}
-
 - (id)description
 {
-    return [NSString stringWithFormat:@"Network name: %@ Port: %@, SSL: %@, CID: %@", self.networkName, [NSNumber numberWithInt:self.port], ((self.isSSL) ? @"on":@"off"), [NSNumber numberWithInt:self.cid]];
+    return [NSString stringWithFormat:@"Network name: %@ Port: %@, SSL: %@, CID: %@", self.networkName, self.port, ((self.isSSL) ? @"ON":@"OFF"), self.cid];
 }
 
 #pragma mark Channel Management -
@@ -61,25 +42,47 @@
             if ([channel.name isEqualToString:currentChan.name])
                 break;
             else
-                [_channels addObject:channel];
+                [_channels setObject:channel forKey:channel.cid];
         }
     }
 }
 
+
+- (void)addChannelFromDictionary:(NSDictionary *)dict
+{
+    ICChannel *channel   = [[ICChannel alloc] initWithName:dict[@"chan"] andBufferID:dict[@"bid"]];
+    channel.members      = dict[@"members"];
+    channel.creationDate = dict[@"created"];
+    channel.topic        = dict[@"topic"];
+    channel.type         = dict[@"channel_type"];
+    channel.mode         = dict[@"mode"];
+    channel.ops          = dict[@"ops"];
+    if (_delegate)
+        [self.delegate network:self didAddChannel:channel];
+    [_channels setObject:channel forKey:channel.bid];
+}
+
+
+
 - (void)addChannel:(ICChannel *)channel
 {
-    for (ICChannel *currentChannel in _channels)
-        if ([channel.name isEqualToString:currentChannel.name])
-            return;
-    [_channels addObject:channel];
+    [_channels setObject:channel forKey:channel.bid];
+    if (_delegate)
+        [self.delegate network:self didAddChannel:channel];
     NSLog(@"%@", _channels);
 }
 
-- (void)removeChannel:(ICChannel *)channel
+- (void)removeChannelWithBID:(NSNumber *)bid
 {
-    [_channels removeObject:channel];
+    if (_delegate)
+        [self.delegate network:self didRemoveChannel:[_channels objectForKey:bid]];
+    [_channels removeObjectForKey:bid];
 }
 
+- (NSArray *)channels
+{
+    return [_channels allValues];
+}
 
 @end
 
