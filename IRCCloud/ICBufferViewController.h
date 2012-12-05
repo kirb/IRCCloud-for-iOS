@@ -18,6 +18,7 @@
 }
 
 @property (strong, nonatomic) NSString *serverName;
+@property (strong, nonatomic) NSString *channelName;
 @property (assign) int channelIndex;
 
 - (void)configureView;

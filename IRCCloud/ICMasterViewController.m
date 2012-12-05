@@ -146,7 +146,8 @@
 {
     if ([[segue identifier] isEqualToString:@"showBuffer"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [segue.destinationViewController setServerName:@""];
+        [segue.destinationViewController setServerName:[[servers objectAtIndex:indexPath.section] networkName]];
+        [(ICBufferViewController *)segue.destinationViewController setChannelName:[[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name]];
 		[segue.destinationViewController setChannelIndex:indexPath.row];
 		[(ICBufferViewController *)segue.destinationViewController configureView];
     }

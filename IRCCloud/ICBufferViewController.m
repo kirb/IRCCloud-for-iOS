@@ -43,25 +43,25 @@
 		
 		UILabel *serverLabel = [[UILabel alloc] init];
 		serverLabel.font = [UIFont systemFontOfSize:20];
-        serverLabel.text = _serverName;
+        serverLabel.text = [_serverName stringByAppendingString:@":"];
 		[titleView addSubview:serverLabel];
 		
-		UILabel *channelName = [[UILabel alloc] init];
-		channelName.font = [UIFont boldSystemFontOfSize:20];
-		//channelName.text =
-		[titleView addSubview:channelName];
+		UILabel *channelNameLabel = [[UILabel alloc] init];
+		channelNameLabel.font = [UIFont boldSystemFontOfSize:20];
+		channelNameLabel.text = self.channelName;
+		[titleView addSubview:channelNameLabel];
 		
-		serverLabel.backgroundColor = channelName.backgroundColor = [UIColor clearColor];
-        serverLabel.textColor = channelName.textColor = [UIColor whiteColor];
-        serverLabel.shadowColor = channelName.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
+		serverLabel.backgroundColor = channelNameLabel.backgroundColor = [UIColor clearColor];
+        serverLabel.textColor = channelNameLabel.textColor = [UIColor whiteColor];
+        serverLabel.shadowColor = channelNameLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
 
-        serverLabel.shadowOffset = channelName.shadowOffset = CGSizeMake(0, -1);
+        serverLabel.shadowOffset = channelNameLabel.shadowOffset = CGSizeMake(0, -1);
 		
 		CGSize serverSize = [serverLabel.text sizeWithFont:serverLabel.font];
         serverLabel.frame = (CGRect) {{0, 0}, serverSize};
 		
-		CGSize channelSize = [channelName.text sizeWithFont:channelName.font];
-		channelName.frame = (CGRect) {{serverSize.width, 0}, channelSize};
+		CGSize channelSize = [channelNameLabel.text sizeWithFont:channelNameLabel.font];
+		channelNameLabel.frame = (CGRect) {{serverSize.width, 0}, channelSize};
 		
 		titleView.frame = CGRectMake(0, 0, serverSize.width + channelSize.width, channelSize.height);
 		self.navigationItem.titleView = titleView;
