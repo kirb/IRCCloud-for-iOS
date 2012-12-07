@@ -56,10 +56,13 @@
 	[webSocket close];
 }
 
--(void)receivedJSON:(NSDictionary *)data {
+- (void)receivedJSON:(NSDictionary *)data
+{
 	if (!data[@"type"]) {
 		return;
 	} else if ([data[@"type"] isEqualToString:@"stat_user"]) {
+        if ([data[@"type"] isEqualToString:@"header"])
+            NSLog(@"Header received.");
 		if (![data[@"verified"] boolValue]) {
 			[ICNotification notificationWithMessage:L(@"Reminder: You haven't verified your email address.") type:AJNotificationTypeBlue];
 		}
@@ -69,23 +72,20 @@
 	} else if ([data[@"type"] isEqualToString:@"oob_include"]) {
 		[self performSelectorInBackground:@selector(getOOBLoaderWithURL:) withObject:data[@"url"]];
 	} else {
-        
         [[ICParser sharedParser] performSelectorInBackground:@selector(parse:) withObject:data];
 	}
 }
 
--(void)getOOBLoaderWithURL:(NSString *)url {
+- (void)getOOBLoaderWithURL:(NSString *)url
+{
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[@"https://alpha.irccloud.com" stringByAppendingString:url]] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
 	[request addValue:[NSString stringWithFormat:@"session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]] forHTTPHeaderField:@"Cookie"];
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 	if (data == nil) {
 		[ICNotification notificationWithMessage:L(@"Oops, something went wrong while connecting to the server.") type:AJNotificationTypeOrange];
 	} else {
-		NSArray *json = [data objectFromJSONData];
-		//NSLog(@"json = %@", json);
-		for (NSDictionary *i in json) {
-			[self performSelectorOnMainThread:@selector(receivedJSON:) withObject:i waitUntilDone:YES];
-		}
+		NSArray *jsonArray = [data objectFromJSONData];
+		[[ICParser sharedParser] parseOOBArray:jsonArray];
 	}
 }
 

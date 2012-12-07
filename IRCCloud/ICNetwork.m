@@ -35,34 +35,31 @@
 }
 
 #pragma mark Channel Management -
-- (void)addChannelsFromArray:(NSArray *)array
+- (void)addOOBChannelFromDictionary:(NSDictionary *)dict
 {
-    for (ICChannel *channel in array) {
-        for (ICChannel *currentChan in _channels) {
-            if ([channel.name isEqualToString:currentChan.name])
-                break;
-            else
-                [_channels setObject:channel forKey:channel.cid];
-        }
-    }
+    ICChannel *channel   = [[ICChannel alloc] initWithName:dict[@"name"] andBufferID:dict[@"bid"]];
+    channel.cid          = dict[@"cid"];
+    channel.creationDate = dict[@"created"];
+    [_channels setObject:channel forKey:channel.bid];
 }
-
 
 - (void)addChannelFromDictionary:(NSDictionary *)dict
 {
-    ICChannel *channel   = [[ICChannel alloc] initWithName:dict[@"chan"] andBufferID:dict[@"bid"]];
+    ICChannel *channel = [_channels objectForKey:dict[@"bid"]];
+    if (!channel) {
+        channel = [[ICChannel alloc] initWithName:dict[@"chan"] andBufferID:dict[@"bid"]];
+        channel.cid = dict[@"created"];
+    }
     channel.members      = dict[@"members"];
-    channel.creationDate = dict[@"created"];
     channel.topic        = dict[@"topic"];
     channel.type         = dict[@"channel_type"];
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
     if (_delegate)
         [self.delegate network:self didAddChannel:channel];
-    [_channels setObject:channel forKey:channel.bid];
+    if (!channel)
+        [_channels setObject:channel forKey:channel.bid];
 }
-
-
 
 - (void)addChannel:(ICChannel *)channel
 {

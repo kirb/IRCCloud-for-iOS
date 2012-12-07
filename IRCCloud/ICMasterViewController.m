@@ -150,6 +150,7 @@
         [(ICBufferViewController *)segue.destinationViewController setChannelName:[[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name]];
 		[segue.destinationViewController setChannelIndex:indexPath.row];
 		[(ICBufferViewController *)segue.destinationViewController configureView];
+        [(ICBufferViewController *)segue.destinationViewController setChannel:[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row]];
     }
 }
 
@@ -158,7 +159,12 @@
 {
     [network setDelegate:self];
     [servers addObject:network];
-    [self.tableView reloadData];
+    
+    // reaally bad idea...
+    int64_t delayInSeconds = 1.5;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+        [self.tableView reloadData];
+    });
 }
 
 - (void)controllerDidRemoveNetwork:(ICNetwork *)network
@@ -167,18 +173,14 @@
     [servers removeObject:network];
 }
 
+#pragma mark - ICNetwork Delegate
 - (void)network:(ICNetwork *)network didAddChannel:(ICChannel *)channel
 {
-#warning This has to be fixed.
-    // so, we have a problem, and I don't have the time to work this out.
-    // -reloadData works perfect for the first [servers count] - 1 networks
-    // but when the last network comes along in -controllerDidAddNetwork:, its channels havent.
-    // I could use -[UITableView insertRowsAtIndexPaths:withAnimation:], but that causes a whole bunch of other problems
+#warning implement this
 }
 
 - (void)network:(ICNetwork *)network didRemoveChannel:(ICChannel *)channel
 {
     
 }
-
 @end

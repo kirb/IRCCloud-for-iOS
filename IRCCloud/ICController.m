@@ -35,10 +35,10 @@ static ICController *controller;
 - (void)addNetworkFromDictionary:(NSDictionary *)dict
 {
     ICNetwork *network = [[ICNetwork alloc] initWithNetworkNamed:dict[@"name"]
-                                                       hostName:dict[@"hostname"]
-                                                            SSL:[(NSNumber *)dict[@"ssl"] boolValue]
-                                                           port:(NSNumber *)dict[@"port"]
-                                                   connectionID:(NSNumber *)dict[@"cid"]];
+                                                        hostName:dict[@"hostname"]
+                                                             SSL:[(NSNumber *)dict[@"ssl"] boolValue]
+                                                            port:(NSNumber *)dict[@"port"]
+                                                    connectionID:(NSNumber *)dict[@"cid"]];
     network.status = dict[@"status"];
     [[ICController sharedController] addNetwork:network];
 }

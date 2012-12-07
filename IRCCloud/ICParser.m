@@ -12,6 +12,10 @@
 #import "ICChannel.h"
 
 @implementation ICParser
+{
+    NSMutableArray *_toBeParsed;
+}
+
 + (ICParser *)sharedParser
 {
     // a sharedInstance is better than continually creating a new instance of the parser
@@ -21,22 +25,77 @@
     return parser;
 }
 
-- (void)parse:(NSDictionary *)json
+- (void)parseOOBArray:(NSArray *)oobArray
 {
-    if ([json[@"type"] isEqualToString:@"header"]) {
-        NSLog(@"Header received, stream has begun");
+    self.loadingOOB = YES;
+    for (NSDictionary *json in oobArray)
+    {
+        if ([json[@"type"] isEqualToString:@"makeserver"]) {
+            NSLog(@"%@", json[@"name"]);
+            [kSharedController addNetworkFromDictionary:[json copy]];
+        }   
+        else if ([json[@"type"] isEqualToString:@"makebuffer"]) {
+            if ([json[@"buffer_type"] isEqualToString:@"channel"]) {
+                if (json[@"archived"])
+                    ;
+                else
+                    [[kSharedController networkForConnection:json[@"cid"]] addOOBChannelFromDictionary:json];
+            }
+        }
+        else if ([json[@"type"] isEqualToString:@"channel_init"]) {
+            ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
+            [channelNetwork addChannelFromDictionary:json];
+        }
+        else if ([json[@"type"] isEqualToString:@"buffer_msg"]) {
+            ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
+            for (ICChannel *channel in [channelNetwork channels]){
+                if ([channel.bid intValue] == [json[@"bid"] intValue]) {
+                    [[channel buffer] addObject:json];
+                    break;
+                }
+            }
+        }
     }
-    if ([json[@"type"] isEqualToString:@"makeserver"]) {
-        [kSharedController addNetworkFromDictionary:[json copy]];
-    }
-    if ([json[@"type"] isEqualToString:@"channel_init"])
-        [self parseChannel:json];
+    self.loadingOOB = NO;
 }
 
-- (void)parseChannel:(NSDictionary *)json
+- (void)parse:(NSDictionary *)json
 {
-    ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
-    [channelNetwork addChannelFromDictionary:json];
+    if (!self.loadingOOB) {
+        if ([json[@"type"] isEqualToString:@"makeserver"]) {
+            [kSharedController addNetworkFromDictionary:[json copy]];
+            return;
+        }
+        if ([json[@"type"] isEqualToString:@"channel_init"]) {
+            ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
+            [channelNetwork addChannelFromDictionary:[json copy]];
+            return;
+        }
+        if ([json[@"type"] isEqualToString:@"buffer_msg"]) {
+            ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
+            for (ICChannel *channel in [channelNetwork channels]){
+                if ([channel.bid intValue] == [json[@"bid"] intValue]) {
+                    [[channel buffer] addObject:[json copy]];
+                    break;
+                }
+            }
+        }
+    }
+    else {
+        [_toBeParsed addObject:json];
+    }
+}
+
+- (void)setLoadingOOB:(BOOL)loadingOOB
+{
+    if (loadingOOB == NO) {
+        _loadingOOB = loadingOOB; // set the ivar
+        for (NSDictionary *meh in _toBeParsed) {
+            // parse all the things!
+            [self parse:meh];
+        }
+    }
+    _loadingOOB = loadingOOB;
 }
 
 @end

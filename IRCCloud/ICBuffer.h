@@ -14,13 +14,12 @@
     NSNumber *_bid;
     NSNumber *_creationDate;
     NSNumber *_lastSeenEid;
-    BOOL      _archived;
     NSString *_name;
 }
 @property (nonatomic, copy) NSNumber *cid;
 @property (nonatomic, copy) NSNumber *bid;
-@property (nonatomic, assign) BOOL archived;
 @property (nonatomic, copy) NSNumber *creationDate;
 @property (nonatomic, copy) NSNumber *lastSeenEid;
 @property (nonatomic, copy) NSString *name;
+@property (strong, nonatomic, readonly) NSMutableArray *buffer; // an array of NSDictionaries, sent along by ICParser.
 @end

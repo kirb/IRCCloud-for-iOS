@@ -31,6 +31,7 @@
 
 - (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(NSNumber *)port connectionID:(NSNumber *)cid;
 - (void)addChannel:(ICChannel *)channel;
+- (void)addOOBChannelFromDictionary:(NSDictionary *)dict;
 - (void)addChannelFromDictionary:(NSDictionary *)dict;
 - (void)removeChannelWithBID:(NSNumber *)channel;
 - (NSArray *)channels;

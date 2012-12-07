@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface ICParser : NSObject
+
+@property (nonatomic, assign) BOOL loadingOOB;
+
 + (ICParser *)sharedParser;
 - (void)parse:(NSDictionary *)json;
+- (void)parseOOBArray:(NSArray *)oobArray;
+
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ICNetwork;
+@class ICChannel;
 
 @interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate>
 {
@@ -17,7 +17,9 @@
 	int channelIndex;
 }
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSString *serverName;
+@property (strong, nonatomic) ICChannel *channel;
 @property (strong, nonatomic) NSString *channelName;
 @property (assign) int channelIndex;
 

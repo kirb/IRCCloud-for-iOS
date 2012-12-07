@@ -9,5 +9,12 @@
 #import "ICBuffer.h"
 
 @implementation ICBuffer
+@synthesize buffer = _buffer; // Xcode was throwing errors without that synthesize. STOOPID!
 
+- (NSMutableArray *)buffer
+{
+    if (!_buffer)
+        _buffer = [[NSMutableArray alloc] init];
+    return _buffer;
+}
 @end
