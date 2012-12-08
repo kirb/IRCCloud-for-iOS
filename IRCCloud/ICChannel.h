@@ -18,5 +18,4 @@
 @property (nonatomic, copy) NSString *mode;
 
 - (id)initWithName:(NSString *)name andBufferID:(NSNumber *)bid;
-
 @end

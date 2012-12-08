@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class ICChannel;
+#import "ICChannel.h"
 
-@interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate>
+@interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate, ICBufferDelegate>
 {
 	UITextField *textField;
 	UIToolbar *toolbar;

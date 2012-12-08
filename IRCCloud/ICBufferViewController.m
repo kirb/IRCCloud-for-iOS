@@ -9,7 +9,6 @@
 #import "ICBufferViewController.h"
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
-#import "ICChannel.h"
 
 @interface ICBufferViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -80,6 +79,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	[self configureView];
+    self.channel.delegate = self;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -182,4 +182,16 @@
     [self setTableView:nil];
     [super viewDidUnload];
 }
+
+
+#pragma mark - ICBuffer's notifs
+- (void)addedMessageToBuffer:(ICBuffer *)buffer
+{
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.channel.buffer indexOfObject:self.channel.buffer.lastObject] inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+    [self.tableView endUpdates];
+    NSIndexPath *lastRow = [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:lastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
 @end

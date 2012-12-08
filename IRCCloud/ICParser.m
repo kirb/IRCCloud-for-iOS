@@ -64,18 +64,19 @@
     if (!self.loadingOOB) {
         if ([json[@"type"] isEqualToString:@"makeserver"]) {
             [kSharedController addNetworkFromDictionary:[json copy]];
-            return;
         }
-        if ([json[@"type"] isEqualToString:@"channel_init"]) {
+        else if ([json[@"type"] isEqualToString:@"channel_init"]) {
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork addChannelFromDictionary:[json copy]];
-            return;
         }
-        if ([json[@"type"] isEqualToString:@"buffer_msg"]) {
+        else if ([json[@"type"] isEqualToString:@"buffer_msg"]) {
             ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
             for (ICChannel *channel in [channelNetwork channels]){
                 if ([channel.bid intValue] == [json[@"bid"] intValue]) {
                     [[channel buffer] addObject:[json copy]];
+                    if ([channel.delegate respondsToSelector:@selector(addedMessageToBuffer:)]) {
+                        [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
+                    }
                     break;
                 }
             }
