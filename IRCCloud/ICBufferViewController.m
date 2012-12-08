@@ -10,6 +10,8 @@
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
 
+#define kLastRow [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
+
 @interface ICBufferViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
@@ -178,11 +180,11 @@
     self.masterPopoverController = nil;
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setTableView:nil];
     [super viewDidUnload];
 }
-
 
 #pragma mark - ICBuffer's notifs
 - (void)addedMessageToBuffer:(ICBuffer *)buffer
@@ -190,8 +192,8 @@
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.channel.buffer indexOfObject:self.channel.buffer.lastObject] inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self.tableView endUpdates];
-    NSIndexPath *lastRow = [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0];
-    [self.tableView scrollToRowAtIndexPath:lastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+    [self.tableView scrollToRowAtIndexPath:kLastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 @end
