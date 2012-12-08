@@ -56,6 +56,7 @@
             }
         }
     }
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     self.loadingOOB = NO;
 }
 

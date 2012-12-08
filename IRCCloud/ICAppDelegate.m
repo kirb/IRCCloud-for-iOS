@@ -48,6 +48,7 @@
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"]) {
 		[webSocket open];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	}
     return YES;
 }
@@ -60,9 +61,9 @@
 {
 	if (!data[@"type"]) {
 		return;
-	} else if ([data[@"type"] isEqualToString:@"stat_user"]) {
-        if ([data[@"type"] isEqualToString:@"header"])
-            NSLog(@"Header received.");
+	} else if ([data[@"type"] isEqualToString:@"header"]) {
+        NSLog(@"Header received.");
+    } else if ([data[@"type"] isEqualToString:@"stat_user"]) {
 		if (![data[@"verified"] boolValue]) {
 			[ICNotification notificationWithMessage:L(@"Reminder: You haven't verified your email address.") type:AJNotificationTypeBlue];
 		}
