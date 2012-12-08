@@ -4,3 +4,6 @@
 [submodule "JSONKit"]
 	path = JSONKit
 	url = git://github.com/johnezang/JSONKit.git
+[submodule "UnittWebSocketClient"]
+	path = UnittWebSocketClient
+	url = git://github.com/kirbylover4000/UnittWebSocketClient.git
