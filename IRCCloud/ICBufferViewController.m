@@ -145,17 +145,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BufferCell"];
-    cell.textLabel.numberOfLines = 5;
     NSString *nick = (self.channel.buffer[indexPath.row])[@"from"];
-    NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"]; // just for some contrast :P
+    NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
     NSString *text = [[nick stringByAppendingString:@": "] stringByAppendingString:message];
+    
+    // http://www.icodeblog.com/2010/11/18/making-smarter-table-view-cells/
+    cell.textLabel.numberOfLines = ceilf([message sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap].height/20.0) + 2;
     cell.textLabel.text = text;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55.0f;
+    NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
+	CGSize cellSize = [message sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
+    
+	return cellSize.height + 15.0f; // just for some extra padding :P
 }
 
 #pragma mark - Table view delegate
