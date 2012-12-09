@@ -10,18 +10,27 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface ICAddViewController ()
-@property (strong, nonatomic) IBOutlet UITextField *portTextField;
-@property (strong, nonatomic) IBOutlet UISwitch *sslSwitch;
-
+@property (strong, nonatomic) UISwitch *sslSwitch;
 @end
 
 @implementation ICAddViewController
 
-- (void)viewDidLoad
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		self.sslSwitch = [[UISwitch alloc] init];
+	}
+	return self;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[super viewDidLoad];
-	[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].backgroundView = [[UIView alloc] init];
-    self.portTextField.layer.cornerRadius = 3.5f;
+	if (indexPath.section == 0 && indexPath.row == 0) {
+		cell.backgroundView = [[UIView alloc] init];
+	} else if (indexPath.section == 1 && indexPath.row == 2) {
+		NSLog(@"ssl = %@", self.sslSwitch);
+		cell.accessoryView = self.sslSwitch;
+	}
 }
 
 - (IBAction)cancelButtonTapped:(UIBarButtonItem *)sender
@@ -36,7 +45,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:(CGRect){0, 0, [UIScreen mainScreen].bounds.size.width, 50}];
+    UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
     accessoryView.backgroundColor = [UIColor blackColor];
     [accessoryView setTranslucent:YES];
     UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard)];
@@ -53,13 +62,13 @@
 
 - (void)dismissKeyboard
 {
-    [self.portTextField resignFirstResponder];
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 - (void)viewDidUnload
 {
-    [self setPortTextField:nil];
     [self setSslSwitch:nil];
     [super viewDidUnload];
 }
+
 @end

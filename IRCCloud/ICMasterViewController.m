@@ -60,7 +60,7 @@
 
 - (void)insertNewObject:(id)sender
 {
-    ICAddViewController *adder = [[UIStoryboard storyboardWithName:@"Add" bundle:nil] instantiateInitialViewController];
+    ICAddViewController *adder = [[UIStoryboard storyboardWithName:isPad ? @"Add_iPad" : @"Add_iPhone" bundle:nil] instantiateInitialViewController];
 	[self.navigationController presentViewController:adder animated:YES completion:NULL];
 }
 

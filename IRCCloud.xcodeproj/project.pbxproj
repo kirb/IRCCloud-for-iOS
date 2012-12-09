@@ -52,8 +52,9 @@
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 		CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA81165E30D300636DB0 /* ICAddViewController.m */; };
 		CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */; };
+		CF7D907B167438C40091402A /* Add_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7D907A167438C40091402A /* Add_iPad.storyboard */; };
 		CF9586A7165F932600137594 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9586A6165F932600137594 /* SSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		CFA11005165F46180056784B /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA11004165F46180056784B /* Add.storyboard */; };
+		CFA11005165F46180056784B /* Add_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA11004165F46180056784B /* Add_iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,9 +142,10 @@
 		CF5FFA81165E30D300636DB0 /* ICAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICAddViewController.m; sourceTree = "<group>"; };
 		CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMultiLineTextCell.h; sourceTree = "<group>"; };
 		CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMultiLineTextCell.m; sourceTree = "<group>"; };
+		CF7D907A167438C40091402A /* Add_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add_iPad.storyboard; sourceTree = "<group>"; };
 		CF9586A5165F932600137594 /* SSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextView.h; sourceTree = "<group>"; };
 		CF9586A6165F932600137594 /* SSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextView.m; sourceTree = "<group>"; };
-		CFA11004165F46180056784B /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
+		CFA11004165F46180056784B /* Add_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add_iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,7 +351,8 @@
 		CF5FFA7E165E2E7800636DB0 /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				CFA11004165F46180056784B /* Add.storyboard */,
+				CFA11004165F46180056784B /* Add_iPhone.storyboard */,
+				CF7D907A167438C40091402A /* Add_iPad.storyboard */,
 				CF5FFA80165E30D300636DB0 /* ICAddViewController.h */,
 				CF5FFA81165E30D300636DB0 /* ICAddViewController.m */,
 			);
@@ -470,7 +473,8 @@
 				49A72775162EDBDD007242E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				49A72777162EDBF1007242E9 /* MainStoryboard_iPad.storyboard in Resources */,
 				4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */,
-				CFA11005165F46180056784B /* Add.storyboard in Resources */,
+				CFA11005165F46180056784B /* Add_iPhone.storyboard in Resources */,
+				CF7D907B167438C40091402A /* Add_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
