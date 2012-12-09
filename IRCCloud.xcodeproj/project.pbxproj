@@ -409,7 +409,7 @@
 			attributes = {
 				CLASSPREFIX = IC;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "Adam D";
+				ORGANIZATIONNAME = "HASHBANG Productions";
 			};
 			buildConfigurationList = 498B8A591619F8B4001A4356 /* Build configuration list for PBXProject "IRCCloud" */;
 			compatibilityVersion = "Xcode 3.2";

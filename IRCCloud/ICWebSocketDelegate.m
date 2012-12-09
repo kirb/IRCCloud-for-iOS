@@ -3,7 +3,7 @@
 //  IRCCloud
 //
 //  Created by Adam D on 2/10/12.
-//  Copyright (c) 2012 Adam D. All rights reserved.
+//  Copyright (c) 2012 HASHBANG Productions. All rights reserved.
 //
 
 #import "ICWebSocketDelegate.h"
