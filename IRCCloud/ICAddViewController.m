@@ -15,20 +15,19 @@
 
 @implementation ICAddViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-		self.sslSwitch = [[UISwitch alloc] init];
-	}
-	return self;
+- (void)viewWillAppear:(BOOL)animated
+{
+	mode = ICAddModeNetwork;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (indexPath.section == 0 && indexPath.row == 0) {
 		cell.backgroundView = [[UIView alloc] init];
-	} else if (indexPath.section == 1 && indexPath.row == 2) {
-		NSLog(@"ssl = %@", self.sslSwitch);
+	} else if (mode == ICAddModeNetwork && indexPath.section == 1 && indexPath.row == 2) {
+		if (!self.sslSwitch) {
+			self.sslSwitch = [[UISwitch alloc] init];
+		}
 		cell.accessoryView = self.sslSwitch;
 	}
 }
@@ -41,6 +40,19 @@
 - (IBAction)doneButtonTapped:(UIBarButtonItem *)sender
 {
     
+}
+
+-(IBAction)segmentDidChange:(UISegmentedControl *)sender
+{
+	if (sender.selectedSegmentIndex == 0) {
+		mode = ICAddModeNetwork;
+		[self.tableView insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 3)] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationAutomatic];
+	} else {
+		mode = ICAddModeChannel;
+		[self.tableView deleteSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 3)] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:4] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
