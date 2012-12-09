@@ -19,9 +19,9 @@
 {
     self = [super init];
     if (self){
-        _networkName = [networkName copy];
-        _hostName = [hostName copy];
-        _SSL        = isSSL;
+        _networkName = networkName;
+        _hostName = hostName;
+        _SSL      = isSSL;
         _port     = port;
         _cid      = cid;
         _channels = [[NSMutableDictionary alloc] init];

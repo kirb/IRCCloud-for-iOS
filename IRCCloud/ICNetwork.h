@@ -24,8 +24,8 @@
 @property (nonatomic, copy) NSString *networkName;
 @property (nonatomic, copy) NSString *hostName;
 @property (nonatomic, assign, getter = isSSL) BOOL SSL;
-@property (nonatomic, assign) NSNumber *port;
-@property (nonatomic, assign) NSNumber *cid;
+@property (nonatomic, copy) NSNumber *port;
+@property (nonatomic, copy) NSNumber *cid;
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, weak) id delegate;
 

@@ -59,6 +59,8 @@
 -(void)didReceiveError:(NSError *)error {
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), error.localizedDescription] type:AJNotificationTypeRed];
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = NO;
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 -(void)didClose:(NSUInteger)statusCode message:(NSString *)message error:(NSError *)error {
