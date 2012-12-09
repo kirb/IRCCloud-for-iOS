@@ -29,6 +29,7 @@
 	self.textField = [[UITextField alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 0)];
 	self.textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	self.textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+	self.textField.textColor = RGBA(56, 84, 135, 1);
 	if (self.detailTextLabel.text) {
 		self.textField.placeholder = self.detailTextLabel.text;
 		self.detailTextLabel.text = nil;

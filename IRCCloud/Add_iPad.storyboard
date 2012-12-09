@@ -30,13 +30,16 @@
                                                         <segment title="Network"/>
                                                         <segment title="Channel"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="segmentDidChange:" destination="h1h-K2-qA7" eventType="valueChanged" id="gU7-fY-Xn3"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="0gs-H5-0iM" firstAttribute="top" secondItem="oS9-NX-dVc" secondAttribute="top" constant="1" id="QWP-vb-IBD"/>
-                                            <constraint firstItem="0gs-H5-0iM" firstAttribute="centerX" secondItem="oS9-NX-dVc" secondAttribute="centerX" type="default" id="tmy-5W-Xas"/>
+                                            <constraint firstItem="0gs-H5-0iM" firstAttribute="centerX" secondItem="oS9-NX-dVc" secondAttribute="centerX" type="default" id="WFX-LS-bFf"/>
+                                            <constraint firstItem="0gs-H5-0iM" firstAttribute="top" secondItem="oS9-NX-dVc" secondAttribute="top" constant="1" id="YeS-rG-djp"/>
                                         </constraints>
                                     </tableViewCell>
                                 </cells>

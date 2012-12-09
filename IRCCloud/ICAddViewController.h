@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ICAddViewController : UITableViewController <UITextFieldDelegate>
+typedef enum {
+	ICAddModeNetwork,
+	ICAddModeChannel
+} ICAddMode;
 
+@interface ICAddViewController : UITableViewController <UITextFieldDelegate> {
+	ICAddMode mode;
+}
+-(IBAction)segmentDidChange:(UISegmentedControl *)sender;
 @end
