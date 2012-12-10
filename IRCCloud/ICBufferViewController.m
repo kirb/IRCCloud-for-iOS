@@ -63,7 +63,12 @@
         serverLabel.frame = (CGRect) {{0, 0}, serverSize};
 		
 		CGSize channelSize = [channelNameLabel.text sizeWithFont:channelNameLabel.font];
-		channelNameLabel.frame = (CGRect) {{serverSize.width, 0}, channelSize};
+        if (!isPad) {
+            channelNameLabel.frame = (CGRect) {{serverSize.width, 0}, 130, channelSize.height};
+            channelNameLabel.adjustsFontSizeToFitWidth = YES;
+        }
+        else
+            channelNameLabel.frame = (CGRect) {{serverSize.width, 0}, channelSize};
 		
 		titleView.frame = CGRectMake(0, 0, serverSize.width + channelSize.width, channelSize.height);
 		self.navigationItem.titleView = titleView;
@@ -160,7 +165,10 @@
     NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
 	CGSize cellSize = [message sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     
-	return cellSize.height + 15.0f; // just for some extra padding :P
+    if (isPad)
+        return cellSize.height + 5.0f;
+    else
+        return cellSize.height + 20.0f; // just for some extra padding :P
 }
 
 #pragma mark - Table view delegate

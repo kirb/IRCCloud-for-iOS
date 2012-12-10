@@ -138,6 +138,10 @@
     if (isPad) {
         //elf.detailViewController.server = servers[indexPath.section];
 		self.detailViewController.channelIndex = indexPath.row;
+        [self.detailViewController setServerName:[[servers objectAtIndex:indexPath.section] networkName]];
+        [self.detailViewController setChannelName:[[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name]];
+        [self.detailViewController setChannel:[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row]];
+        [self.detailViewController.tableView reloadData];
 		[self.detailViewController configureView];
     }
 }
