@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "../UnittWebSocketClient/WebSocket.h"
+#import "WebSocket.h"
 
 @interface ICWebSocketDelegate : NSObject <WebSocketDelegate> {
 	WebSocket *webSocket;
