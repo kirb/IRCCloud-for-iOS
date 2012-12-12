@@ -45,7 +45,7 @@
 
 - (void)addChannelFromDictionary:(NSDictionary *)dict
 {
-    ICChannel *channel = [_channels objectForKey:dict[@"bid"]];
+    __strong ICChannel *channel = [_channels objectForKey:dict[@"bid"]];
     if (!channel) {
         channel = [[ICChannel alloc] initWithName:dict[@"chan"] andBufferID:dict[@"bid"]];
         channel.cid = dict[@"created"];

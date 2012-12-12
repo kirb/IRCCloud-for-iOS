@@ -10,9 +10,12 @@
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
 
-#define kLastRow [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
+#define kLastRowIndex [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
 
 @interface ICBufferViewController ()
+{
+    NSIndexPath *_lastVisibleIndexPath;
+}
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
 
@@ -97,7 +100,7 @@
 		[(ICMasterViewController *)[self.splitViewController.viewControllers[0] topViewController] performSelector:@selector(showLogIn) withObject:nil afterDelay:0.3];
 	}
     if (self.channel.buffer.count > 0)
-        [self.tableView scrollToRowAtIndexPath:kLastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
     // make sure the user knows scrolling has happened.
     // Apple's HIG assumes that the user is stupid. Oh well.
@@ -210,6 +213,11 @@
     [self setTableView:nil];
     [super viewDidUnload];
 }
+#pragma mark - ScrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    _lastVisibleIndexPath = [self.tableView indexPathForCell:[[self.tableView visibleCells] lastObject]];
+}
 
 #pragma mark - ICBuffer's notifs
 - (void)addedMessageToBuffer:(ICBuffer *)buffer
@@ -218,8 +226,8 @@
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.channel.buffer indexOfObject:self.channel.buffer.lastObject] inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self.tableView endUpdates];
-
-    [self.tableView scrollToRowAtIndexPath:kLastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if ((_lastVisibleIndexPath.row + 1) == kLastRowIndex.row) // if the lastVisibleRow + 1 is equal to the newly added row, then scroll to that row. Simple enough.
+        [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 @end
