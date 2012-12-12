@@ -89,26 +89,34 @@
     self.channel.delegate = self;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
 	[super viewDidAppear:animated];
 	
 	if (isPad && ![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"]) {
 		[(ICMasterViewController *)[self.splitViewController.viewControllers[0] topViewController] performSelector:@selector(showLogIn) withObject:nil afterDelay:0.3];
 	}
+    if (self.channel.buffer.count > 0)
+        [self.tableView scrollToRowAtIndexPath:kLastRow atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
+    // make sure the user knows scrolling has happened.
+    // Apple's HIG assumes that the user is stupid. Oh well.
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)keyboardWillShow:(NSNotification *)notification {
+- (void)keyboardWillShow:(NSNotification *)notification {
 	/*UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, [notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height, 0);
 	self.tableView.contentInset = self.tableView.scrollIndicatorInsets = inset;
 	CGRect fieldFrame = textField.frame;
@@ -118,7 +126,8 @@
 	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:textField action:@selector(resignFirstResponder)] animated:YES];
 }
 
--(void)keyboardWillHide:(NSNotification *)notification {
+- (void)keyboardWillHide:(NSNotification *)notification
+{
 	/*self.tableView.contentInset = self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 	CGRect fieldFrame = textField.frame;
 	fieldFrame.origin.y = self.view.frame.size.height - fieldFrame.size.height;
@@ -144,7 +153,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.channel.buffer.count;
+    if (self.channel.buffer)
+        return self.channel.buffer.count;
+    else
+        return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,6 +214,7 @@
 #pragma mark - ICBuffer's notifs
 - (void)addedMessageToBuffer:(ICBuffer *)buffer
 {
+    [self tableView:self.tableView numberOfRowsInSection:0]; // make sure it is updated!
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.channel.buffer indexOfObject:self.channel.buffer.lastObject] inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self.tableView endUpdates];

@@ -60,9 +60,17 @@
     self.loadingOOB = NO;
 }
 
+static BOOL waitingForCompletion = NO;
+static NSMutableArray *backLog; // backLog, as in the backlog from not parsing while waitingForCompletion is true.
 - (void)parse:(NSDictionary *)json
 {
     if (!self.loadingOOB) {
+        if (waitingForCompletion) {
+            if (!backLog)
+                backLog = [[NSMutableArray alloc] init];
+            [backLog addObject:json];
+        }
+        
         if ([json[@"type"] isEqualToString:@"makeserver"]) {
             [kSharedController addNetworkFromDictionary:[json copy]];
         }
@@ -70,13 +78,23 @@
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork addChannelFromDictionary:[json copy]];
         }
-        else if ([json[@"type"] isEqualToString:@"buffer_msg"]) {
+        else if ([json[@"type"] isEqualToString:@"buffer_msg"])
+        {
             ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
-            for (ICChannel *channel in [channelNetwork channels]){
-                if ([channel.bid intValue] == [json[@"bid"] intValue]) {
+            for (__strong ICChannel *channel in [channelNetwork channels])
+            {
+                if ([channel.bid intValue] == [json[@"bid"] intValue])
+                {
                     [[channel buffer] addObject:[json copy]];
-                    if ([channel.delegate respondsToSelector:@selector(addedMessageToBuffer:)]) {
+                    if ([channel.delegate respondsToSelector:@selector(addedMessageToBuffer:)])
+                    {
+                        waitingForCompletion = YES;
                         [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
+                        waitingForCompletion = NO;
+                        if (backLog.count > 0) {
+                            for (NSDictionary *dict in backLog)
+                                [self parse:dict];
+                        }
                     }
                     break;
                 }
@@ -84,7 +102,7 @@
         }
     }
     else {
-        [_toBeParsed addObject:json];
+        [_toBeParsed addObject:json]; // _toBeParsed will only be used when the OOB is being fetched.
     }
 }
 

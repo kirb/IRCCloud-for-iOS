@@ -14,6 +14,7 @@
 #import "ICController.h"
 #import "ICNetwork.h"
 #import "ICChannel.h"
+#import "ICParser.h"
 
 @implementation ICMasterViewController
 
@@ -126,7 +127,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [servers[indexPath.section][1] removeObjectAtIndex:indexPath.row];
+        [(ICNetwork *)servers[indexPath.section] removeChannelWithBID:((ICChannel *)[(ICNetwork *)servers[indexPath.section] channels][indexPath.row]).bid];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -164,7 +165,6 @@
     [network setDelegate:self];
     [servers addObject:network];
     
-    // reaally bad idea...
     int64_t delayInSeconds = 1.5;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         [self.tableView reloadData];
@@ -180,7 +180,10 @@
 #pragma mark - ICNetwork Delegate
 - (void)network:(ICNetwork *)network didAddChannel:(ICChannel *)channel
 {
-#warning implement this
+    if ([[ICParser sharedParser] loadingOOB] == NO) {
+        NSIndexPath *insertionPath = [NSIndexPath indexPathForRow:[[network channels] indexOfObject:channel] inSection:[servers indexOfObject:network]];
+        [self.tableView insertRowsAtIndexPaths:@[insertionPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 - (void)network:(ICNetwork *)network didRemoveChannel:(ICChannel *)channel
