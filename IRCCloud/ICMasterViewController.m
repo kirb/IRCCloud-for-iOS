@@ -127,7 +127,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [(ICNetwork *)servers[indexPath.section] removeChannelWithBID:((ICChannel *)[(ICNetwork *)servers[indexPath.section] channels][indexPath.row]).bid];
+        [(ICNetwork *)servers[indexPath.section] userPartedChannelWithBID:((ICChannel *)[(ICNetwork *)servers[indexPath.section] channels][indexPath.row]).bid];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

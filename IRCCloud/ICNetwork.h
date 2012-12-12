@@ -34,5 +34,6 @@
 - (void)addOOBChannelFromDictionary:(NSDictionary *)dict;
 - (void)addChannelFromDictionary:(NSDictionary *)dict;
 - (void)removeChannelWithBID:(NSNumber *)channel;
+- (void)userPartedChannelWithBID:(NSNumber *)bid;
 - (NSArray *)channels;
 @end

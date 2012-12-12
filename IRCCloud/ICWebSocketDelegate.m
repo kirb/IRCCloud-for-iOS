@@ -14,7 +14,7 @@
 #include <sys/utsname.h>
 
 @implementation ICWebSocketDelegate
-
+@synthesize webSocket;
 -(id)init {
 	self = [super init];
 	if (self) {
@@ -66,6 +66,13 @@
 -(void)didClose:(NSUInteger)statusCode message:(NSString *)message error:(NSError *)error {
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), message] type:AJNotificationTypeRed];
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = NO;
+}
+
+
+- (void)sendJSONFromDictionary:(NSDictionary *)dict
+{
+    NSData *data = [dict JSONData];
+    [webSocket sendBinary:data];
 }
 
 @end

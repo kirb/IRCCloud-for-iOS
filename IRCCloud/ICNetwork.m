@@ -8,6 +8,8 @@
 
 #import "ICNetwork.h"
 #import "ICChannel.h"
+#import "ICAppDelegate.h"
+#import "ICWebSocketDelegate.h"
 
 @implementation ICNetwork
 {
@@ -73,6 +75,18 @@
 {
     if (_delegate)
         [self.delegate network:self didRemoveChannel:[_channels objectForKey:bid]];
+    [_channels removeObjectForKey:bid];
+}
+
+// called when the user uses the app to part.
+- (void)userPartedChannelWithBID:(NSNumber *)bid
+{
+    NSDictionary *removalDict = @{@"reqid"   : [NSNumber numberWithInt:arc4random()],
+                                  @"_method" : @"part",
+                                  @"cid"     : [(ICChannel *)[_channels objectForKey:bid] cid],
+                                  @"channel" : [(ICChannel *)[_channels objectForKey:bid] name],
+                                  @"msg"     : @"IRCCloud app for iOS"};
+    [[(ICAppDelegate *)[UIApplication sharedApplication].delegate webSocket] sendJSONFromDictionary:removalDict];
     [_channels removeObjectForKey:bid];
 }
 

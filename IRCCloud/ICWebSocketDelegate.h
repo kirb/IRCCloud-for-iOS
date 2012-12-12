@@ -12,8 +12,8 @@
 @interface ICWebSocketDelegate : NSObject <WebSocketDelegate> {
 	WebSocket *webSocket;
 }
-
--(void)open;
--(void)close;
-
+@property (nonatomic, strong) WebSocket *webSocket;
+- (void)open;
+- (void)close;
+- (void)sendJSONFromDictionary:(NSDictionary *)dict;
 @end
