@@ -18,6 +18,4 @@ profile
 *.moved-aside
 DerivedData
 .idea/
- UnittWebSocketClient/UnittWebSocketClient.xcodeproj/xcuserdata/*
 
-UnittWebSocketClient
