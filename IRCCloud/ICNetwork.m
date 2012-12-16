@@ -63,19 +63,15 @@
         [self.delegate network:self didAddChannel:channel];
 }
 
-- (void)addChannel:(ICChannel *)channel
-{
-    [_channels setObject:channel forKey:channel.bid];
-    if (_delegate)
-        [self.delegate network:self didAddChannel:channel];
-    NSLog(@"%@", _channels);
-}
-
 - (void)removeChannelWithBID:(NSNumber *)bid
 {
-    if (_delegate)
-        [self.delegate network:self didRemoveChannel:[_channels objectForKey:bid]];
+    if ([_delegate respondsToSelector:@selector(network:willRemoveChannel:)])
+        [self.delegate network:self willRemoveChannel:[_channels objectForKey:bid]];
+    
     [_channels removeObjectForKey:bid];
+    
+    if ([_delegate respondsToSelector:@selector(network:didRemoveChannel:)])
+        [self.delegate network:self didRemoveChannel:[_channels objectForKey:bid]];
 }
 
 // called when the user uses the app to part.

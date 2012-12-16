@@ -165,8 +165,7 @@
     [network setDelegate:self];
     [servers addObject:network];
     
-    int64_t delayInSeconds = 1.5;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         [self.tableView reloadData];
     });
 }
@@ -175,6 +174,7 @@
 {
     [network setDelegate:nil];
     [servers removeObject:network];
+    [self.tableView reloadData];
 }
 
 #pragma mark - ICNetwork Delegate
@@ -186,8 +186,17 @@
     }
 }
 
+static __strong NSIndexPath *removalPath = nil;
+- (void)network:(ICNetwork *)network willRemoveChannel:(ICChannel *)channel
+{
+    removalPath = [NSIndexPath indexPathForRow:[network.channels indexOfObject:channel] inSection:[servers indexOfObject:network]];    
+}
+
 - (void)network:(ICNetwork *)network didRemoveChannel:(ICChannel *)channel
 {
-    
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[removalPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
+
 @end
