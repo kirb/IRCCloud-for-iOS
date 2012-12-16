@@ -43,6 +43,7 @@
             }
         }
         else if ([json[@"type"] isEqualToString:@"channel_init"]) {
+            NSLog(@"%@", json[@"chan"]);
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork addChannelFromDictionary:json];
         }
