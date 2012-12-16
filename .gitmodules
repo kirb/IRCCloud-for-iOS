@@ -7,6 +7,3 @@
 [submodule "UnittWebSocketClient"]
 	path = UnittWebSocketClient
 	url = git://github.com/kirbylover4000/UnittWebSocketClient
-[submodule "TTTAttributedLabel"]
-	path = TTTAttributedLabel
-	url = git://github.com/mattt/TTTAttributedLabel.git

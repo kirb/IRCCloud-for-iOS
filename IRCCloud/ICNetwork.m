@@ -68,7 +68,7 @@
 
 - (void)removeChannelWithBID:(NSNumber *)bid
 {
-    if (_channels[bid] == nil) // the channel has been removed already.
+    if (!_channels[@"bid"]) // the channel has been removed already.
         return;
     
     if ([_delegate respondsToSelector:@selector(network:willRemoveChannel:)])
