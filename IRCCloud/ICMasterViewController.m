@@ -189,6 +189,7 @@
 static __strong NSIndexPath *removalPath = nil;
 - (void)network:(ICNetwork *)network willRemoveChannel:(ICChannel *)channel
 {
+    // get the indexPath before the channel is removed.
     removalPath = [NSIndexPath indexPathForRow:[network.channels indexOfObject:channel] inSection:[servers indexOfObject:network]];    
 }
 

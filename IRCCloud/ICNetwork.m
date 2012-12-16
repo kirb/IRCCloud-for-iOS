@@ -10,6 +10,7 @@
 #import "ICChannel.h"
 #import "ICAppDelegate.h"
 #import "ICWebSocketDelegate.h"
+#import "ICParser.h"
 
 @implementation ICNetwork
 {
@@ -50,7 +51,8 @@
     __strong ICChannel *channel = [_channels objectForKey:dict[@"bid"]];
     if (!channel) {
         channel = [[ICChannel alloc] initWithName:dict[@"chan"] andBufferID:dict[@"bid"]];
-        channel.cid = dict[@"created"];
+        channel.cid          = dict [@"cid"];
+        channel.creationDate = dict[@"created"];
     }
     channel.members      = dict[@"members"];
     channel.topic        = dict[@"topic"];
@@ -65,6 +67,9 @@
 
 - (void)removeChannelWithBID:(NSNumber *)bid
 {
+    if (!_channels[@"bid"]) // the channel has been removed already.
+        return;
+    
     if ([_delegate respondsToSelector:@selector(network:willRemoveChannel:)])
         [self.delegate network:self willRemoveChannel:[_channels objectForKey:bid]];
     
@@ -77,7 +82,7 @@
 // called when the user uses the app to part.
 - (void)userPartedChannelWithBID:(NSNumber *)bid
 {
-    NSDictionary *removalDict = @{@"reqid"   : [NSNumber numberWithInt:arc4random()],
+    NSDictionary *removalDict = @{@"reqid"   : [NSNumber numberWithInt:rand()],
                                   @"_method" : @"part",
                                   @"cid"     : [(ICChannel *)[_channels objectForKey:bid] cid],
                                   @"channel" : [(ICChannel *)[_channels objectForKey:bid] name],
