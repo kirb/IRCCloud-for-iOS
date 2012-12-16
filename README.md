@@ -7,6 +7,7 @@
 * [UnittWebSocketClient](http://code.google.com/p/unitt) ([via mirror](https://github.com/kirbylover4000/UnittWebSocketClient))
 * [AJNotificationView](https://github.com/ajerez/AJNotificationView)
 * [MBProgressHUD](https://github.com/jdg/MBProgressHUD)
+* [TTTAttributedLabel](https://github.com/mattt/TTTAttributedLabel)
 
 ----
 
