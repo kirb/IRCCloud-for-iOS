@@ -13,6 +13,19 @@
 		48DB7205165D31B900646E6F /* ICNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7204165D31B800646E6F /* ICNetwork.m */; };
 		48DB7209165D3C3300646E6F /* ICChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7208165D3C3300646E6F /* ICChannel.m */; };
 		48FC816D16604B1900930F38 /* ICBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC816C16604B1900930F38 /* ICBuffer.m */; };
+		48FD2727167E0E46004B2863 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48FD270B167E0E46004B2863 /* .gitignore */; };
+		48FD2728167E0E46004B2863 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD270E167E0E46004B2863 /* AppDelegate.m */; };
+		48FD2729167E0E46004B2863 /* AttributedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD2710167E0E46004B2863 /* AttributedTableViewCell.m */; };
+		48FD272A167E0E46004B2863 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD2712167E0E46004B2863 /* DetailViewController.m */; };
+		48FD272B167E0E46004B2863 /* espressos.txt in Resources */ = {isa = PBXBuildFile; fileRef = 48FD2713167E0E46004B2863 /* espressos.txt */; };
+		48FD272C167E0E46004B2863 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48FD2717167E0E46004B2863 /* Info.plist */; };
+		48FD272D167E0E46004B2863 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD2718167E0E46004B2863 /* main.m */; };
+		48FD272E167E0E46004B2863 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD271B167E0E46004B2863 /* RootViewController.m */; };
+		48FD272F167E0E46004B2863 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 48FD271C167E0E46004B2863 /* LICENSE */; };
+		48FD2730167E0E46004B2863 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 48FD271D167E0E46004B2863 /* README.md */; };
+		48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD2720167E0E46004B2863 /* TTTAttributedLabel.m */; };
+		48FD2732167E0E46004B2863 /* TTTAttributedLabel.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 48FD2721167E0E46004B2863 /* TTTAttributedLabel.podspec */; };
+		48FD2733167E0E46004B2863 /* TTTAttributedLabel.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 48FD2722167E0E46004B2863 /* TTTAttributedLabel.xcworkspace */; };
 		4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907B6111636980500022D54 /* LogIn_iPad.storyboard */; };
 		498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A631619F8B4001A4356 /* UIKit.framework */; };
 		498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A651619F8B4001A4356 /* Foundation.framework */; };
@@ -58,6 +71,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		48FD2735167E0E46004B2863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48FD2714167E0E46004B2863 /* Espressos.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F877A35C13782AF10022A8AB;
+			remoteInfo = Espressos;
+		};
 		49887DE8163D5D9B003773A7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
@@ -85,6 +105,26 @@
 		48DB7208165D3C3300646E6F /* ICChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICChannel.m; sourceTree = "<group>"; };
 		48FC816B16604B1900930F38 /* ICBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICBuffer.h; sourceTree = "<group>"; };
 		48FC816C16604B1900930F38 /* ICBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBuffer.m; sourceTree = "<group>"; };
+		48FD270B167E0E46004B2863 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		48FD270D167E0E46004B2863 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		48FD270E167E0E46004B2863 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		48FD270F167E0E46004B2863 /* AttributedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributedTableViewCell.h; sourceTree = "<group>"; };
+		48FD2710167E0E46004B2863 /* AttributedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributedTableViewCell.m; sourceTree = "<group>"; };
+		48FD2711167E0E46004B2863 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		48FD2712167E0E46004B2863 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		48FD2713167E0E46004B2863 /* espressos.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = espressos.txt; sourceTree = "<group>"; };
+		48FD2714167E0E46004B2863 /* Espressos.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Espressos.xcodeproj; sourceTree = "<group>"; };
+		48FD2717167E0E46004B2863 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48FD2718167E0E46004B2863 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		48FD2719167E0E46004B2863 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		48FD271A167E0E46004B2863 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		48FD271B167E0E46004B2863 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		48FD271C167E0E46004B2863 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		48FD271D167E0E46004B2863 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		48FD271F167E0E46004B2863 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		48FD2720167E0E46004B2863 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		48FD2721167E0E46004B2863 /* TTTAttributedLabel.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TTTAttributedLabel.podspec; sourceTree = "<group>"; };
+		48FD2722167E0E46004B2863 /* TTTAttributedLabel.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = TTTAttributedLabel.xcworkspace; sourceTree = "<group>"; };
 		4907B6111636980500022D54 /* LogIn_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn_iPad.storyboard; sourceTree = "<group>"; };
 		49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnittWebSocketClient.xcodeproj; path = UnittWebSocketClient/UnittWebSocketClient.xcodeproj; sourceTree = "<group>"; };
 		498B8A5F1619F8B4001A4356 /* IRCCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRCCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +275,57 @@
 			name = Buffers;
 			sourceTree = "<group>";
 		};
+		48FD270A167E0E46004B2863 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				48FD270B167E0E46004B2863 /* .gitignore */,
+				48FD270C167E0E46004B2863 /* Example */,
+				48FD271C167E0E46004B2863 /* LICENSE */,
+				48FD271D167E0E46004B2863 /* README.md */,
+				48FD271E167E0E46004B2863 /* TTTAttributedLabel */,
+				48FD2721167E0E46004B2863 /* TTTAttributedLabel.podspec */,
+				48FD2722167E0E46004B2863 /* TTTAttributedLabel.xcworkspace */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		48FD270C167E0E46004B2863 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				48FD270D167E0E46004B2863 /* AppDelegate.h */,
+				48FD270E167E0E46004B2863 /* AppDelegate.m */,
+				48FD270F167E0E46004B2863 /* AttributedTableViewCell.h */,
+				48FD2710167E0E46004B2863 /* AttributedTableViewCell.m */,
+				48FD2711167E0E46004B2863 /* DetailViewController.h */,
+				48FD2712167E0E46004B2863 /* DetailViewController.m */,
+				48FD2713167E0E46004B2863 /* espressos.txt */,
+				48FD2714167E0E46004B2863 /* Espressos.xcodeproj */,
+				48FD2717167E0E46004B2863 /* Info.plist */,
+				48FD2718167E0E46004B2863 /* main.m */,
+				48FD2719167E0E46004B2863 /* Prefix.pch */,
+				48FD271A167E0E46004B2863 /* RootViewController.h */,
+				48FD271B167E0E46004B2863 /* RootViewController.m */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		48FD2715167E0E46004B2863 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48FD2736167E0E46004B2863 /* Espressos.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48FD271E167E0E46004B2863 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				48FD271F167E0E46004B2863 /* TTTAttributedLabel.h */,
+				48FD2720167E0E46004B2863 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		4907B6131636980D00022D54 /* Log In */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +354,7 @@
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
 				49A92B73163EB7DC00AE20C9 /* JSONKit */,
 				CF9586A4165F932600137594 /* SSToolkit */,
+				48FD270A167E0E46004B2863 /* TTTAttributedLabel */,
 				498B8A621619F8B4001A4356 /* Frameworks */,
 				498B8A601619F8B4001A4356 /* Products */,
 			);
@@ -423,6 +515,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 48FD2715167E0E46004B2863 /* Products */;
+					ProjectRef = 48FD2714167E0E46004B2863 /* Espressos.xcodeproj */;
+				},
+				{
 					ProductGroup = 49887DE1163D5D9B003773A7 /* Products */;
 					ProjectRef = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
 				},
@@ -435,6 +531,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		48FD2736167E0E46004B2863 /* Espressos.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Espressos.app;
+			remoteRef = 48FD2735167E0E46004B2863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -475,6 +578,13 @@
 				4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */,
 				CFA11005165F46180056784B /* Add_iPhone.storyboard in Resources */,
 				CF7D907B167438C40091402A /* Add_iPad.storyboard in Resources */,
+				48FD2727167E0E46004B2863 /* .gitignore in Resources */,
+				48FD272B167E0E46004B2863 /* espressos.txt in Resources */,
+				48FD272C167E0E46004B2863 /* Info.plist in Resources */,
+				48FD272F167E0E46004B2863 /* LICENSE in Resources */,
+				48FD2730167E0E46004B2863 /* README.md in Resources */,
+				48FD2732167E0E46004B2863 /* TTTAttributedLabel.podspec in Resources */,
+				48FD2733167E0E46004B2863 /* TTTAttributedLabel.xcworkspace in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +616,12 @@
 				CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */,
 				CF9586A7165F932600137594 /* SSTextView.m in Sources */,
 				48FC816D16604B1900930F38 /* ICBuffer.m in Sources */,
+				48FD2728167E0E46004B2863 /* AppDelegate.m in Sources */,
+				48FD2729167E0E46004B2863 /* AttributedTableViewCell.m in Sources */,
+				48FD272A167E0E46004B2863 /* DetailViewController.m in Sources */,
+				48FD272D167E0E46004B2863 /* main.m in Sources */,
+				48FD272E167E0E46004B2863 /* RootViewController.m in Sources */,
+				48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
