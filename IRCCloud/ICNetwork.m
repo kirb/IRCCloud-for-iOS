@@ -57,10 +57,10 @@
     channel.type         = dict[@"channel_type"];
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
+    if (![_channels objectForKey:channel.bid]) // I'm such a derp
+            [_channels setObject:channel forKey:channel.bid];
     if (_delegate)
         [self.delegate network:self didAddChannel:channel];
-    if (!channel)
-        [_channels setObject:channel forKey:channel.bid];
 }
 
 - (void)addChannel:(ICChannel *)channel

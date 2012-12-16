@@ -11,7 +11,7 @@
 
 @interface ICChannel : ICBuffer
 
-@property (nonatomic, copy) NSDictionary *topic;
+@property (nonatomic, strong) NSDictionary *topic;
 @property (nonatomic, strong) NSDictionary *members;
 @property (nonatomic, strong) NSArray *ops;
 @property (nonatomic, copy) NSString *type;

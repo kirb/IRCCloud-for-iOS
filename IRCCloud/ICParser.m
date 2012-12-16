@@ -78,6 +78,10 @@ static NSMutableArray *backLog; // backLog, as in the backlog from not parsing w
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork addChannelFromDictionary:[json copy]];
         }
+        else if ([json[@"type"] isEqualToString:@"you_parted_channel"]) {
+            ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
+            [channelNetwork removeChannelWithBID:json[@"bid"]];
+        }
         else if ([json[@"type"] isEqualToString:@"buffer_msg"])
         {
             ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
