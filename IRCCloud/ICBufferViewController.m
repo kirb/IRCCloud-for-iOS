@@ -17,6 +17,8 @@
     NSIndexPath *_lastVisibleIndexPath;
 }
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (assign, nonatomic) NSInteger rowCount;
+- (void)updateRowCount;
 @end
 
 @implementation ICBufferViewController
@@ -29,6 +31,13 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)setChannel:(ICChannel *)channel
+{
+    self.rowCount = channel.buffer.count;
+    channel.delegate = self;
+    _channel = channel;
 }
 
 #pragma mark - Managing the detail item
@@ -78,7 +87,6 @@
 	}
 	[self.navigationController setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:textField]] animated:NO];
 	self.navigationController.toolbarHidden = NO;
-	
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
     }
@@ -102,8 +110,6 @@
     if (self.channel.buffer.count > 0)
         [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
-    // make sure the user knows scrolling has happened.
-    // Apple's HIG assumes that the user is stupid. Oh well.
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -156,8 +162,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (self.channel.buffer)
-        return self.channel.buffer.count;
+    if (self.channel.buffer) {
+        return self.rowCount;
+    }
     else
         return 0;
 }
@@ -181,7 +188,7 @@
 	CGSize cellSize = [message sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     
     if (isPad)
-        return cellSize.height + 5.0f;
+        return cellSize.height + 2.0f;
     else
         return cellSize.height + 20.0f; // just for some extra padding :P
 }
@@ -193,7 +200,15 @@
     return NO;
 }
 #pragma mark - Split view
-
+- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (self.channel.buffer.count > 0)
+            [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
+    });
+}
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
     barButtonItem.title = L(@"Master");
@@ -213,6 +228,12 @@
     [self setTableView:nil];
     [super viewDidUnload];
 }
+
+- (void)updateRowCount
+{
+    self.rowCount = self.channel.buffer.count;
+}
+
 #pragma mark - ScrollView
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -220,11 +241,16 @@
 }
 
 #pragma mark - ICBuffer's notifs
+static BOOL isUpdating = NO;
 - (void)addedMessageToBuffer:(ICBuffer *)buffer
 {
     [self tableView:self.tableView numberOfRowsInSection:0]; // make sure it is updated!
+    if (!isUpdating)
+        [self updateRowCount];
+    isUpdating = YES;
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.channel.buffer indexOfObject:self.channel.buffer.lastObject] inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+    [self updateRowCount];
     [self.tableView endUpdates];
     if ((_lastVisibleIndexPath.row + 1) == kLastRowIndex.row) // if the lastVisibleRow + 1 is equal to the newly added row, then scroll to that row. Simple enough.
         [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
