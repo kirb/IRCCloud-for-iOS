@@ -20,9 +20,20 @@
 {
     // a sharedInstance is better than continually creating a new instance of the parser
     static ICParser *parser;
-    if (!parser)
+    if (!parser) {
         parser = [[self alloc] init];
+    }
     return parser;
+}
+
+- (ICParser *)init
+{
+    if (self = [super init]) {
+        _messageQueue = [NSOperationQueue new];
+        _messageQueue.name = @"ICParserQueue";
+        _messageQueue.maxConcurrentOperationCount = 1;
+    }
+    return self;
 }
 
 - (void)parseOOBArray:(NSArray *)oobArray
@@ -93,10 +104,12 @@ static NSMutableArray *backLog; // backLog, as in the backlog from not parsing w
                     if ([channel.delegate respondsToSelector:@selector(addedMessageToBuffer:)])
                     {
                         waitingForCompletion = YES;
-                        [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
-                        waitingForCompletion = NO;
+                        [self.messageQueue addOperationWithBlock:^{
+                            [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
+                            waitingForCompletion = NO;
+                        }];
                         if (backLog.count > 0) {
-                            for (NSDictionary *dict in backLog)
+                            for (NSDictionary *dict in [backLog copy])
                                 [self parse:dict];
                         }
                     }

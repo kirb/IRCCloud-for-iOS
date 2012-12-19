@@ -60,7 +60,7 @@
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
     
-    if (![_channels objectForKey:channel.bid]) // I'm such a derp
+    if (![_channels objectForKey:channel.bid])
         [_channels setObject:channel forKey:channel.bid];
     if ([_delegate respondsToSelector:@selector(network:didAddChannel:)])
         [self.delegate network:self didAddChannel:channel];

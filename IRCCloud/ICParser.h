@@ -11,6 +11,7 @@
 @interface ICParser : NSObject
 
 @property (nonatomic, assign) BOOL loadingOOB;
+@property (nonatomic, strong) NSOperationQueue *messageQueue;
 
 + (ICParser *)sharedParser;
 - (void)parse:(NSDictionary *)json;

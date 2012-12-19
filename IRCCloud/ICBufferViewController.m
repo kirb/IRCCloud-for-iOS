@@ -9,6 +9,7 @@
 #import "ICBufferViewController.h"
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
+#import "TTTAttributedLabel.h"
 
 #define kLastRowIndex [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
 
@@ -250,8 +251,9 @@ static BOOL isUpdating = NO;
     isUpdating = YES;
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[self.channel.buffer indexOfObject:self.channel.buffer.lastObject] inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
-    [self updateRowCount];
     [self.tableView endUpdates];
+    [self updateRowCount];
+    isUpdating = NO;
     if ((_lastVisibleIndexPath.row + 1) == kLastRowIndex.row) // if the lastVisibleRow + 1 is equal to the newly added row, then scroll to that row. Simple enough.
         [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
