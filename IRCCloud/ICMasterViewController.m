@@ -21,14 +21,7 @@
 - (void)awakeFromNib
 {
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
-	servers = [[NSMutableArray alloc] init];/*WithObjects:
-				@[@"IRCCloud", [@[@"#alpha", @"#changelog", @"#feedback", @"#themes"] mutableCopy]],
-				@[@"Saurik", [@[@"#bacon", @"#cycript", @"#cydia", @"#iphone", @"#iphonedev", @"#theos", @"#winterboard"] mutableCopy]],
-				@[@"Rizon", [@[@"#jailbreak", @"#tklbot"] mutableCopy]],
-				@[@"Chronic-Dev", [@[@"#greenpois0n"] mutableCopy]],
-				@[@"freenode", [@[@"#GelbrackQA", @"#iphonedev", @"#iTweakStore", @"#iTweakStore-dev", @"#jailbreakqa"] mutableCopy]],
-				nil];
-                                             */
+	servers = [[NSMutableArray alloc] init];
     [super awakeFromNib];
 }
 

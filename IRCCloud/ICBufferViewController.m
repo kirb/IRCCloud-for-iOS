@@ -176,89 +176,7 @@
     NSString *nick = (self.channel.buffer[indexPath.row])[@"from"];
     NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
     NSString *text = [[nick stringByAppendingString:@": "] stringByAppendingString:message];
-    
-    if ([cell.textLabel respondsToSelector:@selector(setAttributedText:)])
-    {
-        // iOS6 and above : Use NSAttributedStrings
-        const CGFloat fontSize = 15;
-        UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
-        UIFont *regularFont = [UIFont systemFontOfSize:fontSize];
-        UIColor *foregroundColor = [UIColor whiteColor];
-        
-        // Create the attributes
-        NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                               boldFont, NSFontAttributeName,
-                               foregroundColor, NSForegroundColorAttributeName, nil];
-        NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  regularFont, NSFontAttributeName, nil];
-        const NSRange range = [text rangeOfString:nick];
-        
-        // Create the attributed string (text + attributes)
-        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:attrs];
-        [attributedText setAttributes:subAttrs range:range];
-        
-        // Set it in our UILabel and we are done!
-        [cell.textLabel setAttributedText:attributedText];
-    }
-    /*
-     {
-     [aDate retain];
-     [refreshDate release];
-     refreshDate = aDate;
-     
-     if (refreshDate) {
-     
-      Create the text for the text layer
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"MM/dd/yyyy hh:mm"];
-    
-    NSString *dateString = [df stringFromDate:refreshDate];
-    NSString *prefix = NSLocalizedString(@"Updated", nil);
-    NSString *text = [NSString stringWithFormat:@"%@: %@",prefix, dateString];
-    [df release];
-    
-     Create the text layer on demand 
-    if (!_textLayer) {
-        _textLayer = [[CATextLayer alloc] init];
-        //_textLayer.font = [UIFont boldSystemFontOfSize:13].fontName; // not needed since `string` property will be an NSAttributedString
-        _textLayer.backgroundColor = [UIColor clearColor].CGColor;
-        _textLayer.wrapped = NO;
-        CALayer *layer = self.navigationController.toolbar.layer; //self is a view controller contained by a navigation controller
-        _textLayer.frame = CGRectMake((layer.bounds.size.width-180)/2 + 10, (layer.bounds.size.height-30)/2 + 10, 180, 30);
-        _textLayer.contentsScale = [[UIScreen mainScreen] scale]; // looks nice in retina displays too :)
-        _textLayer.alignmentMode = kCAAlignmentCenter;
-        [layer addSublayer:_textLayer];
-    }
-    
-     Create the attributes (for the attributed string) 
-    CGFloat fontSize = 13;
-    UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
-    CTFontRef ctBoldFont = CTFontCreateWithName((CFStringRef)boldFont.fontName, boldFont.pointSize, NULL);
-    UIFont *font = [UIFont systemFontOfSize:13];
-    CTFontRef ctFont = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize, NULL);
-    CGColorRef cgColor = [UIColor whiteColor].CGColor;
-    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                (id)ctBoldFont, (id)kCTFontAttributeName,
-                                cgColor, (id)kCTForegroundColorAttributeName, nil];
-    CFRelease(ctBoldFont);
-    NSDictionary *subAttributes = [NSDictionary dictionaryWithObjectsAndKeys:(id)ctFont, (id)kCTFontAttributeName, nil];
-    CFRelease(ctFont);
-    
-     Create the attributed string (text + attributes)
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
-    [attrStr addAttributes:subAttributes range:NSMakeRange(prefix.length, 12)]; //12 is the length of " MM/dd/yyyy/ "
-    
-     Set the attributes string in the text layer :)
-    _textLayer.string = attrStr;
-    [attrStr release];
-    
-    _textLayer.opacity = 1.0;
-} else {
-    _textLayer.opacity = 0.0;
-    _textLayer.string = nil;
-}
-}
-     */
+
     cell.textLabel.numberOfLines = ceilf([message sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap].height/20.0) + 2;
     cell.textLabel.text = text;
     return cell;
@@ -329,15 +247,13 @@ static BOOL isUpdating = NO;
     while (isUpdating) {
         continue;
     }
-    
+    NSLock *lock = [[NSLock alloc] init];
+    [lock lock];
     if (!isUpdating)
         [self updateRowCount];
     isUpdating = YES;
     
     NSArray *bufferCopy = self.channel.buffer.copy;
-    
-    NSLock *lock = [[NSLock alloc] init];
-    [lock lock];
     
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[bufferCopy indexOfObject:bufferCopy.lastObject] inSection:0]]withRowAnimation:UITableViewRowAnimationRight];
