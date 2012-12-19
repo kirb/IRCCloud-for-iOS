@@ -94,7 +94,9 @@
 
 - (NSArray *)channels
 {
-    return [_channels allValues];
+    return [[_channels allValues] sortedArrayUsingComparator:^NSComparisonResult(id channel1, id channel2) {
+        return [((ICChannel*) channel1).name compare:((ICChannel*) channel2).name];
+    }];
 }
 
 @end
