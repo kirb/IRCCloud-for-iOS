@@ -107,11 +107,11 @@ static NSMutableArray *backLog; // backLog, as in the backlog from not parsing w
                         [self.messageQueue addOperationWithBlock:^{
                             [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
                             waitingForCompletion = NO;
+                            if (backLog.count > 0) {
+                                for (NSDictionary *dict in [backLog copy])
+                                    [self parse:dict];
+                            }
                         }];
-                        if (backLog.count > 0) {
-                            for (NSDictionary *dict in [backLog copy])
-                                [self parse:dict];
-                        }
                     }
                     break;
                 }
