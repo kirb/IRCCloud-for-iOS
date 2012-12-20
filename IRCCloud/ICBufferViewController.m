@@ -278,7 +278,8 @@ static BOOL isUpdating = NO;
     NSArray *bufferCopy = self.channel.buffer.copy;
     
     [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[bufferCopy indexOfObject:bufferCopy.lastObject] inSection:0]]withRowAnimation:UITableViewRowAnimationRight];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[bufferCopy indexOfObject:bufferCopy.lastObject] inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationBottom];
     [self.tableView endUpdates];
     
     if ((_lastVisibleIndexPath.row + 1) == kLastRowIndex.row) // if the lastVisibleRow + 1 is equal to the newly added row, then scroll to that row. Simple enough.
