@@ -46,13 +46,14 @@
 - (void)configureView
 {
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).currentBuffer = self;
-	
-    // Update the user interface for the detail item. 
-	if (!textField) {
-		textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-		textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		textField.borderStyle = UITextBorderStyleRoundedRect;
+    
+    if (!_textField) {
+		_textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
+		_textField.autoresizingMask   = UIViewAutoresizingFlexibleWidth;
+		_textField.borderStyle        = UITextBorderStyleRoundedRect;
+        _textField.delegate           = self;
 	}
+
 	if (_serverName) {
 		UIView *titleView = [[UIView alloc] init];
 		
@@ -86,19 +87,28 @@
 		titleView.frame = CGRectMake(0, 0, serverSize.width + channelSize.width, channelSize.height);
 		self.navigationItem.titleView = titleView;
 	}
-	[self.navigationController setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:textField]] animated:NO];
-	self.navigationController.toolbarHidden = NO;
+    
+    [self setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:_textField]] animated:NO];
+    
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
     }
+    
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
+    
+    _realTextField  = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
+    _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _realTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _realTextField.returnKeyType = UIReturnKeySend;
+    _realTextField.delegate = self;
+    [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithCustomView:_realTextField]] animated:NO];
+    _textField.inputAccessoryView = _toolbar;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 	[self configureView];
-    self.channel.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -116,40 +126,52 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [_realTextField resignFirstResponder];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-	/*UIEdgeInsets inset = UIEdgeInsetsMake(0, 0, [notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height, 0);
-	self.tableView.contentInset = self.tableView.scrollIndicatorInsets = inset;
-	CGRect fieldFrame = textField.frame;
-	fieldFrame.origin.y = [notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].origin.y - fieldFrame.size.height;
-	textField.frame = fieldFrame;
-	NSLog(@"keyboard will show; %@, %@, %@", NSStringFromUIEdgeInsets(inset), NSStringFromCGRect(fieldFrame), NSStringFromCGRect([notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue]));*/
-	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:textField action:@selector(resignFirstResponder)] animated:YES];
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [self.navigationController setToolbarHidden:YES animated:NO];
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [_realTextField becomeFirstResponder];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	/*self.tableView.contentInset = self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
-	CGRect fieldFrame = textField.frame;
-	fieldFrame.origin.y = self.view.frame.size.height - fieldFrame.size.height;
-	textField.frame = fieldFrame;
-	NSLog(@"keyboard will hide; %@, %@", NSStringFromCGRect(fieldFrame), NSStringFromCGRect([notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue]));*/
-	[self.navigationItem setRightBarButtonItem:nil animated:YES];
+    [self.navigationController setToolbarHidden:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField.text.length > 0)
+        [self.channel sendMessage:textField.text];
+    else {
+        [textField resignFirstResponder];
+    }
+    textField.text = @"";
+    return YES;
 }
 
 #pragma mark - Table view data source

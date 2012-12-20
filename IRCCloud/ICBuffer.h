@@ -30,4 +30,7 @@
 @property (strong, nonatomic, readonly) NSMutableArray *buffer; // an array of NSDictionaries, sent along by ICParser.
 
 @property (nonatomic, weak) id delegate;
+
+- (void)sendMessage:(NSString *)message;
+
 @end

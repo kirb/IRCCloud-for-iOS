@@ -10,11 +10,11 @@
 
 #import "ICChannel.h"
 
-@interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate, ICBufferDelegate>
+@interface ICBufferViewController : UITableViewController <UISplitViewControllerDelegate, UITextFieldDelegate, ICBufferDelegate>
 {
-	UITextField *textField;
-	UIToolbar *toolbar;
-	int channelIndex;
+	UITextField     *_textField;
+    UITextField     *_realTextField;
+    UIToolbar       *_toolbar;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
