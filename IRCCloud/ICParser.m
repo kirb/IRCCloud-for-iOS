@@ -110,8 +110,8 @@ static NSMutableArray *backLog; // backLog, as in the backlog from not parsing w
                             waitingForCompletion = NO;
                             if (backLog.count > 0) {
                                 for (NSDictionary *dict in [backLog copy]) {
-                                    [self parse:dict];
                                     [backLog removeObject:dict];
+                                    [self parse:dict];
                                 }
                             }
                         }];
