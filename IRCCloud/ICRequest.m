@@ -53,17 +53,25 @@ static NSMutableData *output;
 	[output appendData:data];
 }
 
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
 	if (!delegate || !selector) {
 		return;
 	}
 	NSError *err = nil;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:output options:0 error:&err];
-	[delegate performSelector:selector withObject:err ? [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-1] forKey:@"error"] : json];
+#       pragma clang diagnostic push
+#       pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    	[delegate performSelector:selector withObject:err ? [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-1] forKey:@"error"] : json];
+#       pragma clang diagnostic pop
 }
--(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
 	if (delegate && selector) {
+#       pragma clang diagnostic push
+#       pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		[delegate performSelector:selector withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:-2], @"error", [error localizedDescription], @"errormsg", nil]];
+#       pragma clang diagnostic pop
 	}
 }
 @end

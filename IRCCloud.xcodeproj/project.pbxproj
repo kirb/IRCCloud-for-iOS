@@ -8,19 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		480F3EF1165DEA82005079F1 /* ICParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 480F3EF0165DEA82005079F1 /* ICParser.m */; };
+		482C38F31684351300721377 /* NMCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 482C38DB1684351300721377 /* NMCustomLabel.m */; };
+		482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 482C38DD1684351300721377 /* NMCustomLabelStyle.m */; };
 		484BEC5516807B820030F68C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484BEC5416807B820030F68C /* CoreText.framework */; };
-		486F343116837C4E00B591B3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 486F343016837C4E00B591B3 /* Default@2x.png */; };
 		48DB71FC165D303500646E6F /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
 		48DB7202165D30F500646E6F /* ICController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7201165D30F400646E6F /* ICController.m */; };
 		48DB7205165D31B900646E6F /* ICNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7204165D31B800646E6F /* ICNetwork.m */; };
 		48DB7209165D3C3300646E6F /* ICChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7208165D3C3300646E6F /* ICChannel.m */; };
 		48FC816D16604B1900930F38 /* ICBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC816C16604B1900930F38 /* ICBuffer.m */; };
-		48FD2727167E0E46004B2863 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 48FD270B167E0E46004B2863 /* .gitignore */; };
-		48FD272F167E0E46004B2863 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 48FD271C167E0E46004B2863 /* LICENSE */; };
-		48FD2730167E0E46004B2863 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 48FD271D167E0E46004B2863 /* README.md */; };
 		48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD2720167E0E46004B2863 /* TTTAttributedLabel.m */; };
-		48FD2732167E0E46004B2863 /* TTTAttributedLabel.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 48FD2721167E0E46004B2863 /* TTTAttributedLabel.podspec */; };
-		48FD2733167E0E46004B2863 /* TTTAttributedLabel.xcworkspace in Resources */ = {isa = PBXBuildFile; fileRef = 48FD2722167E0E46004B2863 /* TTTAttributedLabel.xcworkspace */; };
 		4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907B6111636980500022D54 /* LogIn_iPad.storyboard */; };
 		498B8A641619F8B4001A4356 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A631619F8B4001A4356 /* UIKit.framework */; };
 		498B8A661619F8B4001A4356 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B8A651619F8B4001A4356 /* Foundation.framework */; };
@@ -65,6 +61,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		482C38F61684351300721377 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 482C38D51684351300721377 /* CoreTextSample.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D4111A1A151A7FEB00EF6CC0;
+			remoteInfo = CoreTextSample;
+		};
 		49887DE8163D5D9B003773A7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
@@ -84,6 +87,31 @@
 /* Begin PBXFileReference section */
 		480F3EEF165DEA82005079F1 /* ICParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICParser.h; sourceTree = "<group>"; };
 		480F3EF0165DEA82005079F1 /* ICParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICParser.m; sourceTree = "<group>"; };
+		482C38BF1684351300721377 /* CoreTextSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoreTextSample-Info.plist"; sourceTree = "<group>"; };
+		482C38C01684351300721377 /* CoreTextSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreTextSample-Prefix.pch"; sourceTree = "<group>"; };
+		482C38C11684351300721377 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		482C38C21684351300721377 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		482C38C31684351300721377 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		482C38C51684351300721377 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		482C38C71684351300721377 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		482C38C91684351300721377 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		482C38CA1684351300721377 /* fez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fez.png; sourceTree = "<group>"; };
+		482C38CB1684351300721377 /* fez@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fez@2x.png"; sourceTree = "<group>"; };
+		482C38CC1684351300721377 /* logo-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-114.png"; sourceTree = "<group>"; };
+		482C38CD1684351300721377 /* logo-150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-150.png"; sourceTree = "<group>"; };
+		482C38CE1684351300721377 /* logo-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-57.png"; sourceTree = "<group>"; };
+		482C38CF1684351300721377 /* logo-74.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-74.png"; sourceTree = "<group>"; };
+		482C38D01684351300721377 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		482C38D11684351300721377 /* NMAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMAppDelegate.h; sourceTree = "<group>"; };
+		482C38D21684351300721377 /* NMAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMAppDelegate.m; sourceTree = "<group>"; };
+		482C38D31684351300721377 /* NMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMViewController.h; sourceTree = "<group>"; };
+		482C38D41684351300721377 /* NMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMViewController.m; sourceTree = "<group>"; };
+		482C38D51684351300721377 /* CoreTextSample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CoreTextSample.xcodeproj; sourceTree = "<group>"; };
+		482C38D81684351300721377 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		482C38DA1684351300721377 /* NMCustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMCustomLabel.h; sourceTree = "<group>"; };
+		482C38DB1684351300721377 /* NMCustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMCustomLabel.m; sourceTree = "<group>"; };
+		482C38DC1684351300721377 /* NMCustomLabelStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMCustomLabelStyle.h; sourceTree = "<group>"; };
+		482C38DD1684351300721377 /* NMCustomLabelStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMCustomLabelStyle.m; sourceTree = "<group>"; };
 		484BEC5416807B820030F68C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		486F343016837C4E00B591B3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		48DB7200165D30F400646E6F /* ICController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICController.h; sourceTree = "<group>"; };
@@ -183,6 +211,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		482C38BC1684351300721377 /* Core-Text-Label */ = {
+			isa = PBXGroup;
+			children = (
+				482C38BD1684351300721377 /* CoreTextSample */,
+				482C38D81684351300721377 /* README.md */,
+				482C38D91684351300721377 /* src */,
+			);
+			path = "Core-Text-Label";
+			sourceTree = "<group>";
+		};
+		482C38BD1684351300721377 /* CoreTextSample */ = {
+			isa = PBXGroup;
+			children = (
+				482C38BE1684351300721377 /* CoreTextSample */,
+				482C38D51684351300721377 /* CoreTextSample.xcodeproj */,
+			);
+			path = CoreTextSample;
+			sourceTree = "<group>";
+		};
+		482C38BE1684351300721377 /* CoreTextSample */ = {
+			isa = PBXGroup;
+			children = (
+				482C38BF1684351300721377 /* CoreTextSample-Info.plist */,
+				482C38C01684351300721377 /* CoreTextSample-Prefix.pch */,
+				482C38C11684351300721377 /* Default-568h@2x.png */,
+				482C38C21684351300721377 /* Default.png */,
+				482C38C31684351300721377 /* Default@2x.png */,
+				482C38C41684351300721377 /* InfoPlist.strings */,
+				482C38C61684351300721377 /* MainStoryboard_iPad.storyboard */,
+				482C38C81684351300721377 /* MainStoryboard_iPhone.storyboard */,
+				482C38CA1684351300721377 /* fez.png */,
+				482C38CB1684351300721377 /* fez@2x.png */,
+				482C38CC1684351300721377 /* logo-114.png */,
+				482C38CD1684351300721377 /* logo-150.png */,
+				482C38CE1684351300721377 /* logo-57.png */,
+				482C38CF1684351300721377 /* logo-74.png */,
+				482C38D01684351300721377 /* main.m */,
+				482C38D11684351300721377 /* NMAppDelegate.h */,
+				482C38D21684351300721377 /* NMAppDelegate.m */,
+				482C38D31684351300721377 /* NMViewController.h */,
+				482C38D41684351300721377 /* NMViewController.m */,
+			);
+			path = CoreTextSample;
+			sourceTree = "<group>";
+		};
+		482C38D61684351300721377 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				482C38F71684351300721377 /* CoreTextSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		482C38D91684351300721377 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				482C38DA1684351300721377 /* NMCustomLabel.h */,
+				482C38DB1684351300721377 /* NMCustomLabel.m */,
+				482C38DC1684351300721377 /* NMCustomLabelStyle.h */,
+				482C38DD1684351300721377 /* NMCustomLabelStyle.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		48DB71FD165D307D00646E6F /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +390,7 @@
 			children = (
 				498B8A691619F8B4001A4356 /* IRCCloud */,
 				498B8A621619F8B4001A4356 /* Frameworks */,
+				482C38BC1684351300721377 /* Core-Text-Label */,
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
 				49A92B73163EB7DC00AE20C9 /* JSONKit */,
@@ -464,6 +557,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 482C38D61684351300721377 /* Products */;
+					ProjectRef = 482C38D51684351300721377 /* CoreTextSample.xcodeproj */;
+				},
+				{
 					ProductGroup = 49887DE1163D5D9B003773A7 /* Products */;
 					ProjectRef = 49887DE0163D5D9B003773A7 /* UnittWebSocketClient.xcodeproj */;
 				},
@@ -476,6 +573,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		482C38F71684351300721377 /* CoreTextSample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = CoreTextSample.app;
+			remoteRef = 482C38F61684351300721377 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -515,12 +619,6 @@
 				4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */,
 				CFA11005165F46180056784B /* Add_iPhone.storyboard in Resources */,
 				CF7D907B167438C40091402A /* Add_iPad.storyboard in Resources */,
-				48FD2727167E0E46004B2863 /* .gitignore in Resources */,
-				48FD272F167E0E46004B2863 /* LICENSE in Resources */,
-				48FD2730167E0E46004B2863 /* README.md in Resources */,
-				48FD2732167E0E46004B2863 /* TTTAttributedLabel.podspec in Resources */,
-				48FD2733167E0E46004B2863 /* TTTAttributedLabel.xcworkspace in Resources */,
-				486F343116837C4E00B591B3 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,10 +667,39 @@
 				CF9586A7165F932600137594 /* SSTextView.m in Sources */,
 				48FC816D16604B1900930F38 /* ICBuffer.m in Sources */,
 				48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */,
+				482C38F31684351300721377 /* NMCustomLabel.m in Sources */,
+				482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		482C38C41684351300721377 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				482C38C51684351300721377 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		482C38C61684351300721377 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				482C38C71684351300721377 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		482C38C81684351300721377 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				482C38C91684351300721377 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		498B8A871619F8B5001A4356 /* Debug */ = {

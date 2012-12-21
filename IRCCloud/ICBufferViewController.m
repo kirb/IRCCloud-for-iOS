@@ -9,7 +9,9 @@
 #import "ICBufferViewController.h"
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
-#import "TTTAttributedLabel.h"
+
+#import "NMCustomLabel.h"
+#import "NMCustomLabelStyle.h"
 
 #define kLastRowIndex [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
 
@@ -196,6 +198,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BufferCell"];
+    
     NSString *nick = (self.channel.buffer[indexPath.row])[@"from"];
     NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
     NSString *text = [[nick stringByAppendingString:@": "] stringByAppendingString:message];
