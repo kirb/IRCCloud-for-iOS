@@ -93,16 +93,6 @@
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
     }
-    
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
-    
-    _realTextField  = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
-    _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _realTextField.borderStyle = UITextBorderStyleRoundedRect;
-    _realTextField.returnKeyType = UIReturnKeySend;
-    _realTextField.delegate = self;
-    [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithCustomView:_realTextField]] animated:NO];
-    _textField.inputAccessoryView = _toolbar;
 }
 
 - (void)viewDidLoad
@@ -121,6 +111,17 @@
     if (self.channel.buffer.count > 0)
         [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
+    
+    
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
+    
+    _realTextField  = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
+    _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _realTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _realTextField.returnKeyType = UIReturnKeySend;
+    _realTextField.delegate = self;
+    [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithCustomView:_realTextField]] animated:YES];
+    _textField.inputAccessoryView = _toolbar;
 }
 
 - (void)viewWillAppear:(BOOL)animated
