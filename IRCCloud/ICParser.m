@@ -80,6 +80,7 @@ static NSMutableArray *backLog; // backLog, as in the backlog from not parsing w
             if (!backLog)
                 backLog = [[NSMutableArray alloc] init];
             [backLog addObject:json];
+            return;
         }
         
         if ([json[@"type"] isEqualToString:@"makeserver"]) {

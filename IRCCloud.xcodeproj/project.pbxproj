@@ -28,7 +28,6 @@
 		498B8A701619F8B4001A4356 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8A6F1619F8B4001A4356 /* main.m */; };
 		498B8A741619F8B4001A4356 /* ICAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8A731619F8B4001A4356 /* ICAppDelegate.m */; };
 		498B8A761619F8B4001A4356 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A751619F8B4001A4356 /* Default.png */; };
-		498B8A781619F8B4001A4356 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A771619F8B4001A4356 /* Default@2x.png */; };
 		498B8A7A1619F8B5001A4356 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A791619F8B4001A4356 /* Default-568h@2x.png */; };
 		498B8A831619F8B5001A4356 /* ICMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8A821619F8B5001A4356 /* ICMasterViewController.m */; };
 		498B8A93161A036B001A4356 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 498B8A92161A036B001A4356 /* icon.png */; };
@@ -86,7 +85,7 @@
 		480F3EEF165DEA82005079F1 /* ICParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICParser.h; sourceTree = "<group>"; };
 		480F3EF0165DEA82005079F1 /* ICParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICParser.m; sourceTree = "<group>"; };
 		484BEC5416807B820030F68C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		486F343016837C4E00B591B3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		486F343016837C4E00B591B3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		48DB7200165D30F400646E6F /* ICController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICController.h; sourceTree = "<group>"; };
 		48DB7201165D30F400646E6F /* ICController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICController.m; sourceTree = "<group>"; };
 		48DB7203165D31B800646E6F /* ICNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetwork.h; sourceTree = "<group>"; };
@@ -114,7 +113,6 @@
 		498B8A721619F8B4001A4356 /* ICAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICAppDelegate.h; sourceTree = "<group>"; };
 		498B8A731619F8B4001A4356 /* ICAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICAppDelegate.m; sourceTree = "<group>"; };
 		498B8A751619F8B4001A4356 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		498B8A771619F8B4001A4356 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		498B8A791619F8B4001A4356 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		498B8A811619F8B5001A4356 /* ICMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICMasterViewController.h; sourceTree = "<group>"; };
 		498B8A821619F8B5001A4356 /* ICMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICMasterViewController.m; sourceTree = "<group>"; };
@@ -188,6 +186,7 @@
 		48DB71FD165D307D00646E6F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				486F343016837C4E00B591B3 /* Default@2x.png */,
 				498B8A98161A03C4001A4356 /* icon~ipad@2x.png */,
 				498B8A96161A03A4001A4356 /* icon~ipad.png */,
 				498B8A94161A0382001A4356 /* icon@2x.png */,
@@ -199,7 +198,6 @@
 				498B8AB7161A10C4001A4356 /* NavButtonSelected.png */,
 				498B8AB8161A10C5001A4356 /* NavButtonSelected@2x.png */,
 				498B8A751619F8B4001A4356 /* Default.png */,
-				498B8A771619F8B4001A4356 /* Default@2x.png */,
 				498B8A791619F8B4001A4356 /* Default-568h@2x.png */,
 			);
 			name = Images;
@@ -298,7 +296,6 @@
 		498B8A541619F8B4001A4356 = {
 			isa = PBXGroup;
 			children = (
-				486F343016837C4E00B591B3 /* Default@2x.png */,
 				498B8A691619F8B4001A4356 /* IRCCloud */,
 				498B8A621619F8B4001A4356 /* Frameworks */,
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
@@ -503,7 +500,6 @@
 				498B8AB3161A0CB1001A4356 /* NavBar.png in Resources */,
 				498B8AB4161A0CB1001A4356 /* NavBar@2x.png in Resources */,
 				498B8A761619F8B4001A4356 /* Default.png in Resources */,
-				498B8A781619F8B4001A4356 /* Default@2x.png in Resources */,
 				498B8A7A1619F8B5001A4356 /* Default-568h@2x.png in Resources */,
 				498B8A93161A036B001A4356 /* icon.png in Resources */,
 				498B8A95161A0382001A4356 /* icon@2x.png in Resources */,
