@@ -10,3 +10,6 @@
 [submodule "TTTAttributedLabel"]
 	path = TTTAttributedLabel
 	url = git://github.com/mattt/TTTAttributedLabel.git
+[submodule "Core-Text-Label"]
+	path = Core-Text-Label
+	url = git://github.com/newsme/Core-Text-Label.git
