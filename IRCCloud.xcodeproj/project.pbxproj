@@ -43,7 +43,6 @@
 		498B8AC5161A1953001A4356 /* ICLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AC3161A1953001A4356 /* ICLogInViewController.m */; };
 		498B8AC9161A1C16001A4356 /* ICTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 498B8AC8161A1C16001A4356 /* ICTextCell.m */; };
 		498E6D8A162A7B4D002BA7E5 /* ICBufferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */; };
-		498E6D8F162A9489002BA7E5 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6D8E162A9489002BA7E5 /* AJNotificationView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 4992FFE51637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m */; };
 		499BCB9D1629B34F00A58167 /* LogIn_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499BCB9C1629B34F00A58167 /* LogIn_iPhone.storyboard */; };
 		499BCBA31629BD2500A58167 /* ICRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 499BCBA21629BD2500A58167 /* ICRequest.m */; };
@@ -58,6 +57,7 @@
 		CF7D907B167438C40091402A /* Add_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7D907A167438C40091402A /* Add_iPad.storyboard */; };
 		CF9586A7165F932600137594 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9586A6165F932600137594 /* SSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CFA11005165F46180056784B /* Add_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA11004165F46180056784B /* Add_iPhone.storyboard */; };
+		CFFFFA3B168A1F2000336EA4 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFFFFA3A168A1F2000336EA4 /* AJNotificationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,8 +165,6 @@
 		498B8AC8161A1C16001A4356 /* ICTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICTextCell.m; sourceTree = "<group>"; };
 		498E6D88162A7B4D002BA7E5 /* ICBufferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICBufferViewController.h; sourceTree = "<group>"; };
 		498E6D89162A7B4D002BA7E5 /* ICBufferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBufferViewController.m; sourceTree = "<group>"; };
-		498E6D8D162A9489002BA7E5 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AJNotificationView.h; sourceTree = "<group>"; };
-		498E6D8E162A9489002BA7E5 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AJNotificationView.m; sourceTree = "<group>"; };
 		4992FFE41637C4C2008A7E8C /* UINavigationController+KeyboardDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KeyboardDismiss.h"; sourceTree = "<group>"; };
 		4992FFE51637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
 		499BCB9C1629B34F00A58167 /* LogIn_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogIn_iPhone.storyboard; sourceTree = "<group>"; };
@@ -189,6 +187,8 @@
 		CF9586A5165F932600137594 /* SSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextView.h; sourceTree = "<group>"; };
 		CF9586A6165F932600137594 /* SSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextView.m; sourceTree = "<group>"; };
 		CFA11004165F46180056784B /* Add_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add_iPhone.storyboard; sourceTree = "<group>"; };
+		CFFFFA39168A1F2000336EA4 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AJNotificationView.h; path = AJNotificationView/AJNotificationView.h; sourceTree = "<group>"; };
+		CFFFFA3A168A1F2000336EA4 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AJNotificationView.m; path = AJNotificationView/AJNotificationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,8 +457,8 @@
 		498E6D8C162A9489002BA7E5 /* AJNotificationView */ = {
 			isa = PBXGroup;
 			children = (
-				498E6D8D162A9489002BA7E5 /* AJNotificationView.h */,
-				498E6D8E162A9489002BA7E5 /* AJNotificationView.m */,
+				CFFFFA39168A1F2000336EA4 /* AJNotificationView.h */,
+				CFFFFA3A168A1F2000336EA4 /* AJNotificationView.m */,
 			);
 			path = AJNotificationView;
 			sourceTree = "<group>";
@@ -654,7 +654,6 @@
 				499BCBA31629BD2500A58167 /* ICRequest.m in Sources */,
 				499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */,
 				498E6D8A162A7B4D002BA7E5 /* ICBufferViewController.m in Sources */,
-				498E6D8F162A9489002BA7E5 /* AJNotificationView.m in Sources */,
 				49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */,
 				4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */,
 				49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */,
@@ -669,6 +668,7 @@
 				48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */,
 				482C38F31684351300721377 /* NMCustomLabel.m in Sources */,
 				482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */,
+				CFFFFA3B168A1F2000336EA4 /* AJNotificationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
