@@ -13,3 +13,6 @@
 [submodule "Core-Text-Label"]
 	path = Core-Text-Label
 	url = git://github.com/newsme/Core-Text-Label.git
+[submodule "AJNotificationView"]
+	path = AJNotificationView
+	url = git://github.com/ajerez/AJNotificationView.git
