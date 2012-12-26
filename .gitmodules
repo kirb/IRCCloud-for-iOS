@@ -1,18 +1,24 @@
 [submodule "MBProgressHUD"]
 	path = MBProgressHUD
 	url = git://github.com/matej/MBProgressHUD.git
+	ignore = dirty
 [submodule "JSONKit"]
 	path = JSONKit
 	url = git://github.com/johnezang/JSONKit.git
+	ignore = dirty
 [submodule "UnittWebSocketClient"]
 	path = UnittWebSocketClient
 	url = git://github.com/kirbylover4000/UnittWebSocketClient
+	ignore = dirty
 [submodule "TTTAttributedLabel"]
 	path = TTTAttributedLabel
 	url = git://github.com/mattt/TTTAttributedLabel.git
+	ignore = dirty
 [submodule "Core-Text-Label"]
 	path = Core-Text-Label
 	url = git://github.com/newsme/Core-Text-Label.git
+	ignore = dirty
 [submodule "AJNotificationView"]
 	path = AJNotificationView
 	url = git://github.com/ajerez/AJNotificationView.git
+	ignore = dirty
