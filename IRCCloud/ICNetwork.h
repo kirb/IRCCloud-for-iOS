@@ -15,6 +15,9 @@
 - (void)network:(ICNetwork *)network didAddChannel:(ICChannel *)channel;
 - (void)network:(ICNetwork *)network willRemoveChannel:(ICChannel *)channel;
 - (void)network:(ICNetwork *)network didRemoveChannel:(ICChannel *)channel;
+
+- (void)network:(ICNetwork *)network didChangeStatus:(NSString *)oldStatus toStatus:(NSString *)newStatus;
+- (void)network:(ICNetwork *)network disconnectedUnexpectedlyWithInfo:(NSDictionary *)info;
 @end
 
 @interface ICNetwork : NSObject
@@ -28,6 +31,8 @@
 @property (nonatomic, copy) NSNumber *port;
 @property (nonatomic, copy) NSNumber *cid;
 @property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSNumber *connectionLag; // lag in µs.
+
 @property (nonatomic, weak) id delegate;
 
 - (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(NSNumber *)port connectionID:(NSNumber *)cid;
@@ -36,4 +41,8 @@
 - (NSArray *)channels;
 - (void)removeChannelWithBID:(NSNumber *)channel;
 - (void)userPartedChannelWithBID:(NSNumber *)bid;
+- (void)disconnectedUnexepectedlyWithFailInfo:(NSDictionary *)info;
+
+- (ICChannel *)channelWithBID:(NSNumber *)bid;
+
 @end

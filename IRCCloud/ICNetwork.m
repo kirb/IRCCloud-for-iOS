@@ -99,5 +99,30 @@
     }];
 }
 
+- (ICChannel *)channelWithBID:(NSNumber *)bid
+{
+    for (ICChannel *channel in [self channels]) {
+        if (channel.bid.intValue == bid.intValue)
+            return channel;
+    }
+    return nil;
+}
+
+
+- (void)setStatus:(NSString *)status
+{
+    if ([self.delegate respondsToSelector:@selector(network:didChangeStatus:)]) {
+        [self.delegate network:self didChangeStatus:_status toStatus:status];
+    }
+    _status = status;
+}
+
+- (void)disconnectedUnexepectedlyWithFailInfo:(NSDictionary *)info
+{
+    if ([self.delegate respondsToSelector:@selector(network:disconnectedUnexpectedlyWithInfo:)]) {
+        [self.delegate network:self disconnectedUnexpectedlyWithInfo:info];
+    }
+}
+
 @end
 

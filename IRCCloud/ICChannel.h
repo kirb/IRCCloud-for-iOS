@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSArray *ops;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *mode;
+@property (nonatomic, copy) NSString *channelURL;
 
 - (id)initWithName:(NSString *)name andBufferID:(NSNumber *)bid;
 @end

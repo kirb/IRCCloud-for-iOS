@@ -14,6 +14,8 @@
 @implementation ICParser
 {
     NSMutableArray *_toBeParsed;
+    BOOL            _waitingForCompletion;
+    NSMutableArray *_backLog; // backLog, as in the backlog from not parsing while waitingForCompletion is true.
 }
 
 + (ICParser *)sharedParser
@@ -71,53 +73,59 @@
     self.loadingOOB = NO;
 }
 
-static BOOL waitingForCompletion = NO;
-static NSMutableArray *backLog; // backLog, as in the backlog from not parsing while waitingForCompletion is true.
-- (void)parse:(NSDictionary *)json
+#define kTypeEqual(string) [json[@"type"] isEqualToString:string]
+
+- (void)parse:(NSDictionary *)json // be sure to rename the "json" in the define if this is renamed.
 {
     if (!self.loadingOOB) {
-        if (waitingForCompletion) {
-            if (!backLog)
-                backLog = [[NSMutableArray alloc] init];
-            [backLog addObject:json];
+        if (_waitingForCompletion) {
+            if (!_backLog)
+                _backLog = [[NSMutableArray alloc] init];
+            [_backLog addObject:json];
             return;
         }
-        
-        if ([json[@"type"] isEqualToString:@"makeserver"]) {
+#pragma mark Network Messages
+        if (kTypeEqual(@"makeserver")) {
             [kSharedController addNetworkFromDictionary:[json copy]];
         }
-        else if ([json[@"type"] isEqualToString:@"channel_init"]) {
+        else if (kTypeEqual(@"status_changed")) {
+            [[kSharedController networkForConnection:json[@"cid"]] setStatus:json[@"newStatus"]];
+        }
+        else if (kTypeEqual(@"connection_lag")) {
+            [[kSharedController networkForConnection:json[@"cid"]] setConnectionLag:json[@"lag"]];
+        }
+        
+#pragma mark Channel Messages
+        else if (kTypeEqual(@"channel_url")) {
+            ICChannel *channel = [[kSharedController networkForConnection:json[@"cid"]] channelWithBID:json[@"bid"]];
+            channel.channelURL = json[@"url"];
+        }
+        else if (kTypeEqual(@"channel_init")) {
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork addChannelFromDictionary:[json copy]];
         }
-        else if ([json[@"type"] isEqualToString:@"you_parted_channel"]) {
+        else if (kTypeEqual(@"you_parted_channel")) {
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork removeChannelWithBID:json[@"bid"]];
         }
-        else if ([json[@"type"] isEqualToString:@"buffer_msg"])
-        {
-            ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
-            for (__strong ICChannel *channel in [channelNetwork channels])
-            {
-                if ([channel.bid intValue] == [json[@"bid"] intValue])
-                {
-                    [[channel buffer] addObject:[json copy]];
-                    if ([channel.delegate respondsToSelector:@selector(addedMessageToBuffer:)])
-                    {
-                        waitingForCompletion = YES;
-                        [self.messageQueue addOperationWithBlock:^{
-                            [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
-                            waitingForCompletion = NO;
-                            if (backLog.count > 0) {
-                                for (NSDictionary *dict in [backLog copy]) {
-                                    [backLog removeObject:dict];
-                                    [self parse:dict];
-                                }
-                            }
-                        }];
+
+#pragma mark Buffer Messages
+        else if (kTypeEqual(@"buffer_msg")) {
+            ICChannel *channel = [[kSharedController networkForConnection:json[@"cid"]] channelWithBID:json[@"bid"]];
+            [[channel buffer] addObject:[json copy]];
+            
+            if ([channel.delegate respondsToSelector:@selector(addedMessageToBuffer:)]) {
+                _waitingForCompletion = YES;
+                [self.messageQueue addOperationWithBlock:^{
+                    [channel.delegate performSelectorOnMainThread:@selector(addedMessageToBuffer:) withObject:channel waitUntilDone:YES];
+                    _waitingForCompletion = NO;
+                    if (_backLog.count > 0) {
+                        for (NSDictionary *dict in [_backLog copy]) {
+                            [_backLog removeObject:dict];
+                            [self parse:dict];
+                        }
                     }
-                    break;
-                }
+                }];
             }
         }
     }
