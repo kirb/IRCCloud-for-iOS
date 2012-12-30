@@ -101,7 +101,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (loggedIn) {
-	    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
+        UITableViewCell *cell = nil;
+        
+        if ([cell respondsToSelector:@selector(dequeueReusableCellWithIdentifier:forIndexPath:)])
+             cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell"];
+        
         if (!cell)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChannelCell"];
 		cell.textLabel.text = [[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name];
