@@ -40,7 +40,11 @@
                                                             port:(NSNumber *)dict[@"port"]
                                                     connectionID:(NSNumber *)dict[@"cid"]];
     network.status = dict[@"status"];
-    [[ICController sharedController] addNetwork:network];
+    [self addNetwork:network];
+    
+    if (_delegate && ![ICParser sharedParser].loadingOOB) {
+        [_delegate controllerDidAddNetwork:network];
+    }
 }
 
 - (void)addNetwork:(ICNetwork *)connection
