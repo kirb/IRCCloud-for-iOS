@@ -59,7 +59,7 @@
     channel.type         = dict[@"channel_type"];
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
-    
+
     if (![_channels objectForKey:channel.bid])
         [_channels setObject:channel forKey:channel.bid];
     if ([_delegate respondsToSelector:@selector(network:didAddChannel:)])
@@ -70,12 +70,12 @@
 {
     if (!_channels[@"bid"]) // the channel has been removed already.
         return;
-    
+
     if ([_delegate respondsToSelector:@selector(network:willRemoveChannel:)])
         [self.delegate network:self willRemoveChannel:[_channels objectForKey:bid]];
-    
+
     [_channels removeObjectForKey:bid];
-    
+
     if ([_delegate respondsToSelector:@selector(network:didRemoveChannel:)])
         [self.delegate network:self didRemoveChannel:[_channels objectForKey:bid]];
 }
@@ -95,7 +95,7 @@
 - (NSArray *)channels
 {
     return [[_channels allValues] sortedArrayUsingComparator:^NSComparisonResult(id channel1, id channel2) {
-        return [((ICChannel*) channel1).name compare:((ICChannel*) channel2).name];
+        return [((ICChannel*) channel1).name caseInsensitiveCompare:((ICChannel*) channel2).name];
     }];
 }
 
