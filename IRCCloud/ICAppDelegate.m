@@ -87,6 +87,7 @@
 	} else {
 		NSArray *jsonArray = [data objectFromJSONData];
 		[[ICParser sharedParser] parseOOBArray:jsonArray];
+        [kSharedController finishedLoadingOOB];
 	}
 }
 

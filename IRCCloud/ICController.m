@@ -8,16 +8,16 @@
 
 #import "ICController.h"
 #import "ICNetwork.h"
+#import "ICParser.h"
 
 @implementation ICController
 {
     __strong NSMutableDictionary *_connections;
 }
 
-static ICController *controller;
-
 + (ICController *)sharedController
 {
+    static ICController *controller;
     if (!controller)
         controller = [[self alloc] init];
     return controller;
@@ -46,7 +46,7 @@ static ICController *controller;
 - (void)addNetwork:(ICNetwork *)connection
 {
     [_connections setObject:connection forKey:connection.cid];
-    if (_delegate) {
+    if (_delegate && ![ICParser sharedParser].loadingOOB) {
         [_delegate controllerDidAddNetwork:connection];
     }
         
@@ -55,7 +55,7 @@ static ICController *controller;
 
 - (void)removeNetworkWithCID:(NSNumber *)cid
 {
-    if (_delegate) {
+    if (_delegate && ![ICParser sharedParser].loadingOOB) {
         [_delegate controllerDidRemoveNetwork:[_connections objectForKey:cid]];
     }
     [_connections removeObjectForKey:cid];
@@ -68,7 +68,14 @@ static ICController *controller;
 
 - (NSArray *)networks
 {
-    return [_connections allKeys];
+    return [_connections allValues];
+}
+
+- (void)finishedLoadingOOB
+{
+    if (_delegate && [_delegate class] == NSClassFromString(@"ICMasterViewController")) {
+        [_delegate parserFinishedLoadingOOB];
+    }
 }
 
 @end

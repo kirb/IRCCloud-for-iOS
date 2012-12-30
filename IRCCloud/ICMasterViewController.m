@@ -159,6 +159,17 @@
 }
 
 #pragma mark - ICController Delegate
+
+- (void)parserFinishedLoadingOOB
+{
+    for (ICNetwork *network in [[kSharedController networks] reverseObjectEnumerator]) {
+        // reverse object enumerator needs to be used, because the controller has it all backwards :P
+        [network setDelegate:self];
+        [servers addObject:network];
+    }
+    [self.tableView reloadData];
+}
+
 - (void)controllerDidAddNetwork:(ICNetwork *)network
 {
     [network setDelegate:self];

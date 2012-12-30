@@ -12,6 +12,7 @@
 
 @protocol IControllerDelegate <NSObject>
 @required
+- (void)parserFinishedLoadingOOB;
 - (void)controllerDidAddNetwork:(ICNetwork *)network;
 - (void)controllerDidRemoveNetwork:(ICNetwork *)network;
 @end
@@ -24,10 +25,13 @@
 @property (nonatomic, weak) id delegate;
 
 + (ICController *)sharedController;
+
 - (void)addNetworkFromDictionary:(NSDictionary *)dict;
 - (void)addNetwork:(ICNetwork *)connection;
 - (void)removeNetworkWithCID:(NSNumber *)cid;
-- (ICNetwork *)networkForConnection:(NSNumber *)connectionID;
 - (NSArray *)networks;
+
+- (ICNetwork *)networkForConnection:(NSNumber *)connectionID;
+- (void)finishedLoadingOOB;
 
 @end
