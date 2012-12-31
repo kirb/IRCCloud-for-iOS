@@ -60,12 +60,16 @@
             [channelNetwork addChannelFromDictionary:json];
         }
         else if (([json[@"type"] isEqualToString:@"buffer_msg"]) || ([json[@"type"] isEqualToString:@"buffer_me_msg"])) {
-            ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
-            for (ICChannel *channel in [channelNetwork channels]){
-                if ([channel.bid intValue] == [json[@"bid"] intValue]) {
-                    [[channel buffer] addObject:json];
-                    break;
-                }
+            if (![json[@"chan"] hasPrefix:@"#"]) {
+                // it is a PM
+                ; // for now.
+            }
+            else {
+                ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
+                ICChannel *channel = [channelNetwork channelWithBID:json[@"bid"]];
+                if (!channel)
+                    [NSException raise:@"WTF" format:@"Channel doesn't exist"];
+                [[channel buffer] addObject:json];
             }
         }
     }
