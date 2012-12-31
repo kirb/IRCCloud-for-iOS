@@ -50,6 +50,13 @@
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).currentBuffer = self;
     
     if (!_textField) {
+        CGFloat width = 0.f;
+        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+            width = [UIScreen mainScreen].bounds.size.width - 15.f;
+        }
+        else if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+            width = [UIScreen mainScreen].bounds.size.height - 15.f;
+        }
 		_textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
 		_textField.autoresizingMask   = UIViewAutoresizingFlexibleWidth;
 		_textField.borderStyle        = UITextBorderStyleRoundedRect;
@@ -117,7 +124,7 @@
     
     _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
     
-    _realTextField  = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
+    _realTextField  = [[UITextField alloc] initWithFrame:_textField.frame];
     _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _realTextField.borderStyle = UITextBorderStyleRoundedRect;
     _realTextField.returnKeyType = UIReturnKeySend;
@@ -201,9 +208,26 @@
     
     NSString *nick = (self.channel.buffer[indexPath.row])[@"from"];
     NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
-    NSString *text = [[nick stringByAppendingString:@": "] stringByAppendingString:message];
-
-    cell.textLabel.numberOfLines = ceilf([message sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap].height/20.0) + 2;
+    NSString *nickAppend = @": ";
+    
+    if ([(self.channel.buffer[indexPath.row])[@"type"] isEqualToString:@"buffer_me_msg"]) {
+        cell.textLabel.font = [UIFont italicSystemFontOfSize:15.f];
+        nickAppend = @" ";
+    }
+    else
+        cell.textLabel.font = [UIFont systemFontOfSize:15.f];
+    
+    NSString *text = [[nick stringByAppendingString:nickAppend] stringByAppendingString:message];
+    
+    CGFloat width = 0.f;
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        width = [UIScreen mainScreen].bounds.size.height;
+    }
+    else if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+        width = [UIScreen mainScreen].bounds.size.width;
+    }
+    
+    cell.textLabel.numberOfLines = 30; // arbitrary high value, no need to calculate this everytime too. -tableView:heightForRowAtIndexPath: does it just fine
     cell.textLabel.text = text;
     return cell;
 }
@@ -211,12 +235,19 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *message = [[[[self.channel buffer] copy] objectAtIndex:indexPath.row] objectForKey:@"msg"];
-	CGSize cellSize = [message sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(300, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
+    CGFloat width = 0.f;
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+        width = [UIScreen mainScreen].bounds.size.height;
+    }
+    else if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+        width = [UIScreen mainScreen].bounds.size.width;
+    }
+	CGSize cellSize = [message sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     
     if (isPad)
-        return cellSize.height + 2.0f;
+        return cellSize.height + 20.0f;
     else
-        return cellSize.height + 20.0f; // just for some extra padding :P
+        return cellSize.height + 22.f;
 }
 
 #pragma mark - Table view delegate

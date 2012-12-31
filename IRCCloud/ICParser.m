@@ -59,7 +59,7 @@
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork addChannelFromDictionary:json];
         }
-        else if ([json[@"type"] isEqualToString:@"buffer_msg"]) {
+        else if (([json[@"type"] isEqualToString:@"buffer_msg"]) || ([json[@"type"] isEqualToString:@"buffer_me_msg"])) {
             ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
             for (ICChannel *channel in [channelNetwork channels]){
                 if ([channel.bid intValue] == [json[@"bid"] intValue]) {
@@ -111,6 +111,7 @@
 
 #pragma mark Buffer Messages
         else if (kTypeEqual(@"buffer_msg") || kTypeEqual(@"buffer_me_msg")) {
+            
             ICChannel *channel = [[kSharedController networkForConnection:json[@"cid"]] channelWithBID:json[@"bid"]];
             [[channel buffer] addObject:[json copy]];
             
