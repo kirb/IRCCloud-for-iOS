@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ICChannel, ICNetwork;
+@class ICBuffer, ICChannel, ICNetwork;
 
 @protocol ICNetworkDelegate <NSObject>
 @optional
@@ -36,13 +36,26 @@
 @property (nonatomic, weak) id delegate;
 
 - (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(NSNumber *)port connectionID:(NSNumber *)cid;
-- (void)addOOBChannelFromDictionary:(NSDictionary *)dict;
-- (void)addChannelFromDictionary:(NSDictionary *)dict;
-- (NSArray *)channels;
-- (void)removeChannelWithBID:(NSNumber *)channel;
-- (void)userPartedChannelWithBID:(NSNumber *)bid;
 - (void)disconnectedUnexepectedlyWithFailInfo:(NSDictionary *)info;
 
+
+// Channels included in the OOB don't have as many properties as the dictionary sent along later
+- (void)addOOBChannelFromDictionary:(NSDictionary *)dict;
+- (void)addChannelFromDictionary:(NSDictionary *)dict;
+
+// returns an array of all current ICChannel(s)
+- (NSArray *)channels;
+
+// sent along when the user uses another client to part.
+- (void)removeChannelWithBID:(NSNumber *)channel;
+// Sent *to* IRCCloud
+- (void)userPartedChannelWithBID:(NSNumber *)bid;
+
+
+// returns the appropriate ICChannel object
 - (ICChannel *)channelWithBID:(NSNumber *)bid;
+
+// add a notice to the notice buffer
+- (void)addNotice:(NSDictionary *)notice;
 
 @end
