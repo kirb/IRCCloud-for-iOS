@@ -28,7 +28,7 @@
 
 - (id)description
 {
-    return [NSString stringWithFormat:@"Channel: %@, Mode: %@ Type: %@", self.name, self.mode, self.type];
+    return [NSString stringWithFormat:@"%@ Channel: %@, Mode: %@ Type: %@", [super description], self.name, self.mode, self.type];
 }
 
 @end

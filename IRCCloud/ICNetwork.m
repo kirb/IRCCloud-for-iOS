@@ -15,26 +15,45 @@
 @implementation ICNetwork
 {
     NSMutableDictionary *_channels;
+    NSMutableArray      *_notices;
 }
 
 #pragma mark Basic Settings -
 - (id)initWithNetworkNamed:(NSString *)networkName hostName:(NSString *)hostName SSL:(BOOL)isSSL port:(NSNumber *)port connectionID:(NSNumber *)cid
 {
     self = [super init];
-    if (self){
+    if (self) {
         _networkName = networkName;
-        _hostName = hostName;
-        _SSL      = isSSL;
-        _port     = port;
-        _cid      = cid;
+        _hostName    = hostName;
+        _SSL         = isSSL;
+        _port        = port;
+        _cid         = cid;
+        
         _channels = [[NSMutableDictionary alloc] init];
+        _notices  = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (id)description
 {
-    return [NSString stringWithFormat:@"Network name: %@ Port: %@, SSL: %@, CID: %@", self.networkName, self.port, ((self.isSSL) ? @"ON":@"OFF"), self.cid];
+    return [NSString stringWithFormat:@"%@ Network name: %@ Port: %@, SSL: %@, CID: %@", [super description], self.networkName, self.port, ((self.isSSL) ? @"ON":@"OFF"), self.cid];
+}
+
+#pragma mark Network Management -
+- (void)setStatus:(NSString *)status
+{
+    if ([self.delegate respondsToSelector:@selector(network:didChangeStatus:)]) {
+        [self.delegate network:self didChangeStatus:_status toStatus:status];
+    }
+    _status = status;
+}
+
+- (void)disconnectedUnexepectedlyWithFailInfo:(NSDictionary *)info
+{
+    if ([self.delegate respondsToSelector:@selector(network:disconnectedUnexpectedlyWithInfo:)]) {
+        [self.delegate network:self disconnectedUnexpectedlyWithInfo:info];
+    }
 }
 
 #pragma mark Channel Management -
@@ -59,7 +78,7 @@
     channel.type         = dict[@"channel_type"];
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
-
+    
     if (![_channels objectForKey:channel.bid])
         [_channels setObject:channel forKey:channel.bid];
     if ([_delegate respondsToSelector:@selector(network:didAddChannel:)])
@@ -101,27 +120,13 @@
 
 - (ICChannel *)channelWithBID:(NSNumber *)bid
 {
-    for (ICChannel *channel in [self channels]) {
-        if (channel.bid.intValue == bid.intValue)
-            return channel;
-    }
-    return nil;
+    return [_channels objectForKey:bid];
 }
 
-
-- (void)setStatus:(NSString *)status
+#pragma mark Notice Management -
+- (void)addNotice:(NSDictionary *)notice
 {
-    if ([self.delegate respondsToSelector:@selector(network:didChangeStatus:)]) {
-        [self.delegate network:self didChangeStatus:_status toStatus:status];
-    }
-    _status = status;
-}
-
-- (void)disconnectedUnexepectedlyWithFailInfo:(NSDictionary *)info
-{
-    if ([self.delegate respondsToSelector:@selector(network:disconnectedUnexpectedlyWithInfo:)]) {
-        [self.delegate network:self disconnectedUnexpectedlyWithInfo:info];
-    }
+    [_notices addObject:notice];
 }
 
 @end
