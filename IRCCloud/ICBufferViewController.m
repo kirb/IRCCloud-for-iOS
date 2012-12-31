@@ -10,8 +10,7 @@
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
 
-#import "NMCustomLabel.h"
-#import "NMCustomLabelStyle.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kLastRowIndex [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
 
@@ -52,15 +51,19 @@
     if (!_textField) {
         CGFloat width = 0.f;
         if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-            width = [UIScreen mainScreen].bounds.size.width - 15.f;
+            width = [UIScreen mainScreen].bounds.size.width - 20.f;
         }
         else if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-            width = [UIScreen mainScreen].bounds.size.height - 15.f;
+            width = [UIScreen mainScreen].bounds.size.height - 20.f;
         }
-		_textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 295, 32)];
+		_textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, width, 32)];
 		_textField.autoresizingMask   = UIViewAutoresizingFlexibleWidth;
 		_textField.borderStyle        = UITextBorderStyleRoundedRect;
         _textField.delegate           = self;
+        
+        
+        [self setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:_textField]] animated:NO];
+        [self.navigationController setToolbarHidden:NO animated:NO];
 	}
 
 	if (_serverName) {
@@ -97,16 +100,43 @@
 		self.navigationItem.titleView = titleView;
 	}
     
-    [self setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:_textField]] animated:NO];
+    
+    
+    
+    // this toolbar will be set as the input accessory view
+    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
+    
+    _realTextField  = [[UITextField alloc] initWithFrame:_textField.frame];
+    _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _realTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _realTextField.returnKeyType = UIReturnKeySend;
+    _realTextField.delegate = self;
+    [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithCustomView:_realTextField]] animated:YES];
+    _textField.inputAccessoryView = _toolbar;
     
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
+    }
+    if (isPad){
+        if (self.channel.buffer.count > 0) {
+            [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
+        }
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // shadow properties
+    self.navigationController.navigationBar.layer.shadowColor        = [UIColor blackColor].CGColor;
+    self.navigationController.navigationBar.layer.shadowRadius       = 5.f;
+    self.navigationController.navigationBar.layer.shadowOffset       = CGSizeMake(0, 0);
+    self.navigationController.navigationBar.layer.shadowOpacity      = 0.8f;
+    self.navigationController.navigationBar.layer.shouldRasterize    = YES;
+    self.navigationController.navigationBar.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
 	[self configureView];
 }
 
@@ -120,17 +150,6 @@
     if (self.channel.buffer.count > 0)
         [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView performSelector:@selector(flashScrollIndicators) withObject:nil afterDelay:0.4];
-    
-    
-    _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
-    
-    _realTextField  = [[UITextField alloc] initWithFrame:_textField.frame];
-    _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _realTextField.borderStyle = UITextBorderStyleRoundedRect;
-    _realTextField.returnKeyType = UIReturnKeySend;
-    _realTextField.delegate = self;
-    [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithCustomView:_realTextField]] animated:YES];
-    _textField.inputAccessoryView = _toolbar;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -156,7 +175,8 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if (self.channel.buffer.count > 1)
+        [self.tableView scrollToRowAtIndexPath:kLastRowIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [_realTextField becomeFirstResponder];
 }
 
