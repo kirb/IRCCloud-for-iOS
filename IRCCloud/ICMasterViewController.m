@@ -34,14 +34,6 @@
 
     [kSharedController setDelegate:self];
     
-    // shadow properties
-    self.navigationController.navigationBar.layer.shadowColor        = [UIColor blackColor].CGColor;
-    self.navigationController.navigationBar.layer.shadowRadius       = 5.f;
-    self.navigationController.navigationBar.layer.shadowOffset       = CGSizeMake(0, 0);
-    self.navigationController.navigationBar.layer.shadowOpacity      = 0.8f;
-    self.navigationController.navigationBar.layer.shouldRasterize    = YES;
-    self.navigationController.navigationBar.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    
 	self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
 	[self updateLoginStatus];
