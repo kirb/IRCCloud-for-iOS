@@ -110,7 +110,7 @@
         }
 
 #pragma mark Buffer Messages
-        else if (kTypeEqual(@"buffer_msg")) {
+        else if (kTypeEqual(@"buffer_msg") || kTypeEqual(@"buffer_me_msg")) {
             ICChannel *channel = [[kSharedController networkForConnection:json[@"cid"]] channelWithBID:json[@"bid"]];
             [[channel buffer] addObject:[json copy]];
             
