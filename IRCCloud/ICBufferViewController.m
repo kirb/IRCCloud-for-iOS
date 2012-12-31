@@ -106,11 +106,13 @@
     // this toolbar will be set as the input accessory view
     _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
     
-    _realTextField  = [[UITextField alloc] initWithFrame:_textField.frame];
+    _realTextField                          = [[UITextField alloc] initWithFrame:_textField.frame];
+    _realTextField.autoresizingMask         = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _realTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _realTextField.borderStyle = UITextBorderStyleRoundedRect;
-    _realTextField.returnKeyType = UIReturnKeySend;
-    _realTextField.delegate = self;
+    _realTextField.borderStyle              = UITextBorderStyleRoundedRect;
+    _realTextField.returnKeyType            = UIReturnKeySend;
+    _realTextField.delegate                 = self;
+    
     [_toolbar setItems:@[[[UIBarButtonItem alloc] initWithCustomView:_realTextField]] animated:YES];
     _textField.inputAccessoryView = _toolbar;
     
