@@ -10,4 +10,10 @@
 
 @interface ICBufferCell : UITableViewCell
 
+// this property should be set before setting the next two.
+@property (nonatomic, assign) BOOL shouldItalicize;
+
+@property (nonatomic, copy) NSString *senderText;
+@property (nonatomic, copy) NSString *messageText;
+
 @end
