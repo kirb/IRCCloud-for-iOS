@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ICTextCell : UITableViewCell {
+@interface ICTextCell : UITableViewCell
+{
 	UITextField *textField;
 }
 
--(void)commonSetup;
+- (void)commonSetup;
 
 @property (nonatomic, strong) UITextField *textField;
 

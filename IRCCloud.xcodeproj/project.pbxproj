@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480221A61692A0F6009D255E /* ICBufferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 480221A51692A0F6009D255E /* ICBufferCell.m */; };
 		480F3EF1165DEA82005079F1 /* ICParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 480F3EF0165DEA82005079F1 /* ICParser.m */; };
 		482C38F31684351300721377 /* NMCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 482C38DB1684351300721377 /* NMCustomLabel.m */; };
 		482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 482C38DD1684351300721377 /* NMCustomLabelStyle.m */; };
@@ -83,6 +84,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		480221A41692A0F6009D255E /* ICBufferCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICBufferCell.h; sourceTree = "<group>"; };
+		480221A51692A0F6009D255E /* ICBufferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBufferCell.m; sourceTree = "<group>"; };
 		480F3EEF165DEA82005079F1 /* ICParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICParser.h; sourceTree = "<group>"; };
 		480F3EF0165DEA82005079F1 /* ICParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICParser.m; sourceTree = "<group>"; };
 		482C38BF1684351300721377 /* CoreTextSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoreTextSample-Info.plist"; sourceTree = "<group>"; };
@@ -205,6 +208,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		480221A71692A12D009D255E /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
+				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
+				480221A41692A0F6009D255E /* ICBufferCell.h */,
+				480221A51692A0F6009D255E /* ICBufferCell.m */,
+			);
+			name = "TableView Cells";
+			sourceTree = "<group>";
+		};
 		482C38BC1684351300721377 /* Core-Text-Label */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,8 +308,6 @@
 			children = (
 				49FDF4AF162E763000AAE35D /* ICNotification.h */,
 				49FDF4B0162E763000AAE35D /* ICNotification.m */,
-				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
-				498B8AC8161A1C16001A4356 /* ICTextCell.m */,
 				499BCBA11629BD2400A58167 /* ICRequest.h */,
 				499BCBA21629BD2500A58167 /* ICRequest.m */,
 			);
@@ -425,8 +437,9 @@
 				48DB7200165D30F400646E6F /* ICController.h */,
 				48DB7201165D30F400646E6F /* ICController.m */,
 				48DB7206165D31BD00646E6F /* Model */,
-				48DB71FE165D309200646E6F /* Convenience Classes */,
+				480221A71692A12D009D255E /* TableView Cells */,
 				48DB71FF165D309C00646E6F /* View Controllers */,
+				48DB71FE165D309200646E6F /* Convenience Classes */,
 				498B8A6A1619F8B4001A4356 /* Supporting Files */,
 			);
 			path = IRCCloud;
@@ -649,6 +662,7 @@
 				482C38F31684351300721377 /* NMCustomLabel.m in Sources */,
 				482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */,
 				CFFFFA3B168A1F2000336EA4 /* AJNotificationView.m in Sources */,
+				480221A61692A0F6009D255E /* ICBufferCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

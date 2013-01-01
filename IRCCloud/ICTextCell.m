@@ -18,13 +18,15 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithCoder:(NSCoder *)decoder
+{
 	self = [super initWithCoder:decoder];
 	[self commonSetup];
 	return self;
 }
 
--(void)commonSetup {
+- (void)commonSetup
+{
 	self.selectionStyle = UITableViewCellSelectionStyleNone;
 	self.textField = [[UITextField alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 0)];
 	self.textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
