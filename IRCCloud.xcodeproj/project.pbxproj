@@ -53,9 +53,7 @@
 		49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FDF4B0162E763000AAE35D /* ICNotification.m */; };
 		49FDF4E4162ECD2C00AAE35D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */; };
 		CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA81165E30D300636DB0 /* ICAddViewController.m */; };
-		CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */; };
 		CF7D907B167438C40091402A /* Add_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF7D907A167438C40091402A /* Add_iPad.storyboard */; };
-		CF9586A7165F932600137594 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9586A6165F932600137594 /* SSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CFA11005165F46180056784B /* Add_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA11004165F46180056784B /* Add_iPhone.storyboard */; };
 		CFFFFA3B168A1F2000336EA4 /* AJNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFFFFA3A168A1F2000336EA4 /* AJNotificationView.m */; };
 /* End PBXBuildFile section */
@@ -181,11 +179,7 @@
 		49FDF4E3162ECD2C00AAE35D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CF5FFA80165E30D300636DB0 /* ICAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICAddViewController.h; sourceTree = "<group>"; };
 		CF5FFA81165E30D300636DB0 /* ICAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICAddViewController.m; sourceTree = "<group>"; };
-		CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMultiLineTextCell.h; sourceTree = "<group>"; };
-		CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICMultiLineTextCell.m; sourceTree = "<group>"; };
 		CF7D907A167438C40091402A /* Add_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add_iPad.storyboard; sourceTree = "<group>"; };
-		CF9586A5165F932600137594 /* SSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextView.h; sourceTree = "<group>"; };
-		CF9586A6165F932600137594 /* SSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextView.m; sourceTree = "<group>"; };
 		CFA11004165F46180056784B /* Add_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add_iPhone.storyboard; sourceTree = "<group>"; };
 		CFFFFA39168A1F2000336EA4 /* AJNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AJNotificationView.h; path = AJNotificationView/AJNotificationView.h; sourceTree = "<group>"; };
 		CFFFFA3A168A1F2000336EA4 /* AJNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AJNotificationView.m; path = AJNotificationView/AJNotificationView.m; sourceTree = "<group>"; };
@@ -298,8 +292,6 @@
 		48DB71FE165D309200646E6F /* Convenience Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CF5FFA83165E394400636DB0 /* ICMultiLineTextCell.h */,
-				CF5FFA84165E394400636DB0 /* ICMultiLineTextCell.m */,
 				49FDF4AF162E763000AAE35D /* ICNotification.h */,
 				49FDF4B0162E763000AAE35D /* ICNotification.m */,
 				498B8AC7161A1C16001A4356 /* ICTextCell.h */,
@@ -394,7 +386,6 @@
 				498E6D8C162A9489002BA7E5 /* AJNotificationView */,
 				499BCBA01629BC2300A58167 /* MBProgressHUD */,
 				49A92B73163EB7DC00AE20C9 /* JSONKit */,
-				CF9586A4165F932600137594 /* SSToolkit */,
 				48FD270A167E0E46004B2863 /* TTTAttributedLabel */,
 				498B8A601619F8B4001A4356 /* Products */,
 			);
@@ -503,15 +494,6 @@
 				49A72776162EDBF1007242E9 /* MainStoryboard_iPad.storyboard */,
 			);
 			name = Main;
-			sourceTree = "<group>";
-		};
-		CF9586A4165F932600137594 /* SSToolkit */ = {
-			isa = PBXGroup;
-			children = (
-				CF9586A5165F932600137594 /* SSTextView.h */,
-				CF9586A6165F932600137594 /* SSTextView.m */,
-			);
-			path = SSToolkit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -662,8 +644,6 @@
 				48DB7209165D3C3300646E6F /* ICChannel.m in Sources */,
 				480F3EF1165DEA82005079F1 /* ICParser.m in Sources */,
 				CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */,
-				CF5FFA85165E394400636DB0 /* ICMultiLineTextCell.m in Sources */,
-				CF9586A7165F932600137594 /* SSTextView.m in Sources */,
 				48FC816D16604B1900930F38 /* ICBuffer.m in Sources */,
 				48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */,
 				482C38F31684351300721377 /* NMCustomLabel.m in Sources */,

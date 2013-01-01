@@ -8,7 +8,7 @@
 
 #import "ICLogInViewController.h"
 #import "ICTextCell.h"
-#import "../MBProgressHUD/MBProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "ICRequest.h"
 #import "ICAppDelegate.h"
 #import "ICMasterViewController.h"
