@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ICRequest : NSObject {
+@interface ICRequest : NSObject
+{
 	id delegate;
 	SEL selector;
 }
 
-+(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate selector:(SEL)selector;
-+(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector;
++ (ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate selector:(SEL)selector;
++ (ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector;
 
 @end

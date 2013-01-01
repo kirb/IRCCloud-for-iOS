@@ -11,7 +11,8 @@
 #import "ICBufferViewController.h"
 #import "ICMasterViewController.h"
 
-@interface ICAppDelegate : UIResponder <UIApplicationDelegate> {
+@interface ICAppDelegate : UIResponder <UIApplicationDelegate>
+{
 	UIView *notificationView;
 	ICWebSocketDelegate *webSocket;
 	ICMasterViewController *buffers;
@@ -22,7 +23,7 @@
 	BOOL isConnected;
 }
 
--(void)receivedJSON:(NSDictionary *)data;
+- (void)receivedJSON:(NSDictionary *)data;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UIView *notificationView;

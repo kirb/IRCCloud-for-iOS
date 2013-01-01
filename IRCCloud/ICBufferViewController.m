@@ -10,8 +10,6 @@
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
 
-#import <QuartzCore/QuartzCore.h>
-
 #define kLastRowIndex [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
 
 @interface ICBufferViewController ()

@@ -10,7 +10,8 @@
 
 @implementation UINavigationController (KeyboardDismiss)
 
--(BOOL)disablesAutomaticKeyboardDismissal {
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
 	//why couldn't this "feature" be optional instead? :(
 	return NO;
 }

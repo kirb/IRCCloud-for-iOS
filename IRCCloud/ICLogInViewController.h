@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ICLogInViewController : UITableViewController <UITextFieldDelegate> {
+@interface ICLogInViewController : UITableViewController <UITextFieldDelegate>
+{
 	UIBarButtonItem *cancelButton;
 }
 

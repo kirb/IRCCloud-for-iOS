@@ -14,13 +14,16 @@ static NSMutableData *output;
 
 @implementation ICRequest
 
-+(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate selector:(SEL)selector {
++ (ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate selector:(SEL)selector
+{
 	return [[self alloc] initWithPage:page parameters:params unauth:unauth delegate:delegate selector:selector];
 }
 
--(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate1 selector:(SEL)selector1 {
+- (ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params unauth:(BOOL)unauth delegate:(id)delegate1 selector:(SEL)selector1
+{
 	self = [super init];
-	if (self) {
+	
+    if (self) {
 		output = [[NSMutableData alloc] init];
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://alpha.irccloud.com/chat/%@", page]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:90];
 		[request setHTTPMethod:@"POST"];
@@ -28,28 +31,35 @@ static NSMutableData *output;
 		struct utsname info;
 		uname(&info);
 		[request addValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]] forHTTPHeaderField:@"User-Agent"];
+        
 		if (!unauth && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"] isEqualToString:@""]){
 			NSDictionary *cookies = [NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"alpha.irccloud.com", NSHTTPCookieDomain, @"/", NSHTTPCookiePath, @"session", NSHTTPCookieName, [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"], NSHTTPCookieValue, nil]]]];
 			[request setAllHTTPHeaderFields:cookies];
-		} else {
+		}
+        else {
 			request.HTTPShouldHandleCookies = NO;
 		}
+        
 		[NSURLConnection connectionWithRequest:request delegate:self];
 		delegate = delegate1;
 		selector = selector1;
 	}
+    
 	return self;
 }
 
-+(ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector {
++ (ICRequest *)requestWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate selector:(SEL)selector
+{
 	return [[self alloc] initWithPage:page parameters:params delegate:delegate selector:selector];
 }
 
--(ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate1 selector:(SEL)selector1 {
+- (ICRequest *)initWithPage:(NSString *)page parameters:(NSString *)params delegate:(id)delegate1 selector:(SEL)selector1
+{
 	return [self initWithPage:page parameters:params unauth:NO delegate:delegate1 selector:selector1];
 }
 
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
 	[output appendData:data];
 }
 

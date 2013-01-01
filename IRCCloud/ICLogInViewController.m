@@ -29,40 +29,53 @@
     return self;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
 	[super viewDidAppear:animated];
 	[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.1];
 }
 
--(void)logIn {
+- (void)logIn
+{
 	NSString *email = ((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField.text;
 	NSString *pass = ((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).textField.text;
+    
 	if (email == nil || [email isEqualToString:@""]) {
 		[[[UIAlertView alloc] initWithTitle:L(@"Oops, you forgot to enter your email address.") message:nil delegate:nil cancelButtonTitle:L(@"Dismiss") otherButtonTitles:nil] show];
 		[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]]).textField becomeFirstResponder];
 		return;
 	}
+    
 	if (pass == nil || [pass isEqualToString:@""]) {
 		[[[UIAlertView alloc] initWithTitle:L(@"Oops, you forgot to enter your password.") message:nil delegate:nil cancelButtonTitle:L(@"Dismiss") otherButtonTitles:nil] show];
 		[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).textField becomeFirstResponder];
 		return;
 	}
+    
 	[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 	self.view.userInteractionEnabled = NO;
 	cancelButton = self.navigationItem.leftBarButtonItem;
 	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
 	[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-	[ICRequest requestWithPage:@"login" parameters:[NSString stringWithFormat:@"email=%@&password=%@", [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [pass stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] unauth:YES delegate:self selector:@selector(_gotSessionCookie:)];
+    
+	[ICRequest requestWithPage:@"login"
+                    parameters:[NSString stringWithFormat:@"email=%@&password=%@", [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [pass stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                        unauth:YES
+                      delegate:self
+                      selector:@selector(_gotSessionCookie:)];
 }
--(void)_gotSessionCookie:(NSDictionary *)json{
+- (void)_gotSessionCookie:(NSDictionary *)json
+{
 	NSString *logInError = @"";
+    
 	if ([json objectForKey:@"success"] && [[json objectForKey:@"success"] boolValue] && [json objectForKey:@"session"]) {
 		[[NSUserDefaults standardUserDefaults] setValue:[json objectForKey:@"session"] forKey:@"cookie"];
 		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).webSocket open];
 		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers updateLoginStatus];
 		[self dismissViewControllerAnimated:YES completion:NULL];
 		return;
-	} else if ([json objectForKey:@"message"]) {
+	}
+    else if ([json objectForKey:@"message"]) {
 		if ([[json objectForKey:@"message"] isEqualToString:@"auth"]) {
 			logInError = L(@"Your email address or password was incorrect.");
 		} else if ([[json objectForKey:@"message"] isEqualToString:@"legacy_account"]) {
@@ -70,14 +83,18 @@
 		} else {
 			logInError = [NSString stringWithFormat:L(@"Unknown error. (\"%@\")"), [json objectForKey:@"message"]];
 		}
-	} else {
+	}
+    
+    else {
 		logInError = L(@"Unknown error.");
 	}
-	if (![logInError isEqualToString:@""]) {
+	
+    if (![logInError isEqualToString:@""]) {
 		[MBProgressHUD hideHUDForView:self.view animated:YES];
 		[[[UIAlertView alloc] initWithTitle:L(@"Oops, an error occurred.") message:logInError delegate:nil cancelButtonTitle:L(@"Dismiss") otherButtonTitles:nil] show];
 	}
-	self.view.userInteractionEnabled = YES;
+	
+    self.view.userInteractionEnabled = YES;
 	[self.navigationItem setLeftBarButtonItem:cancelButton animated:YES];
 }
 
@@ -112,7 +129,8 @@
 		cell.textField.tag = 5 + indexPath.row;
 		cell.textField.delegate = self;
 		return cell;
-	} else {
+	}
+    else {
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogInCell"];
 		cell.textLabel.text = L(@"Log In");
 		cell.textLabel.textAlignment = UITextAlignmentCenter;
@@ -121,29 +139,36 @@
 	return nil;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
 	return L(@"Please note that your account must be migrated to IRCCloud Alpha.");
 }
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	if (indexPath.row == 0 || indexPath.row == 1) {
+	
+    if (indexPath.row == 0 || indexPath.row == 1) {
 		[[tableView cellForRowAtIndexPath:indexPath].contentView becomeFirstResponder];
-	} else {
+	}
+    else {
 		[self logIn];
 	}
 }
 
 #pragma mark - Text field delegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
 	if (textField.tag == 5) {
 		[((ICTextCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).textField becomeFirstResponder];
-	} else if (textField.tag == 6) {
+	}
+    else if (textField.tag == 6) {
 		[self logIn];
 	}
+    
 	return YES;
 }
 

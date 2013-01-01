@@ -18,8 +18,8 @@
 	NSMutableArray *servers;
 }
 
--(void)updateLoginStatus;
--(IBAction)showSettings:(id)sender;
+- (void)updateLoginStatus;
+- (IBAction)showSettings:(id)sender;
 
 @property (strong, nonatomic) ICBufferViewController *detailViewController;
 

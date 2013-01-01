@@ -44,7 +44,6 @@
     for (NSDictionary *json in oobArray)
     {
         if ([json[@"type"] isEqualToString:@"makeserver"]) {
-            NSLog(@"%@", json[@"name"]);
             [kSharedController addNetworkFromDictionary:[json copy]];
         }   
         else if ([json[@"type"] isEqualToString:@"makebuffer"]) {

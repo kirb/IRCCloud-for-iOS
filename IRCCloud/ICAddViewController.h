@@ -13,8 +13,9 @@ typedef enum {
 	ICAddModeChannel
 } ICAddMode;
 
-@interface ICAddViewController : UITableViewController <UITextFieldDelegate> {
+@interface ICAddViewController : UITableViewController <UITextFieldDelegate>
+{
 	ICAddMode mode;
 }
--(IBAction)segmentDidChange:(UISegmentedControl *)sender;
+- (IBAction)segmentDidChange:(UISegmentedControl *)sender;
 @end

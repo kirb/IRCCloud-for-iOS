@@ -121,6 +121,7 @@
 - (ICChannel *)channelWithBID:(NSNumber *)bid
 {
     // get the appropriate key from the dict.
+    /*
     NSNumber *requiredKey = nil;
     for (NSNumber *key in [_channels allKeys]) {
         if (key.intValue == bid.intValue) {
@@ -128,6 +129,8 @@
         }
     }
     return [_channels objectForKey:requiredKey];
+     */
+    return [_channels objectForKey:bid];
 }
 
 #pragma mark Notice Management -

@@ -15,7 +15,8 @@
 
 @implementation ICWebSocketDelegate
 @synthesize webSocket;
--(id)init {
+- (id)init
+{
 	self = [super init];
 	if (self) {
 		struct utsname info;
@@ -35,35 +36,41 @@
 	return self;
 }
 
--(void)open {
+- (void)open
+{
 	[webSocket open];
 }
 
--(void)close {
+- (void)close
+{
 	[webSocket close];
 }
 
--(void)didReceiveTextMessage:(NSString *)message {
+- (void)didReceiveTextMessage:(NSString *)message
+{
 	if ([message isEqualToString:@""]) {
 		return;
 	}
 	[(ICAppDelegate *)[UIApplication sharedApplication].delegate receivedJSON:[message objectFromJSONString]];
 }
 
--(void)didReceiveBinaryMessage:(NSData *)message {} // not needed; the stream will never send a binary message
+- (void)didReceiveBinaryMessage:(NSData *)message {} // not needed; the stream will never send a binary message
 
--(void)didOpen {
+- (void)didOpen
+{
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = YES;
 }
 
--(void)didReceiveError:(NSError *)error {
+- (void)didReceiveError:(NSError *)error
+{
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), error.localizedDescription] type:AJNotificationTypeRed];
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = NO;
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
--(void)didClose:(NSUInteger)statusCode message:(NSString *)message error:(NSError *)error {
+- (void)didClose:(NSUInteger)statusCode message:(NSString *)message error:(NSError *)error
+{
 	[ICNotification notificationWithMessage:[NSString stringWithFormat:L(@"Oops, an error occurred: \"%@\""), message] type:AJNotificationTypeRed];
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).isConnected = NO;
 }

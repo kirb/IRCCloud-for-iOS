@@ -10,5 +10,5 @@
 #import "AJNotificationView.h"
 
 @interface ICNotification : NSObject
-+(void)notificationWithMessage:(NSString *)message type:(AJNotificationType)type;
++ (void)notificationWithMessage:(NSString *)message type:(AJNotificationType)type;
 @end
