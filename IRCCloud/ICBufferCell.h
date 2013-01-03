@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTTAttributedLabel.h"
 
-@interface ICBufferCell : UITableViewCell
+@interface ICBufferCell : UITableViewCell <TTTAttributedLabelDelegate>
 
-// this property should be set before setting the next two.
-@property (nonatomic, assign) BOOL shouldItalicize;
-
-@property (nonatomic, copy) NSString *senderText;
-@property (nonatomic, copy) NSString *messageText;
+@property (nonatomic, strong, readonly) TTTAttributedLabel *attributedLabel;
 
 @end

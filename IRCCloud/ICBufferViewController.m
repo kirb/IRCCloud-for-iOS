@@ -9,6 +9,7 @@
 #import "ICBufferViewController.h"
 #import "ICMasterViewController.h"
 #import "ICAppDelegate.h"
+#import "ICBufferCell.h"
 
 #define kLastRowIndex [NSIndexPath indexPathForRow:self.channel.buffer.count-1 inSection:0]
 
@@ -215,31 +216,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BufferCell"];
+    if ([tableView respondsToSelector:@selector(registerClass:forCellReuseIdentifier:)]) {
+        [tableView registerClass:[ICBufferCell class] forCellReuseIdentifier:@"BufferCell"];
+    }
+    
+    ICBufferCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BufferCell"];
     
     NSString *nick = (self.channel.buffer[indexPath.row])[@"from"];
     NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
-    NSString *nickAppend = @": ";
     
     if ([(self.channel.buffer[indexPath.row])[@"type"] isEqualToString:@"buffer_me_msg"]) {
-        cell.textLabel.font = [UIFont italicSystemFontOfSize:15.f];
-        nickAppend = @" ";
-    }
-    else
-        cell.textLabel.font = [UIFont systemFontOfSize:15.f];
-    
-    NSString *text = [[nick stringByAppendingString:nickAppend] stringByAppendingString:message];
-    
-    CGFloat width = 0.f;
-    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-        width = [UIScreen mainScreen].bounds.size.height;
-    }
-    else if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-        width = [UIScreen mainScreen].bounds.size.width;
+        ;
     }
     
-    cell.textLabel.numberOfLines = 30; // arbitrary high value, no need to calculate this everytime too. -tableView:heightForRowAtIndexPath: does it just fine
-    cell.textLabel.text = text;
+    NSString *text = [[nick stringByAppendingString:@" "] stringByAppendingString:message];
+    cell.attributedLabel.numberOfLines = 20;
+
+    [cell.attributedLabel setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        NSRange boldRange = [[mutableAttributedString string] rangeOfString:nick options:NSCaseInsensitiveSearch];
+        UIFont *boldSystemFont = [UIFont boldSystemFontOfSize:14];
+        
+        CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont.pointSize, NULL);
+        if (font) {
+            [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:boldRange];
+            
+            CFRelease(font);
+        }
+        
+        return mutableAttributedString;
+    }];
+
     return cell;
 }
 
