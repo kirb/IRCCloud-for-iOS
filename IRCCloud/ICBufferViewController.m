@@ -235,7 +235,7 @@
         // redrawing every time is /very/ performance intensive. A noticeable lag is seen on a 3rd gen iPad, too.
         // small problem with doing this, is that the links disappear once this attributed text is set. TBD.
         // the links still launch if tapped, however. They just lose their blue colour.
-        cell.attributedLabel.attributedText = self.attributedMessages[@(indexPath.row)];
+        cell.attributedLabel.text = self.attributedMessages[@(indexPath.row)];
         return cell;
     }
     
@@ -250,9 +250,6 @@
     NSString *text = [[nick stringByAppendingString:@" "] stringByAppendingString:message];
     cell.attributedLabel.numberOfLines = 20;
     
-    __weak typeof(self) weakSelf = self;
-    // blocks keep strong references to variables outside it's scope. Above code is to make sure a weak reference is used.
-    
     [cell.attributedLabel setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         NSRange boldRange = [[mutableAttributedString string] rangeOfString:nick options:NSCaseInsensitiveSearch];
         UIFont *boldSystemFont = [UIFont boldSystemFontOfSize:14];
@@ -262,20 +259,19 @@
             [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:boldRange];
             CFRelease(font);
         }
-        
-        // set the attributed string to the indexPath.row key.
-        // Eventually, I shall add checks to make sure the dictionary doesn't grow so big that iOS kills the app because of memory usage.
-        weakSelf.attributedMessages[@(indexPath.row)] = mutableAttributedString;
-        
         return mutableAttributedString;
     }];
-
+    
+    // set the attributed string to the indexPath.row key.
+    // Eventually, I shall add checks to make sure the dictionary doesn't grow so big that iOS kills the app because of memory usage.
+    self.attributedMessages[@(indexPath.row)] = cell.attributedLabel.attributedText;
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *text = [[[[[self.channel buffer] copy] objectAtIndex:indexPath.row] objectForKey:@"from"] stringByAppendingString:[[[[self.channel buffer] copy] objectAtIndex:indexPath.row] objectForKey:@"msg"]]; // should've used the new syntax. This is hilarious.
+    NSString *text = [self.channel.buffer[indexPath.row][@"from"] stringByAppendingString:self.channel.buffer[indexPath.row][@"msg"]];
     
     CGFloat width = 0.f;
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
@@ -286,12 +282,7 @@
     }
 	CGSize cellSize = [text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     
-    if (isPad) {
-        return cellSize.height + 10.f;
-    }
-    else {
-        return cellSize.height + 4.f;
-    }
+    return cellSize.height;
 }
 
 #pragma mark - Table view delegate
