@@ -8,21 +8,16 @@
 
 #import "ICBufferCell.h"
 
-@interface ICBufferCell ()
-{
-    UILabel *_senderLabel;
-    UILabel *_messageLabel;
-}
-- (void)setUp;
-@end
-
 @implementation ICBufferCell
 
+@synthesize attributedLabel = _attributedLabel;
+
+/*
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self setUp];
+        _attributedLabel = [self attributedLabel];;
     }
     return self;
 }
@@ -31,7 +26,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setUp];
+        _attributedLabel = [self attributedLabel];
     }
     return self;
 }
@@ -40,35 +35,39 @@
 {
     [super setSelected:selected animated:animated];
 }
-
-- (void)setUp
+*/
+- (void)layoutSubviews
 {
-    _senderLabel  = [[UILabel alloc] initWithFrame:(CGRect){self.textLabel.frame.origin.x, self.textLabel.frame.origin.y, 20, 18}];
-    _messageLabel = [[UILabel alloc] initWithFrame:self.contentView.frame];
+    [super layoutSubviews];
     
-    _senderLabel.font = [UIFont boldSystemFontOfSize:15.0f];
-    _messageLabel.numberOfLines = 20;
+    CGRect labelFrame = self.contentView.frame;
+    labelFrame.origin.x   += 5;
+    labelFrame.size.width -= 5;
+    labelFrame.size.height = self.contentView.frame.size.height;
+    self.attributedLabel.frame = labelFrame;
     
-    [self.contentView addSubview:_senderLabel];
-    [self.contentView addSubview:_messageLabel];
 }
 
-- (void)setMessage:(NSString *)message
+- (TTTAttributedLabel *)attributedLabel
 {
-    _messageText = message;
-    NSInteger numberOfSpcaes = ceilf([_senderText sizeWithFont:[UIFont boldSystemFontOfSize:15.f] constrainedToSize:_senderLabel.frame.size].width);
-    NSMutableString *spaces = [NSMutableString stringWithString:@""];
-    for (NSInteger i = 0; i <= numberOfSpcaes; i++) {
-        [spaces appendString:@" "];
+    // lazily load the label.
+    if (!_attributedLabel) {
+        _attributedLabel = [[TTTAttributedLabel alloc] initWithFrame:self.contentView.frame];
+        _attributedLabel.font = [UIFont systemFontOfSize:14];
+        _attributedLabel.textColor = [UIColor blackColor];
+        _attributedLabel.lineBreakMode = UILineBreakModeWordWrap;
+        _attributedLabel.dataDetectorTypes = UIDataDetectorTypeAll;
+        _attributedLabel.delegate = self;
+        [self.contentView addSubview:_attributedLabel];
     }
-    _messageText = [spaces stringByAppendingString:_messageText];
-    _messageLabel.text = _messageText;
+    return _attributedLabel;
 }
 
-- (void)setSenderText:(NSString *)senderText
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-    _senderText = senderText;
-    _senderLabel.text = _senderText;
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end
