@@ -49,7 +49,7 @@
 
 - (void)addNetwork:(ICNetwork *)connection
 {
-    [_connections setObject:connection forKey:connection.cid];
+    _connections[connection.cid] = connection;
     if (_delegate && ![ICParser sharedParser].loadingOOB) {
         [_delegate controllerDidAddNetwork:connection];
     }
@@ -60,14 +60,14 @@
 - (void)removeNetworkWithCID:(NSNumber *)cid
 {
     if (_delegate && ![ICParser sharedParser].loadingOOB) {
-        [_delegate controllerDidRemoveNetwork:[_connections objectForKey:cid]];
+        [_delegate controllerDidRemoveNetwork:_connections[cid]];
     }
     [_connections removeObjectForKey:cid];
 }
 
 - (ICNetwork *)networkForConnection:(NSNumber *)connectionID
 {
-    return [_connections objectForKey:connectionID];
+    return _connections[connectionID];
 }
 
 - (NSArray *)networks

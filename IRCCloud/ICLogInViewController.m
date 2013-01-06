@@ -68,20 +68,20 @@
 {
 	NSString *logInError = @"";
     
-	if ([json objectForKey:@"success"] && [[json objectForKey:@"success"] boolValue] && [json objectForKey:@"session"]) {
-		[[NSUserDefaults standardUserDefaults] setValue:[json objectForKey:@"session"] forKey:@"cookie"];
+	if (json[@"success"] && [json[@"success"] boolValue] && json[@"session"]) {
+		[[NSUserDefaults standardUserDefaults] setValue:json[@"session"] forKey:@"cookie"];
 		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).webSocket open];
 		[((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers updateLoginStatus];
 		[self dismissViewControllerAnimated:YES completion:NULL];
 		return;
 	}
-    else if ([json objectForKey:@"message"]) {
-		if ([[json objectForKey:@"message"] isEqualToString:@"auth"]) {
+    else if (json[@"message"]) {
+		if ([json[@"message"] isEqualToString:@"auth"]) {
 			logInError = L(@"Your email address or password was incorrect.");
-		} else if ([[json objectForKey:@"message"] isEqualToString:@"legacy_account"]) {
+		} else if ([json[@"message"] isEqualToString:@"legacy_account"]) {
 			logInError = L(@"Your account hasn't been migrated to IRCCloud Alpha.");
 		} else {
-			logInError = [NSString stringWithFormat:L(@"Unknown error. (\"%@\")"), [json objectForKey:@"message"]];
+			logInError = [NSString stringWithFormat:L(@"Unknown error. (\"%@\")"), json[@"message"]];
 		}
 	}
     

@@ -27,7 +27,7 @@
 */
 - (void)sendMessage:(NSString *)message
 {
-    NSDictionary *messageDict = @{@"_reqid"  : [NSNumber numberWithInt:rand()],
+    NSDictionary *messageDict = @{@"_reqid"  : @(rand()),
                                   @"_method" : @"say",
                                   @"cid"     : self.cid,
                                   @"to"      : self.name,

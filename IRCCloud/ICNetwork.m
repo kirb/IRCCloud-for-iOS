@@ -62,12 +62,12 @@
     ICChannel *channel   = [[ICChannel alloc] initWithName:dict[@"name"] andBufferID:dict[@"bid"]];
     channel.cid          = dict[@"cid"];
     channel.creationDate = dict[@"created"];
-    [_channels setObject:channel forKey:channel.bid];
+    _channels[channel.bid] = channel;
 }
 
 - (void)addChannelFromDictionary:(NSDictionary *)dict
 {
-    __strong ICChannel *channel = [_channels objectForKey:dict[@"bid"]];
+    __strong ICChannel *channel = _channels[dict[@"bid"]];
     if (!channel) {
         channel = [[ICChannel alloc] initWithName:dict[@"chan"] andBufferID:dict[@"bid"]];
         channel.cid          = dict [@"cid"];
@@ -79,8 +79,8 @@
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
     
-    if (![_channels objectForKey:channel.bid])
-        [_channels setObject:channel forKey:channel.bid];
+    if (!_channels[channel.bid])
+        _channels[channel.bid] = channel;
     if ([_delegate respondsToSelector:@selector(network:didAddChannel:)])
         [self.delegate network:self didAddChannel:channel];
 }
@@ -91,21 +91,21 @@
         return;
 
     if ([_delegate respondsToSelector:@selector(network:willRemoveChannel:)])
-        [self.delegate network:self willRemoveChannel:[_channels objectForKey:bid]];
+        [self.delegate network:self willRemoveChannel:_channels[bid]];
 
     [_channels removeObjectForKey:bid];
 
     if ([_delegate respondsToSelector:@selector(network:didRemoveChannel:)])
-        [self.delegate network:self didRemoveChannel:[_channels objectForKey:bid]];
+        [self.delegate network:self didRemoveChannel:_channels[bid]];
 }
 
 // called when the user uses the app to part.
 - (void)userPartedChannelWithBID:(NSNumber *)bid
 {
-    NSDictionary *removalDict = @{@"reqid"   : [NSNumber numberWithInt:rand()],
+    NSDictionary *removalDict = @{@"reqid"   : @(rand()),
                                   @"_method" : @"part",
-                                  @"cid"     : [(ICChannel *)[_channels objectForKey:bid] cid],
-                                  @"channel" : [(ICChannel *)[_channels objectForKey:bid] name],
+                                  @"cid"     : [(ICChannel *)_channels[bid] cid],
+                                  @"channel" : [(ICChannel *)_channels[bid] name],
                                   @"msg"     : @"IRCCloud app for iOS"};
     [[(ICAppDelegate *)[UIApplication sharedApplication].delegate webSocket] sendJSONFromDictionary:removalDict];
     [_channels removeObjectForKey:bid];
@@ -130,7 +130,7 @@
     }
     return [_channels objectForKey:requiredKey];
      */
-    return [_channels objectForKey:bid];
+    return _channels[bid];
 }
 
 #pragma mark Notice Management -

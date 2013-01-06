@@ -233,14 +233,12 @@
     if (self.attributedMessages[@(indexPath.row)]) {
         // check if the attributed string is available for a row, and use that instead
         // redrawing every time is /very/ performance intensive. A noticeable lag is seen on a 3rd gen iPad, too.
-        // small problem with doing this, is that the links disappear once this attributed text is set. TBD.
-        // the links still launch if tapped, however. They just lose their blue colour.
         cell.attributedLabel.text = self.attributedMessages[@(indexPath.row)];
         return cell;
     }
     
     NSString *nick = (self.channel.buffer[indexPath.row])[@"from"];
-    NSString *message = [[[self.channel buffer] objectAtIndex:indexPath.row] objectForKey:@"msg"];
+    NSString *message = [self.channel buffer][indexPath.row][@"msg"];
     
     if ([(self.channel.buffer[indexPath.row])[@"type"] isEqualToString:@"buffer_me_msg"]) {
         nick = [@"• " stringByAppendingString:nick];

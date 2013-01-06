@@ -30,10 +30,10 @@ static NSMutableData *output;
 		[request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
 		struct utsname info;
 		uname(&info);
-		[request addValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]] forHTTPHeaderField:@"User-Agent"];
+		[request addValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", @(info.machine), [[UIDevice currentDevice] systemVersion]] forHTTPHeaderField:@"User-Agent"];
         
 		if (!unauth && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"] isEqualToString:@""]){
-			NSDictionary *cookies = [NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:@"alpha.irccloud.com", NSHTTPCookieDomain, @"/", NSHTTPCookiePath, @"session", NSHTTPCookieName, [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"], NSHTTPCookieValue, nil]]]];
+			NSDictionary *cookies = [NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:@{NSHTTPCookieDomain: @"alpha.irccloud.com", NSHTTPCookiePath: @"/", NSHTTPCookieName: @"session", NSHTTPCookieValue: [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]}]]];
 			[request setAllHTTPHeaderFields:cookies];
 		}
         else {
@@ -72,7 +72,7 @@ static NSMutableData *output;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:output options:0 error:&err];
 #       pragma clang diagnostic push
 #       pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    	[delegate performSelector:selector withObject:err ? [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:-1] forKey:@"error"] : json];
+    	[delegate performSelector:selector withObject:err ? @{@"error": @-1} : json];
 #       pragma clang diagnostic pop
 }
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -80,7 +80,7 @@ static NSMutableData *output;
 	if (delegate && selector) {
 #       pragma clang diagnostic push
 #       pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-		[delegate performSelector:selector withObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:-2], @"error", [error localizedDescription], @"errormsg", nil]];
+		[delegate performSelector:selector withObject:@{@"error": @-2, @"errormsg": [error localizedDescription]}];
 #       pragma clang diagnostic pop
 	}
 }

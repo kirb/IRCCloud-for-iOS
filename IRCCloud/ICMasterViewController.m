@@ -38,7 +38,7 @@
     
 	[self updateLoginStatus];
     
-	self.detailViewController = (ICBufferViewController *)[[self.splitViewController.viewControllers objectAtIndex:1] topViewController];
+	self.detailViewController = (ICBufferViewController *)[(self.splitViewController.viewControllers)[1] topViewController];
 	
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers = self;
 }
@@ -95,7 +95,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return loggedIn ? [[[servers objectAtIndex:section] channels] count] : 0;
+	return loggedIn ? [[servers[section] channels] count] : 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -115,7 +115,7 @@
         
         if (!cell)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChannelCell"];
-		cell.textLabel.text = [[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name];
+		cell.textLabel.text = [[servers[indexPath.section] channels][indexPath.row] name];
 		cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBar"]];
     	return cell;
 	}
@@ -143,9 +143,9 @@
     if (isPad) {
         //elf.detailViewController.server = servers[indexPath.section];
 		self.detailViewController.channelIndex = indexPath.row;
-        [self.detailViewController setServerName:[[servers objectAtIndex:indexPath.section] networkName]];
-        [self.detailViewController setChannelName:[[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name]];
-        [self.detailViewController setChannel:[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row]];
+        [self.detailViewController setServerName:[servers[indexPath.section] networkName]];
+        [self.detailViewController setChannelName:[[servers[indexPath.section] channels][indexPath.row] name]];
+        [self.detailViewController setChannel:[servers[indexPath.section] channels][indexPath.row]];
         [self.detailViewController.tableView reloadData];
 		[self.detailViewController configureView];
     }
@@ -155,11 +155,11 @@
 {
     if ([[segue identifier] isEqualToString:@"showBuffer"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [segue.destinationViewController setServerName:[[servers objectAtIndex:indexPath.section] networkName]];
-        [(ICBufferViewController *)segue.destinationViewController setChannelName:[[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row] name]];
+        [segue.destinationViewController setServerName:[servers[indexPath.section] networkName]];
+        [(ICBufferViewController *)segue.destinationViewController setChannelName:[[servers[indexPath.section] channels][indexPath.row] name]];
 		[segue.destinationViewController setChannelIndex:indexPath.row];
 		[(ICBufferViewController *)segue.destinationViewController configureView];
-        [(ICBufferViewController *)segue.destinationViewController setChannel:[[[servers objectAtIndex:indexPath.section] channels] objectAtIndex:indexPath.row]];
+        [(ICBufferViewController *)segue.destinationViewController setChannel:[servers[indexPath.section] channels][indexPath.row]];
     }
 }
 

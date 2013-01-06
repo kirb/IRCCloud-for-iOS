@@ -44,8 +44,9 @@
     labelFrame.origin.x   += 5;
     labelFrame.size.width -= 5;
     labelFrame.size.height = self.contentView.frame.size.height;
-    self.attributedLabel.frame = labelFrame;
     
+    self.attributedLabel.frame = labelFrame;
+    self.attributedLabel.attributedText = self.attributedLabel.attributedText;
 }
 
 - (TTTAttributedLabel *)attributedLabel
