@@ -26,7 +26,7 @@
 @end
 
 @implementation ICBufferViewController
-@synthesize channelIndex;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,6 +49,7 @@
 - (void)configureView
 {
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).currentBuffer = self;
+    self.navigationItem.title = self.channel.name;
     
     if (!_textField) {
         CGFloat width = 0.f;
@@ -67,43 +68,6 @@
         [self setToolbarItems:@[[[UIBarButtonItem alloc] initWithCustomView:_textField]] animated:NO];
         [self.navigationController setToolbarHidden:NO animated:NO];
 	}
-
-	if (_serverName) {
-		UIView *titleView = [[UIView alloc] init];
-		
-		UILabel *serverLabel = [[UILabel alloc] init];
-		serverLabel.font = [UIFont systemFontOfSize:20];
-        serverLabel.text = [_serverName stringByAppendingString:@":"];
-		[titleView addSubview:serverLabel];
-		
-		UILabel *channelNameLabel = [[UILabel alloc] init];
-		channelNameLabel.font = [UIFont boldSystemFontOfSize:20];
-		channelNameLabel.text = self.channelName;
-		[titleView addSubview:channelNameLabel];
-		
-		serverLabel.backgroundColor = channelNameLabel.backgroundColor = [UIColor clearColor];
-        serverLabel.textColor = channelNameLabel.textColor = [UIColor whiteColor];
-        serverLabel.shadowColor = channelNameLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
-
-        serverLabel.shadowOffset = channelNameLabel.shadowOffset = CGSizeMake(0, -1);
-		
-		CGSize serverSize = [serverLabel.text sizeWithFont:serverLabel.font];
-        serverLabel.frame = (CGRect) {{0, 0}, serverSize};
-		
-		CGSize channelSize = [channelNameLabel.text sizeWithFont:channelNameLabel.font];
-        if (!isPad) {
-            channelNameLabel.frame = (CGRect) {{serverSize.width, 0}, 130, channelSize.height};
-            channelNameLabel.adjustsFontSizeToFitWidth = YES;
-        }
-        else
-            channelNameLabel.frame = (CGRect) {{serverSize.width, 0}, channelSize};
-		
-		titleView.frame = CGRectMake(0, 0, serverSize.width + channelSize.width, channelSize.height);
-		self.navigationItem.titleView = titleView;
-	}
-    
-    
-    
     
     // this toolbar will be set as the input accessory view
     _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40.f)];
@@ -280,7 +244,7 @@
     }
 	CGSize cellSize = [text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
     
-    return cellSize.height;
+    return cellSize.height + 3.f;
 }
 
 #pragma mark - Table view delegate

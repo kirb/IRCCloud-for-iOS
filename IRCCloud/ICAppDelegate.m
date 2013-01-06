@@ -62,6 +62,7 @@
 {
 	if (!data[@"type"]) {
         NSLog(@"Unrecognized data received");
+        NSLog(@"%@", data);
 		return;
 	}
     

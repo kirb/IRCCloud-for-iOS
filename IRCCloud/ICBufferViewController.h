@@ -20,8 +20,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSString *serverName;
 @property (strong, nonatomic) ICChannel *channel;
-@property (strong, nonatomic) NSString *channelName;
-@property (assign) int channelIndex;
 
 - (void)configureView;
 

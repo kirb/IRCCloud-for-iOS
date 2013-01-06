@@ -18,8 +18,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@implementation ICMasterViewController
+@implementation ICMasterViewController {} // pragma marks don't show without this, for some reason.
 
+#pragma mark - ViewController Life Cycle
 - (void)awakeFromNib
 {
 	loggedIn = !![[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"];
@@ -43,7 +44,24 @@
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationItem.title = @"IRCCloud";
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if (!isPad) {
+        ICNetwork *selectedNetwork = servers[([self.tableView indexPathForSelectedRow].section)];
+        self.navigationItem.title = selectedNetwork.networkName;
+    }
+    
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
 	[super viewDidAppear:animated];
 	
 	if (!isPad && !loggedIn) {
@@ -103,19 +121,42 @@
 	return loggedIn ? [servers[section] networkName] : nil;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // slightly taller cells look nice in the subtitle style.
+    return 50.f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (loggedIn) {
         UITableViewCell *cell = nil;
         
-        if ([cell respondsToSelector:@selector(dequeueReusableCellWithIdentifier:forIndexPath:)])
-             cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
-        else
-            cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell"];
+        ICNetwork *currentNetwork = servers[indexPath.section];
+        ICChannel *currentChannel = currentNetwork.channels[indexPath.row];
         
-        if (!cell)
+        if ([cell respondsToSelector:@selector(dequeueReusableCellWithIdentifier:forIndexPath:)]) {
+             cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell" forIndexPath:indexPath];
+        }
+        else {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelCell"];
+        }
+        
+        if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ChannelCell"];
-		cell.textLabel.text = [[servers[indexPath.section] channels][indexPath.row] name];
+        }
+		cell.textLabel.text = [currentChannel name];
+        
+        if (currentChannel && currentChannel.buffer && currentChannel.buffer.count > 0) {
+            NSString *lastSender = [((NSDictionary *)currentChannel.buffer.lastObject)[@"from"] stringByAppendingString:@": "];
+            NSString *lastMessage = ((NSDictionary *)currentChannel.buffer.lastObject)[@"msg"];
+            NSString *labelText = [lastSender stringByAppendingString:lastMessage];
+            // A way to update this must be found. Notifications, maybe.
+            cell.detailTextLabel.text = labelText;
+        }
+        else {
+            cell.detailTextLabel.text = @"";
+        }
 		cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavBar"]];
     	return cell;
 	}
@@ -133,7 +174,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [(ICNetwork *)servers[indexPath.section] userPartedChannelWithBID:((ICChannel *)[(ICNetwork *)servers[indexPath.section] channels][indexPath.row]).bid];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
@@ -141,10 +183,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isPad) {
-        //elf.detailViewController.server = servers[indexPath.section];
-		self.detailViewController.channelIndex = indexPath.row;
         [self.detailViewController setServerName:[servers[indexPath.section] networkName]];
-        [self.detailViewController setChannelName:[[servers[indexPath.section] channels][indexPath.row] name]];
         [self.detailViewController setChannel:[servers[indexPath.section] channels][indexPath.row]];
         [self.detailViewController.tableView reloadData];
 		[self.detailViewController configureView];
@@ -156,8 +195,6 @@
     if ([[segue identifier] isEqualToString:@"showBuffer"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         [segue.destinationViewController setServerName:[servers[indexPath.section] networkName]];
-        [(ICBufferViewController *)segue.destinationViewController setChannelName:[[servers[indexPath.section] channels][indexPath.row] name]];
-		[segue.destinationViewController setChannelIndex:indexPath.row];
 		[(ICBufferViewController *)segue.destinationViewController configureView];
         [(ICBufferViewController *)segue.destinationViewController setChannel:[servers[indexPath.section] channels][indexPath.row]];
     }
