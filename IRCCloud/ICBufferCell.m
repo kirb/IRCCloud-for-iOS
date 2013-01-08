@@ -12,30 +12,6 @@
 
 @synthesize attributedLabel = _attributedLabel;
 
-/*
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        _attributedLabel = [self attributedLabel];;
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        _attributedLabel = [self attributedLabel];
-    }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-}
-*/
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -44,8 +20,9 @@
     labelFrame.origin.x   += 5;
     labelFrame.size.width -= 5;
     labelFrame.size.height = self.contentView.frame.size.height;
-    
     self.attributedLabel.frame = labelFrame;
+    
+    // set again, to redraw if interface orientation changes.
     self.attributedLabel.attributedText = self.attributedLabel.attributedText;
 }
 

@@ -21,14 +21,22 @@
 	if (self) {
 		struct utsname info;
 		uname(&info);
-		WebSocketConnectConfig *config = [WebSocketConnectConfig configWithURLString:@"wss://alpha.irccloud.com" origin:nil protocols:nil tlsSettings:[@{
+		WebSocketConnectConfig *config = [WebSocketConnectConfig configWithURLString:@"wss://alpha.irccloud.com"
+                                                                              origin:nil
+                                                                           protocols:nil
+                                                                         tlsSettings:[@{
 																(NSString *)kCFStreamSSLPeerName: [NSNull null],
-														   (NSString *)kCFStreamSSLAllowsAnyRoot: [NSNumber numberWithBool:YES],
-											   (NSString *)kCFStreamSSLValidatesCertificateChain: [NSNumber numberWithBool:NO]
+														   (NSString *)kCFStreamSSLAllowsAnyRoot: @YES,
+											   (NSString *)kCFStreamSSLValidatesCertificateChain: @NO
 										  } mutableCopy] headers:[@[
-											[HandshakeHeader headerWithValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding], [[UIDevice currentDevice] systemVersion]] forKey:@"User-Agent"],
-											[HandshakeHeader headerWithValue:[NSString stringWithFormat:@"session=%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]] forKey:@"Cookie"]
-										  ] mutableCopy] verifySecurityKey:YES extensions:nil];
+											[HandshakeHeader headerWithValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1",
+                                            [NSString stringWithCString:info.machine encoding:NSUTF8StringEncoding],
+                                            [[UIDevice currentDevice] systemVersion]] forKey:@"User-Agent"],
+											[HandshakeHeader headerWithValue:[NSString stringWithFormat:@"session=%@",
+                                            [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]] forKey:@"Cookie"]
+										  ] mutableCopy]
+                                                                   verifySecurityKey:YES
+                                                                          extensions:nil];
 		config.closeTimeout = 15;
 		config.keepAlive = 15;
 		webSocket = [WebSocket webSocketWithConfig:config delegate:self];
