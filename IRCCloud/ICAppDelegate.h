@@ -13,14 +13,14 @@
 
 @interface ICAppDelegate : UIResponder <UIApplicationDelegate>
 {
-	UIView *notificationView;
-	ICWebSocketDelegate *webSocket;
-	ICMasterViewController *buffers;
-	ICBufferViewController *currentBuffer;
-	int selectedBufferID;
-	NSArray *highlights;
-	NSDictionary *preferences;
-	BOOL isConnected;
+	UIView *_notificationView;
+    
+	ICWebSocketDelegate *_webSocket;
+	
+    ICMasterViewController *_buffers;
+	ICBufferViewController *_currentBuffer;
+
+	BOOL _isConnected;
 }
 
 - (void)receivedJSON:(NSDictionary *)data;
@@ -30,9 +30,6 @@
 @property (strong, nonatomic) ICWebSocketDelegate *webSocket;
 @property (strong, nonatomic) ICMasterViewController *buffers;
 @property (strong, nonatomic) ICBufferViewController *currentBuffer;
-@property (assign) int selectedBufferID;
-@property (strong, nonatomic) NSArray *highlights;
-@property (strong, nonatomic) NSDictionary *preferences;
 @property (assign) BOOL isConnected;
 
 @end

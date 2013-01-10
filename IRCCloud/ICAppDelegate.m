@@ -13,8 +13,6 @@
 #import "JSONKit.h"
 
 @implementation ICAppDelegate
-@synthesize notificationView, webSocket, buffers, currentBuffer, isConnected, selectedBufferID, highlights, preferences;
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,15 +37,15 @@
 		mainView = self.window.rootViewController.view;
 	}
 	
-	notificationView = [[UIView alloc] initWithFrame:CGRectMake(0, isPad ? 44 : 64, mainView.frame.size.width, 100)];
-	notificationView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	notificationView.userInteractionEnabled = NO;
-	[mainView addSubview:notificationView];
+	_notificationView = [[UIView alloc] initWithFrame:CGRectMake(0, isPad ? 44 : 64, mainView.frame.size.width, 100)];
+	_notificationView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_notificationView.userInteractionEnabled = NO;
+	[mainView addSubview:_notificationView];
 	
 	self.webSocket = [[ICWebSocketDelegate alloc] init];
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"cookie"]) {
-		[webSocket open];
+		[_webSocket open];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	}
     return YES;
@@ -55,7 +53,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	[webSocket close];
+	[_webSocket close];
 }
 
 - (void)receivedJSON:(NSDictionary *)data
@@ -69,15 +67,6 @@
     else if ([data[@"type"] isEqualToString:@"header"]) {
         NSLog(@"Header received.");
     }
-    
-    else if ([data[@"type"] isEqualToString:@"stat_user"]) {
-		if (![data[@"verified"] boolValue]) {
-			[ICNotification notificationWithMessage:L(@"Reminder: You haven't verified your email address.") type:AJNotificationTypeBlue];
-		}
-		self.selectedBufferID = [data[@"last_selected_bid"] intValue];
-		self.highlights = data[@"highlights"];
-		self.preferences = [data[@"prefs"] objectFromJSONString];
-	}
     
     else if ([data[@"type"] isEqualToString:@"oob_include"]) {
 		[self performSelectorInBackground:@selector(getOOBLoaderWithURL:) withObject:data[@"url"]];

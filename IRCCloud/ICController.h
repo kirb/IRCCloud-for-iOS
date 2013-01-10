@@ -23,6 +23,9 @@
 }
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, strong) NSDictionary *preferences;
+@property (nonatomic, strong) NSArray *highlights;
+@property (nonatomic, strong) NSNumber *lastSelectedBID;
 
 + (ICController *)sharedController;
 
