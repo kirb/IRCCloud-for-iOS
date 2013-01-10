@@ -27,7 +27,8 @@
 @property (nonatomic, copy) NSNumber *creationDate;
 @property (nonatomic, copy) NSNumber *lastSeenEid;
 @property (nonatomic, copy) NSString *name;
-@property (strong, nonatomic, readonly) NSMutableArray *buffer; // an array of NSDictionaries, sent along by ICParser.
+@property (nonatomic, strong, readonly) NSMutableArray *buffer; // an array of NSDictionaries, sent along by ICParser.
+@property (nonatomic, assign) BOOL archived;
 
 @property (nonatomic, weak) id delegate;
 

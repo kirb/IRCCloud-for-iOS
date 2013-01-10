@@ -8,16 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@class ICBuffer, ICChannel, ICNetwork;
+@class ICNetwork, ICChannel, ICConversation;
 
 @protocol ICNetworkDelegate <NSObject>
 @optional
+- (void)network:(ICNetwork *)network didChangeStatus:(NSString *)oldStatus toStatus:(NSString *)newStatus;
+- (void)network:(ICNetwork *)network disconnectedUnexpectedlyWithInfo:(NSDictionary *)info;
+
+- (void)network:(ICNetwork *)network willAddChannel:(ICChannel *)channel;
 - (void)network:(ICNetwork *)network didAddChannel:(ICChannel *)channel;
 - (void)network:(ICNetwork *)network willRemoveChannel:(ICChannel *)channel;
 - (void)network:(ICNetwork *)network didRemoveChannel:(ICChannel *)channel;
 
-- (void)network:(ICNetwork *)network didChangeStatus:(NSString *)oldStatus toStatus:(NSString *)newStatus;
-- (void)network:(ICNetwork *)network disconnectedUnexpectedlyWithInfo:(NSDictionary *)info;
+- (void)network:(ICNetwork *)network willAddConversation:(ICConversation *)conversation;
+- (void)network:(ICNetwork *)network didAddConversation:(ICConversation *)conversation;
+- (void)network:(ICNetwork *)network willRemoveConversation:(ICConversation *)conversation;
+- (void)network:(ICNetwork *)network didRemoveConversation:(ICConversation *)conversation;
 @end
 
 @interface ICNetwork : NSObject
@@ -54,6 +60,11 @@
 
 // returns the appropriate ICChannel object
 - (ICChannel *)channelWithBID:(NSNumber *)bid;
+
+// Create a PM buffer from the dictionary.
+- (void)addConversationFromDictionary:(NSDictionary *)dict;
+// return the appropriate PM buffer.
+- (ICConversation *)conversationWithBID:(NSNumber *)bid;
 
 // add a notice to the notice buffer
 - (void)addNotice:(NSDictionary *)notice;

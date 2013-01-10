@@ -8,6 +8,7 @@
 
 #import "ICNetwork.h"
 #import "ICChannel.h"
+#import "ICConversation.h"
 #import "ICAppDelegate.h"
 #import "ICWebSocketDelegate.h"
 #import "ICParser.h"
@@ -15,6 +16,7 @@
 @implementation ICNetwork
 {
     NSMutableDictionary *_channels;
+    NSMutableDictionary *_conversations;
     NSMutableArray      *_notices;
 }
 
@@ -29,8 +31,9 @@
         _port        = port;
         _cid         = cid;
         
-        _channels = [[NSMutableDictionary alloc] init];
-        _notices  = [[NSMutableArray alloc] init];
+        _channels      = [[NSMutableDictionary alloc] init];
+        _conversations = [[NSMutableDictionary alloc] init];
+        _notices       = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -79,10 +82,15 @@
     channel.mode         = dict[@"mode"];
     channel.ops          = dict[@"ops"];
     
-    if (!_channels[channel.bid])
+    if (!_channels[channel.bid]) {
+        if ([_delegate respondsToSelector:@selector(network:willAddChannel:)]) {
+            [_delegate network:self willAddChannel:channel];
+        }
         _channels[channel.bid] = channel;
-    if ([_delegate respondsToSelector:@selector(network:didAddChannel:)])
+    }
+    if ([_delegate respondsToSelector:@selector(network:didAddChannel:)]) {
         [self.delegate network:self didAddChannel:channel];
+    }
 }
 
 - (void)removeChannelWithBID:(NSNumber *)bid
@@ -120,17 +128,33 @@
 
 - (ICChannel *)channelWithBID:(NSNumber *)bid
 {
-    // get the appropriate key from the dict.
-    /*
-    NSNumber *requiredKey = nil;
-    for (NSNumber *key in [_channels allKeys]) {
-        if (key.intValue == bid.intValue) {
-            requiredKey = key;
-        }
-    }
-    return [_channels objectForKey:requiredKey];
-     */
     return _channels[bid];
+}
+
+#pragma mark PM Management -
+- (void)addConversationFromDictionary:(NSDictionary *)dict
+{
+    ICConversation *conversation = [[ICConversation alloc] init];
+    conversation.cid          = dict[@"cid"];
+    conversation.bid          = dict[@"bid"];
+    conversation.name         = dict[@"name"];
+    conversation.creationDate = dict[@"created"];
+    conversation.archived     = [dict[@"arhived"] boolValue];
+    
+    if ([_delegate respondsToSelector:@selector(network:willAddConversation:)]) {
+        [_delegate network:self willAddConversation:conversation];
+    }
+    
+    [_conversations setObject:conversation forKey:dict[@"bid"]];
+
+    if ([_delegate respondsToSelector:@selector(network:didAddConversation:)]) {
+        [_delegate network:self didAddConversation:conversation];
+    }
+}
+
+- (ICConversation *)conversationWithBID:(NSNumber *)bid
+{
+    return _conversations[bid];
 }
 
 #pragma mark Notice Management -
