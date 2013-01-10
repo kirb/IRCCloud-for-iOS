@@ -16,6 +16,7 @@
 		48DB7202165D30F500646E6F /* ICController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7201165D30F400646E6F /* ICController.m */; };
 		48DB7205165D31B900646E6F /* ICNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7204165D31B800646E6F /* ICNetwork.m */; };
 		48DB7209165D3C3300646E6F /* ICChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7208165D3C3300646E6F /* ICChannel.m */; };
+		48E75285169E8A7100D8A2CC /* ICConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E75284169E8A7100D8A2CC /* ICConversation.m */; };
 		48FC816D16604B1900930F38 /* ICBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC816C16604B1900930F38 /* ICBuffer.m */; };
 		48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FD2720167E0E46004B2863 /* TTTAttributedLabel.m */; };
 		4907B6121636980500022D54 /* LogIn_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4907B6111636980500022D54 /* LogIn_iPad.storyboard */; };
@@ -121,6 +122,8 @@
 		48DB7204165D31B800646E6F /* ICNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNetwork.m; sourceTree = "<group>"; };
 		48DB7207165D3C3300646E6F /* ICChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICChannel.h; sourceTree = "<group>"; };
 		48DB7208165D3C3300646E6F /* ICChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICChannel.m; sourceTree = "<group>"; };
+		48E75283169E8A7100D8A2CC /* ICConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICConversation.h; sourceTree = "<group>"; };
+		48E75284169E8A7100D8A2CC /* ICConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICConversation.m; sourceTree = "<group>"; };
 		48FC816B16604B1900930F38 /* ICBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICBuffer.h; sourceTree = "<group>"; };
 		48FC816C16604B1900930F38 /* ICBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICBuffer.m; sourceTree = "<group>"; };
 		48FD270B167E0E46004B2863 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 				48FC816C16604B1900930F38 /* ICBuffer.m */,
 				48DB7207165D3C3300646E6F /* ICChannel.h */,
 				48DB7208165D3C3300646E6F /* ICChannel.m */,
+				48E75283169E8A7100D8A2CC /* ICConversation.h */,
+				48E75284169E8A7100D8A2CC /* ICConversation.m */,
 			);
 			name = Buffers;
 			sourceTree = "<group>";
@@ -663,6 +668,7 @@
 				482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */,
 				CFFFFA3B168A1F2000336EA4 /* AJNotificationView.m in Sources */,
 				480221A61692A0F6009D255E /* ICBufferCell.m in Sources */,
+				48E75285169E8A7100D8A2CC /* ICConversation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
