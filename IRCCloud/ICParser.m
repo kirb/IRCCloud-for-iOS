@@ -8,8 +8,13 @@
 
 #import "ICParser.h"
 #import "ICController.h"
+
 #import "ICNetwork.h"
 #import "ICChannel.h"
+#import "ICConversation.h"
+
+#import "ICNotification.h"
+#import "JSONKit.h"
 
 @implementation ICParser
 {
@@ -48,10 +53,12 @@
         }   
         else if ([json[@"type"] isEqualToString:@"makebuffer"]) {
             if ([json[@"buffer_type"] isEqualToString:@"channel"]) {
-                if (json[@"archived"])
-                    ;
-                else
+                if (json[@"archived"]) {
+                    continue;
+                }
+                else {
                     [[kSharedController networkForConnection:json[@"cid"]] addOOBChannelFromDictionary:json];
+                }
             }
         }
         else if ([json[@"type"] isEqualToString:@"channel_init"]) {
@@ -61,7 +68,8 @@
         else if (([json[@"type"] isEqualToString:@"buffer_msg"]) || ([json[@"type"] isEqualToString:@"buffer_me_msg"])) {
             if (![json[@"chan"] hasPrefix:@"#"]) {
                 // it is a PM
-                ; // for now.
+                // I realise this is a really shitty way to check, will fix.
+                continue; // for now.
             }
             else {
                 ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
@@ -87,6 +95,17 @@
             [_backLog addObject:json];
             return;
         }
+        
+#pragma mark User Preferences
+        else if (kTypeEqual(@"stat_user")) {
+            if (![json[@"verified"] boolValue]) {
+                [ICNotification notificationWithMessage:L(@"Reminder: You haven't verified your email address.") type:AJNotificationTypeBlue];
+            }
+            kSharedController.lastSelectedBID = json[@"last_selected_bid"];
+            kSharedController.highlights = json[@"highlights"];
+            kSharedController.preferences = [json[@"prefs"] objectFromJSONString];
+        }
+        
 #pragma mark Network Messages
         if (kTypeEqual(@"makeserver")) {
             [kSharedController addNetworkFromDictionary:[json copy]];
@@ -110,6 +129,12 @@
         else if (kTypeEqual(@"you_parted_channel")) {
             ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
             [channelNetwork removeChannelWithBID:json[@"bid"]];
+        }
+
+#pragma mark Private Messages
+        else if (kTypeEqual(@"makebuffer") && [json[@"buffer_type"] isEqualToString:@"conversation"]) {
+            ICNetwork *network = [kSharedController networkForConnection:json[@"cid"]];
+            [network addConversationFromDictionary:json];
         }
 
 #pragma mark Buffer Messages
