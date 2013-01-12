@@ -44,22 +44,6 @@
 	((ICAppDelegate *)[UIApplication sharedApplication].delegate).buffers = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationItem.title = @"IRCCloud";
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    if (!isPad) {
-        ICNetwork *selectedNetwork = servers[([self.tableView indexPathForSelectedRow].section)];
-        self.navigationItem.title = selectedNetwork.networkName;
-    }
-    
-    [super viewDidDisappear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
