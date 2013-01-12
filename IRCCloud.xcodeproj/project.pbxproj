@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		480221A61692A0F6009D255E /* ICBufferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 480221A51692A0F6009D255E /* ICBufferCell.m */; };
 		480F3EF1165DEA82005079F1 /* ICParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 480F3EF0165DEA82005079F1 /* ICParser.m */; };
-		482C38F31684351300721377 /* NMCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 482C38DB1684351300721377 /* NMCustomLabel.m */; };
-		482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 482C38DD1684351300721377 /* NMCustomLabelStyle.m */; };
 		484BEC5516807B820030F68C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484BEC5416807B820030F68C /* CoreText.framework */; };
 		48DB71FC165D303500646E6F /* libUnittWebSocketClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49887DE9163D5D9B003773A7 /* libUnittWebSocketClient.a */; };
 		48DB7202165D30F500646E6F /* ICController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB7201165D30F400646E6F /* ICController.m */; };
@@ -647,28 +645,26 @@
 			files = (
 				498B8A701619F8B4001A4356 /* main.m in Sources */,
 				498B8A741619F8B4001A4356 /* ICAppDelegate.m in Sources */,
-				498B8A831619F8B5001A4356 /* ICMasterViewController.m in Sources */,
 				498B8ABF161A13B0001A4356 /* ICWebSocketDelegate.m in Sources */,
-				498B8AC5161A1953001A4356 /* ICLogInViewController.m in Sources */,
-				498B8AC9161A1C16001A4356 /* ICTextCell.m in Sources */,
 				499BCBA31629BD2500A58167 /* ICRequest.m in Sources */,
-				499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */,
+				498B8A831619F8B5001A4356 /* ICMasterViewController.m in Sources */,
 				498E6D8A162A7B4D002BA7E5 /* ICBufferViewController.m in Sources */,
+				498B8AC5161A1953001A4356 /* ICLogInViewController.m in Sources */,
+				CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */,
+				48DB7202165D30F500646E6F /* ICController.m in Sources */,
+				480F3EF1165DEA82005079F1 /* ICParser.m in Sources */,
+				48DB7205165D31B900646E6F /* ICNetwork.m in Sources */,
+				48FC816D16604B1900930F38 /* ICBuffer.m in Sources */,
+				48DB7209165D3C3300646E6F /* ICChannel.m in Sources */,
+				48E75285169E8A7100D8A2CC /* ICConversation.m in Sources */,
+				480221A61692A0F6009D255E /* ICBufferCell.m in Sources */,
+				498B8AC9161A1C16001A4356 /* ICTextCell.m in Sources */,
 				49FDF4B1162E763000AAE35D /* ICNotification.m in Sources */,
 				4992FFE61637C4C3008A7E8C /* UINavigationController+KeyboardDismiss.m in Sources */,
-				49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */,
-				48DB7202165D30F500646E6F /* ICController.m in Sources */,
-				48DB7205165D31B900646E6F /* ICNetwork.m in Sources */,
-				48DB7209165D3C3300646E6F /* ICChannel.m in Sources */,
-				480F3EF1165DEA82005079F1 /* ICParser.m in Sources */,
-				CF5FFA82165E30D300636DB0 /* ICAddViewController.m in Sources */,
-				48FC816D16604B1900930F38 /* ICBuffer.m in Sources */,
 				48FD2731167E0E46004B2863 /* TTTAttributedLabel.m in Sources */,
-				482C38F31684351300721377 /* NMCustomLabel.m in Sources */,
-				482C38F41684351300721377 /* NMCustomLabelStyle.m in Sources */,
 				CFFFFA3B168A1F2000336EA4 /* AJNotificationView.m in Sources */,
-				480221A61692A0F6009D255E /* ICBufferCell.m in Sources */,
-				48E75285169E8A7100D8A2CC /* ICConversation.m in Sources */,
+				49A92B74163EB82B00AE20C9 /* JSONKit.m in Sources */,
+				499BCBA51629C34100A58167 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
