@@ -9,6 +9,5 @@
 * [MBProgressHUD](https://github.com/jdg/MBProgressHUD)
 * [TTTAttributedLabel](https://github.com/mattt/TTTAttributedLabel)
 
-----
-
-Thanks to [flux](https://github.com/caughtinflux) for helping with this project!
+---
+Thanks to [flux](https://github.com/caughtinflux) for being so ***awesome***.
