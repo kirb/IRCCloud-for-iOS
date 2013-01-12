@@ -48,35 +48,37 @@
     self.loadingOOB = YES;
     for (NSDictionary *json in oobArray)
     {
-        if ([json[@"type"] isEqualToString:@"makeserver"]) {
-            [kSharedController addNetworkFromDictionary:[json copy]];
-        }   
-        else if ([json[@"type"] isEqualToString:@"makebuffer"]) {
-            if ([json[@"buffer_type"] isEqualToString:@"channel"]) {
-                if (json[@"archived"]) {
-                    continue;
+        @autoreleasepool {
+            if ([json[@"type"] isEqualToString:@"makeserver"]) {
+                [kSharedController addNetworkFromDictionary:[json copy]];
+            }   
+            else if ([json[@"type"] isEqualToString:@"makebuffer"]) {
+                if ([json[@"buffer_type"] isEqualToString:@"channel"]) {
+                    if (json[@"archived"]) {
+                        continue;
+                    }
+                    else {
+                        [[kSharedController networkForConnection:json[@"cid"]] addOOBChannelFromDictionary:json];
+                    }
+                }
+            }
+            else if ([json[@"type"] isEqualToString:@"channel_init"]) {
+                ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
+                [channelNetwork addChannelFromDictionary:json];
+            }
+            else if (([json[@"type"] isEqualToString:@"buffer_msg"]) || ([json[@"type"] isEqualToString:@"buffer_me_msg"])) {
+                if (![json[@"chan"] hasPrefix:@"#"]) {
+                    // it is a PM
+                    // I realise this is a really shitty way to check, will fix.
+                    continue; // for now.
                 }
                 else {
-                    [[kSharedController networkForConnection:json[@"cid"]] addOOBChannelFromDictionary:json];
+                    ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
+                    ICChannel *channel = [channelNetwork channelWithBID:json[@"bid"]];
+                    if (!channel)
+                        [NSException raise:@"WTF" format:@"Channel doesn't exist"];
+                    [[channel buffer] addObject:json];
                 }
-            }
-        }
-        else if ([json[@"type"] isEqualToString:@"channel_init"]) {
-            ICNetwork *channelNetwork = [[ICController sharedController] networkForConnection:json[@"cid"]];
-            [channelNetwork addChannelFromDictionary:json];
-        }
-        else if (([json[@"type"] isEqualToString:@"buffer_msg"]) || ([json[@"type"] isEqualToString:@"buffer_me_msg"])) {
-            if (![json[@"chan"] hasPrefix:@"#"]) {
-                // it is a PM
-                // I realise this is a really shitty way to check, will fix.
-                continue; // for now.
-            }
-            else {
-                ICNetwork *channelNetwork = [kSharedController networkForConnection:json[@"cid"]];
-                ICChannel *channel = [channelNetwork channelWithBID:json[@"bid"]];
-                if (!channel)
-                    [NSException raise:@"WTF" format:@"Channel doesn't exist"];
-                [[channel buffer] addObject:json];
             }
         }
     }
