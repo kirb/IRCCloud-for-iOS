@@ -105,7 +105,8 @@
             }
             kSharedController.lastSelectedBID = json[@"last_selected_bid"];
             kSharedController.highlights = json[@"highlights"];
-            kSharedController.preferences = [json[@"prefs"] objectFromJSONString];
+            if (json[@"prefs"] != (id)[NSNull null])
+                kSharedController.preferences = [json[@"prefs"] objectFromJSONString];
         }
         
 #pragma mark Network Messages
