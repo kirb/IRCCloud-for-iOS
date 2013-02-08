@@ -25,7 +25,7 @@ static NSMutableData *output;
 	
     if (self) {
 		output = [[NSMutableData alloc] init];
-		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://alpha.irccloud.com/chat/%@", page]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:90];
+		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.irccloud.com/chat/%@", page]] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:90];
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
 		struct utsname info;
@@ -33,7 +33,7 @@ static NSMutableData *output;
 		[request addValue:[NSString stringWithFormat:@"IRCCloudiOS/%@ (%@; iOS %@)", @"0.0.1", @(info.machine), [[UIDevice currentDevice] systemVersion]] forHTTPHeaderField:@"User-Agent"];
         
 		if (!unauth && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"] isEqualToString:@""]){
-			NSDictionary *cookies = [NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:@{NSHTTPCookieDomain: @"alpha.irccloud.com", NSHTTPCookiePath: @"/", NSHTTPCookieName: @"session", NSHTTPCookieValue: [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]}]]];
+			NSDictionary *cookies = [NSHTTPCookie requestHeaderFieldsWithCookies:@[[NSHTTPCookie cookieWithProperties:@{NSHTTPCookieDomain: @"www.irccloud.com", NSHTTPCookiePath: @"/", NSHTTPCookieName: @"session", NSHTTPCookieValue: [[NSUserDefaults standardUserDefaults] stringForKey:@"cookie"]}]]];
 			[request setAllHTTPHeaderFields:cookies];
 		}
         else {
