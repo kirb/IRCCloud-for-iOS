@@ -21,7 +21,7 @@
 	if (self) {
 		struct utsname info;
 		uname(&info);
-		WebSocketConnectConfig *config = [WebSocketConnectConfig configWithURLString:@"wss://alpha.irccloud.com"
+		WebSocketConnectConfig *config = [WebSocketConnectConfig configWithURLString:@"wss://www.irccloud.com"
                                                                               origin:nil
                                                                            protocols:nil
                                                                          tlsSettings:[@{
